@@ -1,104 +1,69 @@
-import { Layout, Menu, Input } from 'antd';
-import {
-  UserOutlined,
-  BookOutlined,
-  TranslationOutlined,
-} from '@ant-design/icons';
+import { Breadcrumb, Layout, Input, theme } from 'antd';
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import AppSiderMenu from '../components/Menu/Menu';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 
 const AppLayout = () => {
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
   const location = useLocation();
 
-  const menuItems = [
-    {
-      key: '/ca-nhan',
-      icon: <UserOutlined />,
-      label: <Link to="/ca-nhan">Trang cá nhân</Link>,
-    },
-    {
-      key: '/danh-sach-lop',
-      icon: <BookOutlined />,
-      label: <Link to="/danh-sach-lop">Mục lục</Link>,
-    },
-    {
-      key: '/giai-nghia',
-      icon: <TranslationOutlined />,
-      label: <Link to="/giai-nghia">Giải nghĩa từ</Link>,
-    },
-  ];
-
-  // Đặt menu đang chọn theo URL hiện tại
-  const selectedKey =
-    menuItems.find((item) => location.pathname.startsWith(item.key))?.key ??
-    '/ca-nhan';
-
   return (
-    <Layout className="min-h-screen w-full">
-      {/* Header phong cách Sách giáo khoa điện tử */}
+    <Layout>
       <Header
         style={{
-          backgroundColor: '#61B543',
           display: 'flex',
           alignItems: 'center',
+          background: '#61B543',
           paddingInline: 24,
         }}
       >
-        <div className="flex items-center w-full gap-6">
-          <Link
-            to="/"
-            className="text-white text-2xl font-extrabold tracking-tight"
-          >
-            Lgo
-          </Link>
-
-          <div className="flex-1 flex justify-center">
-            <Input.Search
-              placeholder="Tìm kiếm bài học, chương, mục lục..."
-              allowClear
-              className="max-w-xl w-full rounded-full"
-              style={{
-                borderRadius: 9999,
-                backgroundColor: '#ffffff',
-              }}
-            />
-          </div>
-
-          <div className="w-12" />
+        <Link
+          to="/"
+          className="text-white text-2xl font-extrabold tracking-tight"
+          style={{ minWidth: 80 }}
+        >
+          Lgo
+        </Link>
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Input.Search
+            placeholder="Tìm kiếm bài học, chương, mục lục..."
+            allowClear
+            className="max-w-xl"
+            style={{
+              borderRadius: 9999,
+              backgroundColor: '#ffffff',
+              width: 350,
+            }}
+          />
         </div>
+        <div style={{ minWidth: 80 }} />
       </Header>
 
       <Layout>
-        {/* Sidebar điều hướng */}
-        <Sider
-          width={250}
-          style={{
-            backgroundColor: '#ffffff',
-            borderRight: '1px solid rgba(0,0,0,0.06)',
-          }}
-        >
-          <Menu
-            mode="inline"
-            selectedKeys={[selectedKey]}
-            items={menuItems}
-            style={{ borderRight: 0, paddingTop: 16 }}
-          />
-        </Sider>
-
-        {/* Khu vực nội dung bài học */}
-        <Content
-          style={{
-            backgroundColor: '#FFFDEF',
-            padding: 0,
-            minHeight: 'calc(100vh - 64px)',
-            display: 'flex',
-          }}
-        >
-          <div className="bg-white rounded-lg shadow-md p-6 w-full h-full">
+        <AppSiderMenu />
+        <Layout style={{ padding: '0 24px 24px' }}>
+          
+          <Content
+            style={{
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
             <Outlet />
-          </div>
-        </Content>
+          </Content>
+        </Layout>
       </Layout>
     </Layout>
   );

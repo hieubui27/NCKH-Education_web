@@ -1,34 +1,47 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import Home from '../pages/home';
-import Login from '../pages/login';
 import AppLayout from '../layouts/AppLayout';
 import MainLayout from '../layouts/MainLayout';
+import Home from '../pages/Home';
+import Login from '../pages/Login';
+import Account from '../pages/Account';
+import ClassList from '../pages/ClassList';
+import TermList from '../pages/TermList';
+import TopicList from '../pages/TopicList';
+import LessonList from '../pages/LessonList';
+import LessonDetail from '../pages/LessonDetail';
+import Dictionary from '../pages/Dictionary';
 
-// Mock Components (Bạn sẽ thay bằng file Page thật sau)
-const Placeholder = ({ name }) => <div className="text-2xl font-bold text-brand-green">{name}</div>;
+
 
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Cụm trang Public */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
       </Route>
 
-      {/* Cụm trang App Học Tập */}
       <Route element={<AppLayout />}>
-        <Route path="/ca-nhan" element={<Placeholder name="Thông tin cá nhân (Frame 8)" />} />
-        <Route path="/danh-sach-lop" element={<Placeholder name="Chọn Lớp (Frame 17)" />} />
-        
-        {/* Dynamic Routes cho luồng học */}
-        <Route path="/lop/:classId" element={<Placeholder name="Danh sách Học kỳ (Frame 18)" />} />
-        <Route path="/lop/:classId/ky/:termId" element={<Placeholder name="Danh sách Bài học (Frame 19/20)" />} />
-        <Route path="/bai-hoc/:lessonId" element={<Placeholder name="Nội dung bài đọc (Frame 21/22)" />} />
-        <Route path="/giai-nghia" element={<Placeholder name="Giải nghĩa từ (Frame 23)" />} />
-      </Route>
+        <Route path="/ca-nhan" element={<Account />} />
+        <Route path="/giai-nghia" element={<Dictionary />} />
 
+        <Route path="/danh-sach-lop">
+          <Route index element={<ClassList />} />
+          <Route path=":classId">
+            <Route index element={<TermList />} />
+
+            <Route path="ky/:termId">
+              <Route index element={<TopicList />} />
+
+              <Route path="chu-de/:topicId">
+                <Route index element={<LessonList />} />
+                <Route path="bai-hoc/:lessonId" element={<LessonDetail />} />
+              </Route>
+            </Route>
+          </Route>
+        </Route>
+      </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
