@@ -12,11 +12,7 @@ export const authenticateToken = (req, res, next) => {
 
         // Giải mã token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-
         req.user = decoded; 
-        
-
         next(); 
     } catch (error) {
         console.error("Auth Error:", error.message);
