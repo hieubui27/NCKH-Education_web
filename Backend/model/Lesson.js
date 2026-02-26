@@ -59,3 +59,12 @@ export const Lessons = {
         return rows;
     },
 };
+
+export const Vocabularies = {
+    getVocabulariesByLessonId: async (lessonId) => {
+        const query = `SELECT * FROM vocabularies WHERE lesson_id = $1`;
+        const { rows } = await pool.query(query, [lessonId]);
+        return rows;
+    },
+    
+};

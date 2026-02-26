@@ -1,4 +1,4 @@
-import { Themes, Lessons } from "../model/Lesson.js";
+import { Themes, Lessons, Vocabularies } from "../model/Lesson.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 export const ThemesController = {
@@ -12,7 +12,7 @@ export const ThemesController = {
     }),
     getThemesContent: asyncHandler(async (req, res) => {
         try {
-            const themeId = req.params.id;
+            const themeId = req.params.themeId;
             if(!themeId){
                 throw new ErrorResponse('Vui lòng cung cấp id của chủ đề', 400);
             }
@@ -38,7 +38,7 @@ export const LessonsController = {
     }),
     getLessonsContent: asyncHandler(async (req, res) => {
         try {
-            const lessonId = req.params.id;
+            const lessonId = req.params.lessonId;
             if(!lessonId){
                 throw new ErrorResponse('Vui lòng cung cấp id của bài học', 400);
             }
@@ -47,6 +47,25 @@ export const LessonsController = {
                 throw new ErrorResponse('Không tìm thấy bài học', 404);
             }
             res.status(200).json({ success: true, data: lessonData });
+        } catch (error) {
+            res.status(500).json({ success: false, message: error.message });
+        }
+    }),
+};
+
+
+export const VocabulariesController = {
+    getVocabulariesByLessonId: asyncHandler(async (req, res) => {
+        try {
+            const lessonId = req.params.lessonId;
+            if(!lessonId){
+                throw new ErrorResponse('Vui lòng cung cấp id của bài học', 400);
+            }
+            const vocabularies = await Vocabularies.getVocabulariesByLessonId(lessonId);
+            if(vocabularies.length === 0){
+                throw new ErrorResponse('Không tìm thấy từ vựng', 404);
+            }
+            res.status(200).json({ success: true, data: vocabularies });
         } catch (error) {
             res.status(500).json({ success: false, message: error.message });
         }

@@ -5,7 +5,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import { ErrorResponse } from "../utils/middleware.js";
 
 export const register = asyncHandler(async (req, res) => {
-    const { fullname, username, password, school, address } = req.body;
+    const { fullname, username, password, phonenumber, dob, school, address, role } = req.body;
     if(!username || !password || !fullname || !school || !address){
         throw new ErrorResponse('Vui lòng cung cấp đầy đủ thông tin', 400);
     }
@@ -14,7 +14,7 @@ export const register = asyncHandler(async (req, res) => {
         throw new ErrorResponse('Tên đăng nhập đã tồn tại', 400);
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const users = await User.create({ fullname, username, password: hashedPassword, school, address });
+    const users = await User.create({ fullname, username, password: hashedPassword, phonenumber, dob, school, address, role: role || 'student' });
     if(users){
         res.status(201).json({ users });
     }
