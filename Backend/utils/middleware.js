@@ -26,3 +26,14 @@ export class ErrorResponse extends Error {
     this.statusCode = statusCode;
   }
 }
+
+export const errorHandler = (err, req, res, next) => {
+    let statusCode = err.statusCode || 500;
+    let message = err.message || 'Lỗi máy chủ nội bộ';
+
+    res.status(statusCode).json({
+        success: false,
+        message: message,
+        stack: process.env.NODE_ENV === 'production' ? null : err.stack 
+    });
+};

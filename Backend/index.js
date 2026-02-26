@@ -4,6 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRoutes from './routes/authRoutes.js';
 import lessonRoutes from './routes/lessonRoutes.js';
+import { errorHandler } from './utils/middleware.js';
 dotenv.config();
 
 const app = express();
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/lessons', lessonRoutes);
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server đang chạy ở http://localhost:${PORT}`);
