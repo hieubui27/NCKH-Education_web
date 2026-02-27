@@ -1,6 +1,7 @@
 import { Breadcrumb, Layout, Input, theme } from 'antd';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import AppSiderMenu from '../components/Menu/Menu';
+import logoImg from '../assets/logo_vienkey.png';
 
 const { Header, Content } = Layout;
 
@@ -22,10 +23,14 @@ const AppLayout = () => {
       >
         <Link
           to="/"
-          className="text-white text-2xl font-extrabold tracking-tight"
+          className="flex items-center mr-6"
           style={{ minWidth: 80 }}
         >
-          Lgo
+          <img
+            src={logoImg}
+            alt="VienKey Logo"
+            className="h-10 w-auto object-contain mix-blend-multiply"
+          />
         </Link>
         <div
           style={{
