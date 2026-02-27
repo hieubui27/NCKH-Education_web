@@ -30,18 +30,18 @@ const Header = () => {
 
         {/* Cụm nút bấm bên phải */}
         <div className="flex items-center space-x-3">
-          <Button
-            className=" text-brand-green border-none font-bold hover:!text-brand-green-light"
+          <button
+            className="bg-white text-[#61B543] font-extrabold text-base md:text-lg px-5 py-2 md:px-8 md:py-2.5 rounded-full shadow-[0_4px_0_#41802b] hover:shadow-[0_2px_0_#41802b] hover:translate-y-0.5 transition-all border-none cursor-pointer"
             onClick={() => navigate('/login')}
           >
             Đăng nhập
-          </Button>
-          <Button
-            ghost
-            className="text-white border-white hover:!border-brand-green-light hover:!text-brand-green-light"
+          </button>
+          <button
+            className="bg-[#EB7470] text-white font-extrabold text-base md:text-lg px-5 py-2 md:px-8 md:py-2.5 rounded-full shadow-[0_4px_0_#b53b37] hover:shadow-[0_2px_0_#b53b37] hover:translate-y-0.5 transition-all border-none cursor-pointer"
+            onClick={() => navigate('/register')}
           >
             Đăng ký
-          </Button>
+          </button>
         </div>
       </div>
 

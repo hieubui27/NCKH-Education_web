@@ -4,6 +4,7 @@ import AppLayout from '../layouts/AppLayout';
 import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
+import Register from '../pages/Register';
 import Account from '../pages/Account';
 import ClassList from '../pages/ClassList';
 import TermList from '../pages/TermList';
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Route>
 
       <Route element={<AppLayout />}>
