@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Baloo 2"', 'sans-serif'],
+      },
       colors: {
         // Ánh xạ các biến CSS từ file CSS của bạn
         green: {

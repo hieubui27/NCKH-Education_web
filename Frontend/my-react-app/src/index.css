@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Baloo 2", Arial, sans-serif;
+}
 
 :root {
   --green-primary: #A7DE93;
@@ -8,10 +11,16 @@
   --white-primary: #FFFFFF;
   --white-secondary: #FFFDEF;
   --black: #000000;
-  
-
-  font-family: Arial, sans-serif;
 }
+
+* {
+  font-family: var(--font-sans) !important;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
 
 
 button {

@@ -11,7 +11,7 @@ const AppLayout = () => {
   const location = useLocation();
 
   return (
-    <Layout>
+    <Layout style={{ minHeight: '100vh' }}>
       <Header
         style={{
           display: 'flex',
@@ -40,7 +40,7 @@ const AppLayout = () => {
             className="max-w-xl"
             style={{
               borderRadius: 9999,
-              backgroundColor: '#ffffff',
+              backgroundColor: '#FFFFFF',
               width: 350,
             }}
           />
@@ -50,11 +50,10 @@ const AppLayout = () => {
 
       <Layout>
         <AppSiderMenu />
-        <Layout style={{ padding: '0 24px 24px' }}>
-          
+        <Layout >
+
           <Content
             style={{
-              padding: 24,
               margin: 0,
               minHeight: 280,
               background: colorBgContainer,
