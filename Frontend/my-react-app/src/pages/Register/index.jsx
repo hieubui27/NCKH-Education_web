@@ -1,7 +1,43 @@
-import { Form, Input, Button, DatePicker, Radio } from 'antd';
+import { Form, Input, message, DatePicker, Radio } from 'antd';
 import Banner from '../../components/Banner/Banner';
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const handleRegister = async (vals) => {
+        try {
+            setLoading(true);
+
+            // Xử lý lại dữ liệu từ Form cho khớp với yêu cầu của Backend
+            const payload = {
+                ...vals,
+                phonenumber: vals.phone,
+                // Xử lý DatePicker của Ant Design sang dạng chuỗi YYYY-MM-DD
+                dob: vals.dob ? vals.dob.format('YYYY-MM-DD') : undefined
+            };
+
+            const response = await fetch('http://localhost:5000/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload), // Gửi payload đã xử lý thay vì vals gốc
+            });
+            const data = await response.json();
+            if (response.ok) {
+                message.success('Đăng ký thành công!');
+                navigate('/login');
+            } else {
+                message.error(data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            message.error('Lỗi kết nối đến server!');
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className="w-full min-h-[calc(100vh-80px)] bg-[#FFFDEF] flex flex-col items-center pt-2 pb-20 relative font-sans">
             <div className="w-full max-w-6xl px-4 sm:px-8 z-10 flex flex-col items-center">
@@ -10,7 +46,7 @@ const Register = () => {
                 <div className="w-full max-w-5xl bg-[#EB7470] p-8 md:p-14 rounded-[2rem] shadow-sm mt-4">
                     <Form
                         layout="vertical"
-                        onFinish={(vals) => console.log(vals)}
+                        onFinish={handleRegister}
                         className="w-full max-w-4xl mx-auto"
                     >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2">
