@@ -24,7 +24,7 @@ const Header = () => {
         <nav className="hidden md:flex text-[24px] font-medium  space-x-6 text-black">
           <Link to="/" className="hover:text-amber-50 transition-all duration-300 ease-in-out">Giới thiệu</Link>
           <Link to="/" className="hover:text-amber-50 transition-all duration-300 ease-in-out">Chương trình</Link>
-          <Link to="/" className="hover:text-amber-50 transition-all duration-300 ease-in-out">Tin tức</Link>
+          <Link to="/tin-tuc" className="hover:text-amber-50 transition-all duration-300 ease-in-out">Tin tức</Link>
           <Link to="/" className="hover:text-amber-50 transition-all duration-300 ease-in-out">Hướng dẫn</Link>
         </nav>
 

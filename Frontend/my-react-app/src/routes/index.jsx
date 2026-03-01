@@ -12,8 +12,8 @@ import TopicList from '../pages/TopicList';
 import LessonList from '../pages/LessonList';
 import LessonDetail from '../pages/LessonDetail';
 import Dictionary from '../pages/Dictionary';
-
-
+// 1. Import trang tin tức của bạn ở đây
+import News from '../pages/News'; 
 
 const AppRoutes = () => {
   return (
@@ -22,20 +22,22 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/tin-tuc" element={<News />} />
       </Route>
 
       <Route element={<AppLayout />}>
         <Route path="/ca-nhan" element={<Account />} />
         <Route path="/giai-nghia" element={<Dictionary />} />
+        
+        {/* 2. Thêm Route Tin tức tại đây */}
+
 
         <Route path="/danh-sach-lop">
           <Route index element={<ClassList />} />
           <Route path=":classId">
             <Route index element={<TermList />} />
-
             <Route path="ky/:termId">
               <Route index element={<TopicList />} />
-
               <Route path="chu-de/:topicId">
                 <Route index element={<LessonList />} />
                 <Route path="bai-hoc/:lessonId" element={<LessonDetail />} />
@@ -44,6 +46,7 @@ const AppRoutes = () => {
           </Route>
         </Route>
       </Route>
+      
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
