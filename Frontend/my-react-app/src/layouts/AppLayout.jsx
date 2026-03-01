@@ -2,6 +2,7 @@ import { Breadcrumb, Layout, Input, theme } from 'antd';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import AppSiderMenu from '../components/Menu/Menu';
 import logoImg from '../assets/logo_vienkey.png';
+import AppFooter from '../components/Footer/AppFooter';
 
 const { Header, Content } = Layout;
 
@@ -79,6 +80,7 @@ const AppLayout = () => {
           >
             <Outlet />
           </Content>
+          <AppFooter />
         </Layout>
       </Layout>
     </Layout>

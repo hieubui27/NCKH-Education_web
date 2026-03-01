@@ -6,14 +6,15 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Account from '../pages/Account';
+
 import ClassList from '../pages/ClassList';
 import TermList from '../pages/TermList';
 import TopicList from '../pages/TopicList';
 import LessonList from '../pages/LessonList';
 import LessonDetail from '../pages/LessonDetail';
 import Dictionary from '../pages/Dictionary';
-// 1. Import trang tin tức của bạn ở đây
 import News from '../pages/News'; 
+import CurriculumPage from '../pages/chuong trinh';
 
 const AppRoutes = () => {
   return (
@@ -23,13 +24,14 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/tin-tuc" element={<News />} />
+        {/* --- CẬP NHẬT: Thêm route cho trang chương trình học --- */}
+        <Route path="/chuong-trinh-hoc" element={<CurriculumPage />} />
       </Route>
 
       <Route element={<AppLayout />}>
         <Route path="/ca-nhan" element={<Account />} />
         <Route path="/giai-nghia" element={<Dictionary />} />
-        
-        {/* 2. Thêm Route Tin tức tại đây */}
+      
 
 
         <Route path="/danh-sach-lop">

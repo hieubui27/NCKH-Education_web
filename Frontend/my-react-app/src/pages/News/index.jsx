@@ -20,7 +20,7 @@ const NewsPage = () => {
   return (
     <div className="min-h-screen p-4 md:p-8 font-sans">
       {/* Container chính với viền xanh như trong ảnh */}
-      <div className="max-w-4xl mx-auto bg-white border-[1px] border-green-200 shadow-sm rounded-sm">
+      <div className="max-w-4xl mx-auto bg-white border border-green-200 shadow-sm rounded-sm">
         
     
 
@@ -33,7 +33,7 @@ const NewsPage = () => {
             <div className="space-y-0">
               {newsData.tutorials.map((item, index) => (
                 <div key={index} className="flex py-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors cursor-pointer group">
-                  <span className="w-32 flex-shrink-0 text-gray-300 text-sm">{item.date}</span>
+                  <span className="w-32 shrink-0 text-gray-300 text-sm">{item.date}</span>
                   <span className="text-gray-700 group-hover:text-blue-600 transition-colors">{item.title}</span>
                 </div>
               ))}
@@ -48,7 +48,7 @@ const NewsPage = () => {
             <div className="space-y-0">
               {newsData.specialized.map((item, index) => (
                 <div key={index} className="flex py-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors cursor-pointer group">
-                  <span className="w-32 flex-shrink-0 text-gray-300 text-sm">{item.date}</span>
+                  <span className="w-32 shrink-0 text-gray-300 text-sm">{item.date}</span>
                   <span className="text-gray-700 group-hover:text-blue-600">{item.title}</span>
                 </div>
               ))}

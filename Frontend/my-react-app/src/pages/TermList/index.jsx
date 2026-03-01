@@ -35,7 +35,7 @@ const TermList = () => {
             <img
               src={term.image}
               alt={`Sách Tiếng Việt 2 ${term.name}`}
-              className="w-full max-w-[280px] h-auto object-cover rounded shadow-lg"
+              className="w-full max-w-70 h-auto object-cover rounded shadow-lg"
             />
           </div>
         ))}
