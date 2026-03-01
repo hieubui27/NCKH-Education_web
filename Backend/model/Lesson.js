@@ -58,6 +58,7 @@ export const Lessons = {
         const { rows } = await pool.query(query, [lessonId]);
         return rows;
     },
+
 };
 
 export const Vocabularies = {

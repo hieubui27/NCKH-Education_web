@@ -67,3 +67,20 @@ export const getMe = asyncHandler(async (req, res) => {
         }
     );
 })
+
+export const updateInfo = asyncHandler(async (req, res) => {
+    const { id, fullname, dob } = req.body;
+    if(!fullname || !dob){
+        throw new ErrorResponse('Vui lòng cung cấp đầy đủ thông tin', 400);
+    }
+    if(!await User.findById(id)){
+        throw new ErrorResponse('Không tìm thấy tài khoản', 401);
+    }
+    const user = await User.updateInfo({id, fullname, dob});
+    if(user){
+        res.status(200).json({ user });
+    }
+    else{
+        throw new ErrorResponse('Không thể cập nhật thông tin', 400);
+    }
+})

@@ -1,11 +1,12 @@
 import express from 'express';
-import { register, login, getMe } from '../controller/authController.js';
+import { register, login, getMe, updateInfo } from '../controller/authController.js';
 import { authenticateToken } from '../utils/middleware.js';
 
 const router = express.Router();
 
-router.post('/register', register);
-router.post('/login', login);
-router.get('/me', authenticateToken, getMe);
+router.post('/register', register); // đăng ký tài khoản
+router.post('/login', login); // đăng nhập tài khoản
+router.get('/me', authenticateToken, getMe);// lấy thông tin cá nhân của user
+router.put('/me', authenticateToken, updateInfo);// cập nhật thông tin cá nhân của user
 
 export default router;

@@ -22,6 +22,18 @@ export const User = {
     const values = [fullname, username, password, phonenumber, dob, school, address, role || 'student'];
     const { rows } = await pool.query(query, values);
     return rows[0];
+  },
+
+  updateInfo: async ({id, fullname, dob}) =>{
+    const query = `
+      UPDATE users
+      SET fullname = $1, dob = $2
+      WHERE id = $3
+      RETURNING id, fullname, dob;
+    `;
+    const values = [fullname, dob, id];
+    const { rows } = await pool.query(query, values);
+    return rows[0];
   }
 };
 
