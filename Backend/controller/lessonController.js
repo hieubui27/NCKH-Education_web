@@ -1,6 +1,30 @@
-import { Themes, Lessons, Vocabularies } from "../model/Lesson.js";
+import { Themes, Lessons, Vocabularies, SearchModel } from "../model/Lesson.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { ErrorResponse } from "../utils/middleware.js"; 
+
+//xu ly tim kiem
+export const SearchController = {
+    suggest: asyncHandler(async (req, res) => {
+        const keyword = req.query.q; // Nhận từ khóa từ Frontend qua query string (VD: ?q=Mùa Xuân)
+
+        // Nếu keyword rỗng, không cần query DB, trả về mảng rỗng ngay lập tức
+        if (!keyword || keyword.trim() === "") {
+            return res.status(200).json({
+                success: true,
+                data: { themes: [], lessons: [] }
+            });
+        }
+
+        // Gọi DB để lấy dữ liệu
+        const results = await SearchModel.liveSearchData(keyword.trim());
+
+        // Trả kết quả thành công
+        res.status(200).json({
+            success: true,
+            data: results
+        });
+    })
+};
 
 //xu ly chu de
 export const ThemesController = {
@@ -33,21 +57,22 @@ export const LessonsController = {
             throw new ErrorResponse('Vui lòng cung cấp id của bài học', 400);
         }
         const lessonData = await Lessons.getContentByLessonId(lessonId);
+        const wordsData = await Vocabularies.getWordsByLessonId(lessonId);
         if(!lessonData){
             throw new ErrorResponse('Không tìm thấy bài học', 404);
         }
-        res.status(200).json({ success: true, data: lessonData });
+        res.status(200).json({ success: true, data: {lessonData, wordsData} });
     }),
 };
 
 //xu ly tu vung
 export const VocabulariesController = {
-    getVocabulariesByLessonId: asyncHandler(async (req, res) => {
-        const lessonId = req.params.lessonId;
-        if(!lessonId){
-            throw new ErrorResponse('Vui lòng cung cấp id của bài học', 400);
+    getVocabulariesByWordId: asyncHandler(async (req, res) => {
+        const wordId = req.params.wordId;
+        if(!wordId){
+            throw new ErrorResponse('Vui lòng cung cấp id của từ vựng', 400);
         }
-        const vocabularies = await Vocabularies.getVocabulariesByLessonId(lessonId);
+        const vocabularies = await Vocabularies.getVocabulariesByWordId(wordId);
         if(vocabularies.length === 0){
             throw new ErrorResponse('Không tìm thấy từ vựng', 404);
         }

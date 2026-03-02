@@ -58,14 +58,64 @@ export const Lessons = {
         const { rows } = await pool.query(query, [lessonId]);
         return rows;
     },
-
 };
 
 export const Vocabularies = {
-    getVocabulariesByLessonId: async (lessonId) => {
-        const query = `SELECT * FROM vocabularies WHERE lesson_id = $1`;
+    getVocabulariesByWordId: async (wordId) => {
+        const query = `SELECT * FROM vocabularies WHERE id = $1`;
+        const { rows } = await pool.query(query, [wordId]);
+        return rows;
+    },
+    getWordsByLessonId: async (lessonId) => {
+        const query = `SELECT id, word FROM vocabularies WHERE lesson_id = $1`;
         const { rows } = await pool.query(query, [lessonId]);
         return rows;
     },
-    
+};
+
+//xu ly tim kiem bản only search
+export const SearchModel = {
+    liveSearchData: async (keyword) => {
+        const searchParam = `%${keyword}%`;
+
+        // 1. DỌN DẸP LẠI: Chỉ lấy id, title, và content (để lọc tác giả)
+        // Bỏ hẳn phần join với bảng vocabularies
+        const lessonQuery = `
+            SELECT id, title, content
+            FROM lessons
+            WHERE title ILIKE $1 OR content ILIKE $1
+            LIMIT 5;
+        `;
+
+        // 2. DỌN DẸP LẠI: Chỉ lấy id và tên chủ đề
+        // Bỏ hẳn phần join với bảng weeks và lessons
+        const themeQuery = `
+            SELECT id, title as theme_name
+            FROM themes
+            WHERE title ILIKE $1
+            LIMIT 3;
+        `;
+
+        const [lessonResult, themeResult] = await Promise.all([
+            pool.query(lessonQuery, [searchParam]),
+            pool.query(themeQuery, [searchParam])
+        ]);
+
+        // Xử lý tách tên tác giả
+        const processedLessons = lessonResult.rows.map(lesson => {
+            const authorMatch = lesson.content.match(/\(?Theo\s+(.+?)\)?$/i); 
+            
+            return {
+                id: lesson.id,
+                title: lesson.title,
+                author: authorMatch ? authorMatch[1].trim() : "Chưa rõ"
+                // Mình không trả về 'content' nữa cho JSON nhẹ bớt, vì dropdown ko cần in ra bài văn dài
+            };
+        });
+
+        return {
+            themes: themeResult.rows,     // Trả về [{id: 1, theme_name: "..."}]
+            lessons: processedLessons     // Trả về [{id: 1, title: "...", author: "..."}]
+        };
+    }
 };
