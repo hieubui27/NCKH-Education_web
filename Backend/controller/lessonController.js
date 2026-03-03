@@ -11,7 +11,7 @@ export const SearchController = {
         if (!keyword || keyword.trim() === "") {
             return res.status(200).json({
                 success: true,
-                data: { themes: [], lessons: [] }
+                data: { themes: [], lessons: [], words: [] }
             });
         }
 

@@ -93,12 +93,20 @@ export const SearchModel = {
             SELECT id, title as theme_name
             FROM themes
             WHERE title ILIKE $1
-            LIMIT 3;
+            LIMIT 5;
         `;
 
-        const [lessonResult, themeResult] = await Promise.all([
+        const wordQuery = `
+            SELECT id, word
+            FROM vocabularies
+            WHERE word ILIKE $1
+            LIMIT 5;
+        `;
+
+        const [lessonResult, themeResult, wordResult] = await Promise.all([
             pool.query(lessonQuery, [searchParam]),
-            pool.query(themeQuery, [searchParam])
+            pool.query(themeQuery, [searchParam]),
+            pool.query(wordQuery, [searchParam])
         ]);
 
         // Xử lý tách tên tác giả
@@ -115,7 +123,8 @@ export const SearchModel = {
 
         return {
             themes: themeResult.rows,     // Trả về [{id: 1, theme_name: "..."}]
-            lessons: processedLessons     // Trả về [{id: 1, title: "...", author: "..."}]
+            lessons: processedLessons,     // Trả về [{id: 1, title: "...", author: "..."}]
+            words: wordResult.rows
         };
     }
 };
