@@ -8,7 +8,7 @@ router.get('/search', authenticateToken, SearchController.suggest); // tim kiem 
 
 router.get('/', authenticateToken, ThemesController.getAllThemes); // tra ve danh sach cac chu de
 router.get('/:themeId', authenticateToken, ThemesController.getThemesContent); // tra ve noi dung cua 1 chu de(gom co thong tin chu de va thong tin cac bai hoc)
-router.get('/:lessonId', authenticateToken, LessonsController.getLessonsContent); // tra ve noi dung cua 1 bai hoc(doan van va tu vung cua no)
-router.get('/:wordId', authenticateToken, VocabulariesController.getVocabulariesByWordId); // tra ve noi dung tu vung
+router.get('/:themeId/:lessonId', authenticateToken, LessonsController.getLessonsContent); // tra ve noi dung cua 1 bai hoc(doan van va tu vung cua no)
+router.get('/:themeId/:lessonId/:wordId', authenticateToken, VocabulariesController.getVocabulariesByWordId); // tra ve noi dung tu vung
 
 export default router;

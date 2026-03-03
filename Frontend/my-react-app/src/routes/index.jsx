@@ -13,8 +13,9 @@ import TopicList from '../pages/TopicList';
 import LessonList from '../pages/LessonList';
 import LessonDetail from '../pages/LessonDetail';
 import Dictionary from '../pages/Dictionary';
-import News from '../pages/News'; 
+import News from '../pages/News';
 import CurriculumPage from '../pages/chuong trinh';
+import WordDetail from '../pages/Word';
 
 const AppRoutes = () => {
   return (
@@ -31,7 +32,7 @@ const AppRoutes = () => {
       <Route element={<AppLayout />}>
         <Route path="/ca-nhan" element={<Account />} />
         <Route path="/giai-nghia" element={<Dictionary />} />
-      
+
 
 
         <Route path="/danh-sach-lop">
@@ -42,13 +43,17 @@ const AppRoutes = () => {
               <Route index element={<TopicList />} />
               <Route path="chu-de/:topicId">
                 <Route index element={<LessonList />} />
-                <Route path="bai-hoc/:lessonId" element={<LessonDetail />} />
+                <Route path="bai-hoc/:lessonId">
+                  <Route index element={<LessonDetail />} />
+                  {/* Thêm route cho chi tiết từ vựng ở đây */}
+                  <Route path="tu-vung/:wordId" element={<WordDetail />} />
+                </Route>
               </Route>
             </Route>
           </Route>
         </Route>
       </Route>
-      
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

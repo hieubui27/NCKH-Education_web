@@ -8,9 +8,10 @@ const TermList = () => {
   const navigate = useNavigate();
   const { classId } = useParams();
 
+  // Dữ liệu cứng hiển thị ngay lập tức
   const terms = [
-    { id: 1, name: 'Tập Một', image: bookTap1, path: `/danh-sach-lop/${classId}/ky/1` },
-    { id: 2, name: 'Tập Hai', image: bookTap2, path: `/danh-sach-lop/${classId}/ky/2` },
+    { id: '1', name: 'Tập 1', image: bookTap1 },
+    { id: '2', name: 'Tập 2', image: bookTap2 },
   ];
 
   return (
@@ -29,12 +30,12 @@ const TermList = () => {
         {terms.map((term) => (
           <div
             key={term.id}
-            onClick={() => navigate(term.path)}
+            onClick={() => navigate(`/danh-sach-lop/${classId}/ky/${term.id}`)}
             className="flex justify-center transition-transform hover:-translate-y-2 cursor-pointer drop-shadow-md hover:drop-shadow-xl"
           >
             <img
               src={term.image}
-              alt={`Sách Tiếng Việt 2 ${term.name}`}
+              alt={term.name}
               className="w-full max-w-70 h-auto object-cover rounded shadow-lg"
             />
           </div>
