@@ -27,7 +27,7 @@ const LessonList = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:5000/api/lessons/${topicId || '1'}`, {
+        const res = await fetch(`/api/lessons/${topicId || '1'}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

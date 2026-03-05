@@ -21,7 +21,7 @@ const WordDetail = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:5000/api/lessons/${themeId}/${lessonId}/${wordId}`, {
+        const res = await fetch(`/api/lessons/${themeId}/${lessonId}/${wordId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const result = await res.json();
