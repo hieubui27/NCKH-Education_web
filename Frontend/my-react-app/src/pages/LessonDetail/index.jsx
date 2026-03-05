@@ -19,7 +19,7 @@ const LessonDetail = () => {
         const token = localStorage.getItem('token');
         
         // Gọi API lấy chi tiết bài học theo themeId (topicId) và lessonId
-        const res = await fetch(`http://localhost:5000/api/lessons/${topicId}/${lessonId}`, {
+        const res = await fetch(`/api/lessons/${topicId}/${lessonId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

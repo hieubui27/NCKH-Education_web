@@ -54,7 +54,7 @@ const TopicList = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:5000/api/lessons`, {
+        const res = await fetch(`/api/lessons`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
