@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
@@ -27,6 +28,7 @@ import new8 from "../../assets/Tintuc8.png";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
 
   // Dữ liệu cho phần carousel tính năng nổi bật (vẫn giữ nguyên)
   const features = [
@@ -123,17 +125,17 @@ const Home = () => {
           >
             {newsData.map((news) => (
               <SwiperSlide key={news.id}>
-                <div 
+                <div
                   className="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
                   // --- THAY ĐỔI Ở ĐÂY ---
                   // Chuyển hướng về trang danh sách tin tức chung
-                  onClick={() => navigate('/tin-tuc')} 
+                  onClick={() => navigate('/tin-tuc')}
                 >
                   {/* Ảnh tin tức */}
                   <div className="aspect-[16/10] w-full overflow-hidden">
                     <img src={news.image} alt={news.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
                   </div>
-                  
+
                   {/* Tiêu đề tin tức */}
                   <div className="p-4">
                     <h3 className="text-sm md:text-base font-bold text-gray-800 line-clamp-2 h-10">
@@ -150,8 +152,8 @@ const Home = () => {
       {/* Nút Call to Action */}
       <div className="mt-10 text-center z-10">
         <button
-          onClick={() => navigate('/login')}
-          className="bg-[#EB7470] hover:bg-[#d85e5a] text-white text-2xl font-extrabold px-14 py-5 rounded-full shadow-[0_10px_0_#b53b37] active:shadow-none active:translate-y-2 transition-all cursor-pointer"
+          onClick={() => navigate(isLoggedIn ? '/danh-sach-lop' : '/login')}
+          className="bg-[#EB7470] hover:bg-[#d85e5a] text-white text-2xl font-extrabold px-14 py-5 rounded-full shadow-[0_10px_0_#b53b37] active:shadow-none active:translate-y-2 transition-all cursor-pointer border-none"
         >
           Bắt đầu học ngay! 🚀
         </button>

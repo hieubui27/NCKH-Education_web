@@ -43,7 +43,7 @@ const Header = () => {
           {isLoggedIn ? (
             <>
               <div
-                className="flex items-center gap-2 cursor-pointer mr-4"
+                className="flex items-center gap-2 cursor-pointer mr-2"
                 onClick={() => navigate('/ca-nhan')}
               >
                 <div className="w-10 h-10 rounded-full bg-[#EB7470] flex items-center justify-center text-white font-bold text-xl overflow-hidden border-2 border-white shadow-sm hover:scale-105 transition-transform">
@@ -54,10 +54,16 @@ const Header = () => {
                 </span>
               </div>
               <button
-                className="bg-white text-[#EB7470] font-extrabold text-base md:text-lg px-4 py-2 border-2 border-[#EB7470] rounded-full shadow-sm hover:bg-[#EB7470] hover:text-white transition-all cursor-pointer"
+                className="bg-white text-[#EB7470] font-extrabold text-base px-4 py-2 border-2 border-[#EB7470] rounded-full shadow-sm hover:bg-[#EB7470] hover:text-white transition-all cursor-pointer mr-2"
                 onClick={handleLogout}
               >
                 Đăng xuất
+              </button>
+              <button
+                className="bg-[#EB7470] hover:bg-[#d85e5a] text-white font-extrabold text-base md:text-lg px-4 md:px-5 py-2 md:py-2.5 rounded-full shadow-[0_4px_0_#b53b37] hover:shadow-[0_2px_0_#b53b37] active:shadow-none active:translate-y-1 transition-all border-none cursor-pointer"
+                onClick={() => navigate('/danh-sach-lop')}
+              >
+                Bắt đầu học ngay! 🚀
               </button>
             </>
           ) : (
