@@ -1,11 +1,13 @@
 import { Form, Input, message } from 'antd';
 import Banner from '../../components/Banner/Banner';
-import { useNavigate, Link } from 'react-router-dom'; // Thêm Link từ react-router-dom
+import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleLogin = async (vals) => {
     try {
@@ -15,6 +17,7 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Yêu cầu gửi/nhận cookie
         body: JSON.stringify(vals),
       });
       let data;
@@ -28,8 +31,7 @@ const Login = () => {
 
       if (response.ok) {
         message.success('Đăng nhập thành công!');
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
+        login(data.user || data); // Cập nhật state ở Context
         navigate('/ca-nhan');
       } else {
         message.error(data.message || 'Tên đăng nhập hoặc mật khẩu không đúng!');

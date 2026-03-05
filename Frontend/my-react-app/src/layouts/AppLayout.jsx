@@ -1,7 +1,8 @@
 import React from 'react';
-import { Breadcrumb, Layout, Input, Spin, theme } from 'antd';
+import { Breadcrumb, Layout, Input, Spin, theme, message } from 'antd';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import AppSiderMenu from '../components/Menu/Menu';
+import { useAuth } from '../context/AuthContext';
 import logoImg from '../assets/logo_vienkey.png';
 import AppFooter from '../components/Footer/AppFooter';
 
@@ -14,6 +15,14 @@ const AppLayout = () => {
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [showDropdown, setShowDropdown] = React.useState(false);
   const searchTimeoutRef = React.useRef(null);
+
+  const { user, isLoggedIn, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    message.success('Đã đăng xuất thành công!');
+    navigate('/');
+  };
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -109,11 +118,13 @@ const AppLayout = () => {
           className="flex items-center mr-6"
           style={{ minWidth: 80 }}
         >
-          <img
-            src={logoImg}
-            alt="VienKey Logo"
-            className="h-10 w-auto object-contain mix-blend-multiply"
-          />
+          <div className="bg-white p-1 md:p-1.5 rounded-xl shadow-sm hover:-translate-y-1 transition-transform">
+            <img
+              src={logoImg}
+              alt="VienKey Logo"
+              className="h-10 w-auto object-contain"
+            />
+          </div>
         </Link>
         <div
           style={{
@@ -207,14 +218,43 @@ const AppLayout = () => {
             )}
           </div>
         </div>
-        <div style={{ minWidth: 80 }} className="flex justify-end">
-          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-[#814C9D] cursor-pointer">
-            {/* Simple user icon SVG */}
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#814C9D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-          </div>
+        <div style={{ minWidth: 80 }} className="flex justify-end items-center space-x-3">
+          {isLoggedIn ? (
+            <>
+              <div
+                className="flex items-center gap-2 cursor-pointer mr-2 md:mr-4"
+                onClick={() => navigate('/ca-nhan')}
+              >
+                <div className="w-10 h-10 rounded-full bg-[#EB7470] flex items-center justify-center text-white font-bold text-xl overflow-hidden border-2 border-white shadow-sm hover:scale-105 transition-transform">
+                  {user?.fullname ? user.fullname.charAt(0).toUpperCase() : '👤'}
+                </div>
+                <span className="hidden md:block font-bold text-black max-w-[120px] truncate">
+                  {user?.fullname || 'Học sinh'}
+                </span>
+              </div>
+              <button
+                className="bg-white text-[#EB7470] font-extrabold text-base px-4 py-2 border-2 border-[#EB7470] rounded-full shadow-sm hover:bg-[#EB7470] hover:text-white transition-all cursor-pointer"
+                onClick={handleLogout}
+              >
+                Đăng xuất
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="bg-white text-[#61B543] font-extrabold text-base px-4 py-2 rounded-full shadow-[0_4px_0_#41802b] hover:shadow-[0_2px_0_#41802b] hover:translate-y-0.5 transition-all border-none cursor-pointer hidden md:block"
+                onClick={() => navigate('/login')}
+              >
+                Đăng nhập
+              </button>
+              <button
+                className="bg-[#EB7470] text-white font-extrabold text-base px-4 py-2 rounded-full shadow-[0_4px_0_#b53b37] hover:shadow-[0_2px_0_#b53b37] hover:translate-y-0.5 transition-all border-none cursor-pointer"
+                onClick={() => navigate('/register')}
+              >
+                Đăng ký
+              </button>
+            </>
+          )}
         </div>
       </Header>
 
