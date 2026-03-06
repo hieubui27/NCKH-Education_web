@@ -3,31 +3,23 @@ import React from 'react';
 const NewsPage = () => {
   const newsData = {
     tutorials: [
-      { date: "27/02/2026", title: "Hướng dẫn vòng thi cấp Quốc gia Violympic năm học 2025 2026" },
-      { date: "27/02/2026", title: "Chủ điểm ôn tập môn Tiếng Việt vòng Quốc gia" },
-      { date: "27/02/2026", title: "Chủ điểm ôn tập môn Toán vòng Quốc gia" },
-      { date: "27/02/2026", title: "Chủ điểm ôn tập môn Toán Tiếng Anh vòng Quốc gia" },
-      { date: "01/03/2026", title: "Ra mắt website Vienkey - hỗ trợ dạy học tập đọc cho học sinh rối loạn phổ tự kỷ" },
+      { date: "27/02/2026", title: "Ra mắt website Vienkey - website hỗ trợ dạy học tập đọc cho học sinh rối loạn phổ tự kỷ học Tiểu học hòa nhập" },
+      { date: "27/02/2026", title: "Các tính năng và hướng dẫn sử dụng website Vienkey" },
     ],
     specialized: [
       { date: "01/03/2026", title: "Ra mắt tính năng tìm kiếm theo từ khóa - tra cứu nhanh" },
       { date: "01/03/2026", title: "Chủ đề ôn tập môn Tiếng Việt lớp 2" },
       { date: "01/03/2026", title: "Chủ đề ôn tập môn Tiếng Việt lớp 3" },
+      { date: "01/03/2026", title: "Chủ đề ôn tập môn Tiếng Việt lớp 4" },
+      { date: "01/03/2026", title: "Chủ đề ôn tập môn Tiếng Việt lớp 5" },
       { date: "01/03/2026", title: "Cách hỗ trợ học sinh rối loạn phổ tự kỷ hiểu nghĩa từ trong môn Tập đọc" },
     ]
   };
 
   return (
     <div className="min-h-screen p-4 md:p-8 font-sans">
-      {/* Container chính với viền xanh như trong ảnh */}
       <div className="max-w-4xl mx-auto bg-white border border-green-200 shadow-sm rounded-sm">
-        
-    
-
-        {/* Content Area */}
         <div className="p-8 md:p-12">
-          
-          {/* Section: Tin Hướng Dẫn */}
           <section className="mb-12">
             <h2 className="text-2xl text-blue-400 mb-8 font-light">Tin hướng dẫn</h2>
             <div className="space-y-0">
@@ -40,7 +32,6 @@ const NewsPage = () => {
             </div>
           </section>
 
-          {/* Section: Tin Chuyên Môn */}
           <section>
             <h2 className="text-2xl text-blue-400 mb-8 font-light">
               Tin chuyên môn
