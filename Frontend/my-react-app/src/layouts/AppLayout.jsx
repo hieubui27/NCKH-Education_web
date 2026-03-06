@@ -39,7 +39,7 @@ const AppLayout = () => {
     try {
       const token = localStorage.getItem('token');
       setSearchLoading(true);
-      const res = await fetch(`http://localhost:5000/api/lessons/search?q=${encodeURIComponent(keyword)}`, {
+      const res = await fetch(`/api/lessons/search?q=${encodeURIComponent(keyword)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -239,7 +239,7 @@ const AppLayout = () => {
                 Đăng xuất
               </button>
               <button
-                className="bg-[#EB7470] hover:bg-[#d85e5a] text-white font-extrabold text-base md:text-lg px-4 md:px-5 py-2 md:py-2.5 rounded-full shadow-[0_4px_0_#b53b37] hover:shadow-[0_2px_0_#b53b37] active:shadow-none active:translate-y-1 transition-all border-none cursor-pointer"
+                className="bg-[#EB7470] hover:bg-[#d85e5a] text-white font-extrabold text-base px-4 py-2 rounded-full shadow-[0_4px_0_#41802b] hover:shadow-[0_2px_0_#41802b] hover:translate-y-0.5 transition-all border-none cursor-pointer"
                 onClick={() => navigate('/danh-sach-lop')}
               >
                 Bắt đầu học ngay! 🚀

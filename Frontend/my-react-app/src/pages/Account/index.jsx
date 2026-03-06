@@ -135,7 +135,7 @@ const Account = () => {
                             </div>
 
                             {/* Avatar Panel */}
-                            <div className="w-full md:w-56 flex flex-col items-center gap-6 pt-4">
+                            <div className="w-full md:w-56 flex flex-col items-center justify-center gap-6 pt-4">
                                 <div className="w-32 h-32 md:w-40 md:h-40 bg-[#D9D9D9] rounded-full shadow-inner overflow-hidden flex items-center justify-center">
                                     <span className="text-4xl text-gray-500">👤</span>
                                 </div>
