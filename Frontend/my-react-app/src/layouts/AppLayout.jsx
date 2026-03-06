@@ -11,7 +11,7 @@ const { Header, Content } = Layout;
 const AppLayout = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = React.useState('');
-  const [suggestions, setSuggestions] = React.useState({ themes: [], lessons: [] });
+  const [suggestions, setSuggestions] = React.useState({ themes: [], lessons: [], words: [] });
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [showDropdown, setShowDropdown] = React.useState(false);
   const searchTimeoutRef = React.useRef(null);
@@ -31,7 +31,7 @@ const AppLayout = () => {
 
   const handleFetchSuggestions = React.useCallback(async (keyword) => {
     if (!keyword || keyword.trim() === '') {
-      setSuggestions({ themes: [], lessons: [] });
+      setSuggestions({ themes: [], lessons: [], words: [] });
       setShowDropdown(false);
       return;
     }
@@ -53,15 +53,16 @@ const AppLayout = () => {
         setSuggestions({
           themes: data.data.themes || [],
           lessons: data.data.lessons || [],
+          words: data.data.words || [],
         });
         setShowDropdown(true);
       } else {
-        setSuggestions({ themes: [], lessons: [] });
+        setSuggestions({ themes: [], lessons: [], words: [] });
         setShowDropdown(false);
       }
     } catch (error) {
       console.error('Lỗi khi tìm kiếm:', error);
-      setSuggestions({ themes: [], lessons: [] });
+      setSuggestions({ themes: [], lessons: [], words: [] });
       setShowDropdown(false);
     } finally {
       setSearchLoading(false);
@@ -92,15 +93,18 @@ const AppLayout = () => {
   const handleSelectTheme = (theme) => {
     setShowDropdown(false);
     setSearchTerm('');
-    // Giả định theme.id tương ứng với topicId, class/term mặc định
     navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/${theme.id}`);
   };
 
   const handleSelectLesson = (lesson) => {
     setShowDropdown(false);
     setSearchTerm('');
-    // Tạm thời điều hướng đến trang chi tiết bài học với tham số mặc định
     navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/1/bai-hoc/${lesson.id}`);
+  };
+
+  const handleSelectWord = (word) => {
+    setShowDropdown(false);
+    setSearchTerm(word.word);
   };
 
   return (
@@ -133,7 +137,7 @@ const AppLayout = () => {
             justifyContent: 'center',
           }}
         >
-          <div className="relative flex items-center w-[350px] md:w-[450px]">
+          <div className="relative flex items-center w-87.5 md:w-112.5">
             <form
               onSubmit={handleSubmitSearch}
               className="flex items-center w-full bg-white rounded-full shadow-sm"
@@ -145,7 +149,7 @@ const AppLayout = () => {
                 value={searchTerm}
                 onChange={handleChangeSearch}
                 onFocus={() => {
-                  if ((suggestions.themes?.length || suggestions.lessons?.length) && searchTerm) {
+                  if ((suggestions.themes?.length || suggestions.lessons?.length || suggestions.words?.length) && searchTerm) {
                     setShowDropdown(true);
                   }
                 }}
@@ -166,7 +170,7 @@ const AppLayout = () => {
               </button>
             </form>
 
-            {showDropdown && (suggestions.themes.length > 0 || suggestions.lessons.length > 0) && (
+            {showDropdown && (suggestions.themes.length > 0 || suggestions.lessons.length > 0 || suggestions.words.length > 0) && (
               <div className="absolute top-[110%] left-0 w-full bg-white rounded-2xl shadow-lg border border-gray-100 z-50 max-h-96 overflow-y-auto">
                 {suggestions.themes.length > 0 && (
                   <div className="border-b border-gray-100">
@@ -190,7 +194,7 @@ const AppLayout = () => {
                 )}
 
                 {suggestions.lessons.length > 0 && (
-                  <div>
+                  <div className="border-b border-gray-100">
                     <div className="px-4 pt-3 pb-1 text-xs font-semibold text-gray-500 uppercase">
                       Bài học
                     </div>
@@ -212,6 +216,26 @@ const AppLayout = () => {
                         </span>
                       </button>
                     ))}
+                  </div>
+                )}
+
+                {suggestions.words.length > 0 && (
+                  <div>
+                    <div className="px-4 pt-3 pb-1 text-xs font-semibold text-gray-500 uppercase">
+                      Từ vựng
+                    </div>
+                    <div className="px-4 pb-3 flex flex-wrap gap-2">
+                      {suggestions.words.map((word) => (
+                        <button
+                          key={word.id}
+                          type="button"
+                          className="px-3 py-1 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-full text-sm border border-orange-100 transition-colors"
+                          onClick={() => handleSelectWord(word)}
+                        >
+                          {word.word}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -267,7 +291,6 @@ const AppLayout = () => {
       <Layout>
         <AppSiderMenu />
         <Layout >
-
           <Content
             style={{
               margin: 0,
