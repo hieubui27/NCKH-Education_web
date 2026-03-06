@@ -53,8 +53,6 @@ const Register = () => {
         <div className="w-full min-h-[calc(100vh-80px)] bg-[#FFFDEF] flex flex-col items-center pt-2 pb-20 relative font-sans">
             <div className="w-full max-w-6xl px-4 sm:px-8 z-10 flex flex-col items-center">
                 <Banner />
-
-                {/* --- CHỈNH SỬA TẠI ĐÂY: Thay màu nền đỏ bằng màu xanh nhạt hài hòa hơn --- */}
                 <div className="w-full max-w-5xl bg-[#A7DE93] p-8 md:p-14 rounded-[2rem] shadow-sm mt-4">
                     <Form
                         layout="vertical"
@@ -63,7 +61,6 @@ const Register = () => {
                         className="w-full max-w-4xl mx-auto"
                     >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-1">
-                            {/* --- CÁC LABEL ĐƯỢC CHUYỂN THÀNH MÀU ĐẬM HƠN ĐỂ NỔI TRÊN NỀN XANH --- */}
                             <Form.Item
                                 label={<span className="text-xl font-extrabold text-[#3b662b] font-serif tracking-wide">Họ và tên :</span>}
                                 name="fullname"
