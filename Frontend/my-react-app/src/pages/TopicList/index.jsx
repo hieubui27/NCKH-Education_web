@@ -106,7 +106,7 @@ const TopicList = () => {
                 id={lesson.id}
                 title={lesson.title}
                 color={color}
-                imageUrl={`https://picsum.photos/seed/${lesson.id}/300/300`}
+                imageUrl={lesson.image_url}
                 path={`/danh-sach-lop/${classId}/ky/${termId}/chu-de/${lesson.id}`}
                 marginTop={isStaggeredDown ? 'md:mt-20' : 'md:-mt-10'}
               />
