@@ -1,15 +1,5 @@
 {
   "version": 2,
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/Backend/index.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/Frontend/my-react-app/$1"
-    }
-  ],
   "builds": [
     {
       "src": "Backend/index.js",
@@ -17,7 +7,18 @@
     },
     {
       "src": "Frontend/my-react-app/package.json",
-      "use": "@vercel/static-build"
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/Backend/index.js"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/Frontend/my-react-app/index.html"
     }
   ]
 }
