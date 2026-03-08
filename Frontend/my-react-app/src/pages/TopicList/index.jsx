@@ -3,40 +3,23 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Spin, message } from 'antd';
 import bannerImage from '../../assets/Group 1.png';
 
-const TopicItem = ({ id, title, path, color, imageUrl, marginTop }) => {
+const TopicItem = ({ title, path, imageUrl, marginTop }) => {
   const navigate = useNavigate();
 
   return (
     <div
-      className={`relative flex flex-col items-center justify-center cursor-pointer transition-transform hover:-translate-y-2 ${marginTop}`}
+      className={`relative flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:-translate-y-3 active:scale-90 ${marginTop}`}
       onClick={() => navigate(path)}
     >
       <div className="relative w-48 h-48 sm:w-60 sm:h-60">
-        {/* Chữ uốn lượn bên trên */}
-        <svg viewBox="0 0 200 200" className="absolute top-[-35px] left-0 w-full h-full pointer-events-none z-20 overflow-visible">
-          <path id={`curve-${id}`} d="M 20, 100 A 80,80 0 1,1 180,100" fill="transparent" />
-          <text>
-            <textPath
-              href={`#curve-${id}`}
-              startOffset="50%"
-              textAnchor="middle"
-              fill={color}
-              style={{ fontSize: '14px', fontWeight: '900', textTransform: 'uppercase' }}
-            >
-              {title}
-            </textPath>
-          </text>
-        </svg>
-
-        {/* Hình ảnh tròn */}
+        {/* Chỉ giữ lại khung tròn hình ảnh, không viền */}
         <div
-          className="w-full h-full rounded-full border-8 bg-white overflow-hidden shadow-md flex items-center justify-center relative z-10"
-          style={{ borderColor: color }}
+          className="w-full h-full rounded-full bg-white overflow-hidden shadow-xl flex items-center justify-center relative z-10"
         >
           <img
-            src={imageUrl}
+            src={imageUrl || 'https://picsum.photos/400/400?education'}
             alt={title}
-            className="w-[96%] h-[96%] object-cover rounded-full"
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
           />
         </div>
       </div>
@@ -69,7 +52,6 @@ const TopicList = () => {
         }
 
         setLessons(data.data || []);
-
       } catch (error) {
         console.error('Lỗi tải danh sách bài học:', error);
         message.error(error.message);
@@ -92,23 +74,19 @@ const TopicList = () => {
           <Spin size="large" tip="Đang tải bài học..." />
         </div>
       ) : lessons.length === 0 ? (
-        <div className="py-20 text-gray-500 font-bold">Không tìm thấy bài học nào.</div>
+        <div className="py-20 text-gray-500 font-bold uppercase tracking-widest">Không tìm thấy bài học nào.</div>
       ) : (
         <div className="w-full max-w-[1300px] grid grid-cols-2 md:grid-cols-4 gap-x-10 md:gap-x-16 gap-y-24 px-10 pb-20 pt-10 justify-items-center">
           {lessons.map((lesson, index) => {
-            const colors = ['#38BDF8', '#06B6D4', '#3B82F6', '#0EA5E9', '#F97316', '#F43F5E'];
-            const color = colors[index % colors.length];
             const isStaggeredDown = index % 2 !== 0;
 
             return (
               <TopicItem
                 key={lesson.id}
-                id={lesson.id}
                 title={lesson.title}
-                color={color}
                 imageUrl={lesson.image_url}
                 path={`/danh-sach-lop/${classId}/ky/${termId}/chu-de/${lesson.id}`}
-                marginTop={isStaggeredDown ? 'md:mt-20' : 'md:-mt-10'}
+                marginTop={isStaggeredDown ? 'md:mt-16' : 'md:-mt-8'}
               />
             );
           })}
