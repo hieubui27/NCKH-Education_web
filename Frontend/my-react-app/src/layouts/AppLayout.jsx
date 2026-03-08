@@ -105,6 +105,7 @@ const AppLayout = () => {
   const handleSelectWord = (word) => {
     setShowDropdown(false);
     setSearchTerm(word.word);
+    navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/1/bai-hoc/1/tu-vung/${word.id}`);
   };
 
   return (
