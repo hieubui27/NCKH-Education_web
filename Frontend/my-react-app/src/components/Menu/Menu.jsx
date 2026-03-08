@@ -15,7 +15,6 @@ const AppSiderMenu = () => {
   const [loading, setLoading] = useState(false);
   const [openKeys, setOpenKeys] = useState(['/danh-sach-lop', '/danh-sach-lop/lop-2', '/danh-sach-lop/lop-2/ky/2']);
 
-  // 1. Lấy dữ liệu thực tế cho Lớp 2 - Kỳ 2
   useEffect(() => {
     const fetchRealData = async () => {
       try {
@@ -40,35 +39,35 @@ const AppSiderMenu = () => {
     fetchRealData();
   }, []);
 
-  // Helper để định dạng text cho đồng bộ
-  const renderLabel = (text, weight = "font-extrabold") => (
-    <span className={`${weight} text-black text-[16px]`}>{text}</span>
+  // Helper render label bọc Link để có thể nhấn vào Header Menu
+  const renderLinkStyle = (path, text, weight = "font-extrabold") => (
+    <Link to={path} style={{ display: 'block', width: '100%', color: 'inherit', textDecoration: 'none' }}>
+      <span className={`${weight} text-black text-[16px]`}>{text}</span>
+    </Link>
   );
 
-  // 2. Cấu trúc Menu: Tĩnh các lớp khác, Động cho Lớp 2 Kỳ 2
   const menuItems = [
     {
       key: '/ca-nhan',
       icon: <UserOutlined />,
-      label: <Link to="/ca-nhan">{renderLabel('Trang cá nhân')}</Link>,
+      label: renderLinkStyle('/ca-nhan', 'Trang cá nhân'),
     },
     {
       key: '/danh-sach-lop',
       icon: <ReadOutlined />,
-      label: renderLabel('Mục lục'),
+      label: renderLinkStyle('/danh-sach-lop', 'Mục lục'),
       children: [
         {
           key: '/danh-sach-lop/lop-2',
-          label: renderLabel('Lớp 2'),
+          label: renderLinkStyle('/danh-sach-lop/lop-2', 'Lớp 2'),
           children: [
             { 
               key: '/danh-sach-lop/lop-2/ky/1', 
-              label: <span className="text-gray-400 italic font-bold">Học kỳ I</span> 
+              label: renderLinkStyle('/danh-sach-lop/lop-2/ky/1', 'Học kỳ I', "font-bold text-gray-400 italic") 
             },
             {
               key: '/danh-sach-lop/lop-2/ky/2',
-              label: renderLabel('Học kỳ II'),
-              // Đổ dữ liệu thật từ API vào đây
+              label: renderLinkStyle('/danh-sach-lop/lop-2/ky/2', 'Học kỳ II'),
               children: loading ? [
                 { key: 'loading', label: <Spin size="small" className="ml-4" /> }
               ] : themes.map((theme) => ({
@@ -85,15 +84,15 @@ const AppSiderMenu = () => {
             },
           ],
         },
-        { key: '/danh-sach-lop/lop-3', label: renderLabel('Lớp 3') },
-        { key: '/danh-sach-lop/lop-4', label: renderLabel('Lớp 4') },
-        { key: '/danh-sach-lop/lop-5', label: renderLabel('Lớp 5') },
+        { key: '/danh-sach-lop/lop-3', label: renderLinkStyle('/danh-sach-lop/lop-3', 'Lớp 3') },
+        { key: '/danh-sach-lop/lop-4', label: renderLinkStyle('/danh-sach-lop/lop-4', 'Lớp 4') },
+        { key: '/danh-sach-lop/lop-5', label: renderLinkStyle('/danh-sach-lop/lop-5', 'Lớp 5') },
       ],
     },
   ];
 
   return (
-    <Sider width={260} style={{ background: '#AEE2A4',minHeight: '100vh', }} className="overflow-y-auto border-r border-white/20">
+    <Sider width={260} style={{ background: '#AEE2A4', minHeight: '100vh' }} className="overflow-y-auto border-r border-white/20">
       <ConfigProvider
         theme={{
           components: {
