@@ -17,7 +17,11 @@
       "destination": "/Backend/index.js"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/(.*)",
+      "destination": "/Frontend/my-react-app/$1"
+    },
+    {
+      "source": "/(.*)",
       "destination": "/Frontend/my-react-app/index.html"
     }
   ]
