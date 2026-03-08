@@ -231,10 +231,18 @@ const AppLayout = () => {
                 </div>
                 <span className="hidden lg:block font-bold text-white truncate max-w-[100px]">{user?.fullname || 'Học sinh'}</span>
               </div>
-              <button className="bg-[#EB7470] text-white font-bold px-5 py-2 rounded-full hover:bg-[#d85e5a] transition-all border-none cursor-pointer shadow-md" onClick={() => navigate('/danh-sach-lop')}>
-                Học ngay! 🚀
+              <button
+                className="bg-[#FF8E7E] text-white font-black text-sm px-5 py-2.5 rounded-full shadow-[0_4px_0_#e57a6b] hover:shadow-[0_2px_0_#e57a6b] hover:translate-y-0.5 active:translate-y-1 transition-all border-none cursor-pointer"
+                onClick={() => navigate('/danh-sach-lop')}
+              >
+                HỌC NGAY! 🚀
               </button>
-              <button className="bg-white text-[#EB7470] font-bold px-4 py-2 rounded-full border-2 border-white hover:bg-transparent hover:text-white transition-all cursor-pointer" onClick={handleLogout}>
+
+              {/* Nút Thoát - Màu đỏ nhạt pastel, viền mảnh */}
+              <button
+                className="bg-[#FFF1F0] text-[#FF7875] font-bold text-sm px-4 py-2.5 rounded-full border border-[#FFA39E] hover:bg-[#FF7875] hover:text-white transition-all cursor-pointer"
+                onClick={handleLogout}
+              >
                 Thoát
               </button>
             </>
