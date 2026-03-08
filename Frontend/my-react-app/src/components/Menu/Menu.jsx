@@ -1,79 +1,94 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, ConfigProvider } from 'antd';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { Layout, Menu, ConfigProvider, Spin } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import { 
+  UserOutlined, 
+  ReadOutlined, 
+  BorderOutlined, 
+  FolderOpenOutlined 
+} from '@ant-design/icons';
 
 const { Sider } = Layout;
 
-const menuConfig = [
-  { key: '/ca-nhan', label: <span className="text-xl font-extrabold text-black">Trang cá nhân</span> },
-  {
-    key: '/danh-sach-lop',
-    label: <span className="text-xl font-extrabold text-black">Mục lục</span>,
-    className: 'border-b border-white/40',
-    children: [
-      {
-        key: '/danh-sach-lop/lop-2',
-        label: <span className="text-xl font-extrabold text-black">Lớp 2</span>,
-        className: 'border-b border-white/40',
-        children: [
-          {
-            key: '/danh-sach-lop/lop-2/ky/1',
-            label: <span className="text-lg font-bold text-black border-b border-white/40 block pb-1">Học kỳ I</span>,
-            children: [
-              { key: '/danh-sach-lop/lop-2/ky/1/chu-de/1', label: <span className="text-base font-semibold text-gray-500">Em lớn lên từng ngày</span> },
-              { key: '/danh-sach-lop/lop-2/ky/1/chu-de/2', label: <span className="text-base font-semibold text-gray-500">Đi học vui sao</span> },
-              { key: '/danh-sach-lop/lop-2/ky/1/chu-de/3', label: <span className="text-base font-semibold text-gray-500">Niềm vui tuổi thơ</span> },
-              { key: '/danh-sach-lop/lop-2/ky/1/chu-de/4', label: <span className="text-base font-semibold text-gray-500">Mái ấm gia đình</span> },
-            ]
-          },
-          { key: '/danh-sach-lop/lop-2/ky/2', label: <span className="text-lg font-bold text-black border-b border-white/40 block pb-1">Học kỳ II</span> },
-        ]
-      },
-      {
-        key: '/danh-sach-lop/lop-3',
-        label: <span className="text-xl font-extrabold text-black border-b border-white/40 block pb-1">Lớp 3</span>,
-      },
-      {
-        key: '/danh-sach-lop/lop-4',
-        label: <span className="text-xl font-extrabold text-black border-b border-white/40 block pb-1">Lớp 4</span>,
-      },
-      {
-        key: '/danh-sach-lop/lop-5',
-        label: <span className="text-xl font-extrabold text-black">Lớp 5</span>,
-      },
-    ]
-  },
-];
-
-const getMenuItems = (data) => {
-  return data.map((item) => ({
-    key: item.key,
-    icon: item.icon,
-    className: item.className,
-    label: (
-      <Link to={item.key} style={{ display: 'block', width: '100%', color: 'inherit', textDecoration: 'none' }}>
-        {item.label}
-      </Link>
-    ),
-    children: item.children ? getMenuItems(item.children) : null,
-  }));
-};
-
 const AppSiderMenu = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [openKeys, setOpenKeys] = useState([]);
+  const [themes, setThemes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [openKeys, setOpenKeys] = useState(['/danh-sach-lop', '/danh-sach-lop/lop-2']);
 
+  // 1. Chỉ gọi API lấy dữ liệu cho Lớp 2 - Kỳ 2
   useEffect(() => {
-    const pathSnippets = location.pathname.split('/').filter(i => i);
-    const keys = pathSnippets.map((_, index) =>
-      '/' + pathSnippets.slice(0, index + 1).join('/')
-    );
-    setOpenKeys(keys);
-  }, [location.pathname]);
+    const fetchRealData = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch('/api/lessons'); // API lấy danh sách bài học/chủ đề hiện có
+        const result = await res.json();
+        if (result.success) {
+          setThemes(result.data || []);
+        }
+      } catch (error) {
+        console.error("Lỗi tải dữ liệu thực tế:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRealData();
+  }, []);
+
+  // 2. Hàm tạo label với Style đồng nhất
+  const formatLabel = (text, isMain = false) => (
+    <span className={`font-extrabold text-black ${isMain ? 'text-lg' : 'text-base'}`}>
+      {text}
+    </span>
+  );
+
+  // 3. Cấu trúc Menu kết hợp Tĩnh & Động
+  const menuItems = [
+    {
+      key: '/ca-nhan',
+      icon: <UserOutlined />,
+      label: <Link to="/ca-nhan">{formatLabel('Trang cá nhân', true)}</Link>,
+    },
+    {
+      key: '/danh-sach-lop',
+      icon: <ReadOutlined />,
+      label: formatLabel('Mục lục', true),
+      className: 'border-b border-white/40',
+      children: [
+        {
+          key: '/danh-sach-lop/lop-2',
+          label: formatLabel('Lớp 2'),
+          children: [
+            { 
+              key: '/danh-sach-lop/lop-2/ky/1', 
+              label: <span className="font-bold text-gray-400 italic">Học kỳ I (Sắp ra mắt)</span> 
+            },
+            {
+              key: '/danh-sach-lop/lop-2/ky/2',
+              label: formatLabel('Học kỳ II'),
+              // ĐỔ DATA THẬT VÀO ĐÂY
+              children: loading ? [{ key: 'loading', label: <Spin size="small" /> }] : themes.map(t => ({
+                key: `/danh-sach-lop/lop-2/ky/2/chu-de/${t.id}`,
+                label: (
+                  <Link to={`/danh-sach-lop/lop-2/ky/2/chu-de/${t.id}`}>
+                    <span className="text-sm font-semibold text-gray-600 hover:text-[#61B543]">
+                      {t.title}
+                    </span>
+                  </Link>
+                )
+              }))
+            },
+          ]
+        },
+        { key: '/danh-sach-lop/lop-3', label: formatLabel('Lớp 3') },
+        { key: '/danh-sach-lop/lop-4', label: formatLabel('Lớp 4') },
+        { key: '/danh-sach-lop/lop-5', label: formatLabel('Lớp 5') },
+      ]
+    }
+  ];
 
   return (
-    <Sider width={250} style={{ background: '#AEE2A4' }}>
+    <Sider width={260} style={{ background: '#AEE2A4' }} className="h-screen overflow-y-auto shadow-lg">
       <ConfigProvider
         theme={{
           components: {
@@ -81,11 +96,9 @@ const AppSiderMenu = () => {
               itemBg: 'transparent',
               itemSelectedBg: '#FEFBF4',
               itemHoverBg: 'rgba(255,255,255,0.3)',
-              itemActiveBg: '#FEFBF4',
-              itemColor: '#000000',
-              itemSelectedColor: '#000000',
-              itemMarginInline: 16,
-              itemBorderRadius: 16,
+              itemSelectedColor: '#61B543',
+              itemMarginInline: 12,
+              itemBorderRadius: 12,
               subMenuItemBg: 'transparent',
               activeBarWidth: 0,
             },
@@ -97,9 +110,8 @@ const AppSiderMenu = () => {
           selectedKeys={[location.pathname]}
           openKeys={openKeys}
           onOpenChange={(keys) => setOpenKeys(keys)}
-          style={{ height: '100%', borderInlineEnd: 0, background: 'transparent', paddingTop: 20 }}
-          items={getMenuItems(menuConfig)}
-          className="cursor-pointer"
+          style={{ height: '100%', borderRight: 0, background: 'transparent', paddingTop: 20 }}
+          items={menuItems}
         />
       </ConfigProvider>
     </Sider>
