@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Layout, Spin, theme, message, Drawer } from 'antd';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { SearchOutlined, UserOutlined, MenuOutlined, CloseOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import { Layout, Input, Spin, theme, message } from 'antd';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import AppSiderMenu from '../components/Menu/Menu';
 import { useAuth } from '../context/AuthContext';
 import logoImg from '../assets/logo_vienkey.png';
 import AppFooter from '../components/Footer/AppFooter';
+import { SearchOutlined, UserOutlined } from '@ant-design/icons';
 
-const { Header, Content, Sider } = Layout;
+const { Header, Content } = Layout;
 
 const AppLayout = () => {
   const navigate = useNavigate();
@@ -15,13 +15,14 @@ const AppLayout = () => {
   const [suggestions, setSuggestions] = useState({ themes: [], lessons: [], words: [] });
   const [searchLoading, setSearchLoading] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false); 
-  
   const searchTimeoutRef = useRef(null);
   const dropdownRef = useRef(null);
+
   const { user, isLoggedIn, logout } = useAuth();
-  const { token: { borderRadiusLG } } = theme.useToken();
+
+  const {
+    token: { borderRadiusLG },
+  } = theme.useToken();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -29,29 +30,52 @@ const AppLayout = () => {
         setShowDropdown(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
+  const handleLogout = async () => {
+    await logout();
+    message.success('Đã đăng xuất thành công!');
+    navigate('/');
+  };
+
   const handleFetchSuggestions = useCallback(async (keyword) => {
-    if (!keyword?.trim()) {
+    if (!keyword || keyword.trim() === '') {
       setSuggestions({ themes: [], lessons: [], words: [] });
       setShowDropdown(false);
       return;
     }
+
     try {
-      setSearchLoading(true);
       const token = localStorage.getItem('token');
+      setSearchLoading(true);
       const res = await fetch(`/api/lessons/search?q=${encodeURIComponent(keyword)}`, {
-        headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
       });
+
       const data = await res.json();
       if (data.success && data.data) {
-        setSuggestions(data.data);
+        setSuggestions({
+          themes: data.data.themes || [],
+          lessons: data.data.lessons || [],
+          words: data.data.words || [],
+        });
         setShowDropdown(true);
+      } else {
+        setSuggestions({ themes: [], lessons: [], words: [] });
+        setShowDropdown(false);
       }
     } catch (error) {
-      console.error('Lỗi tìm kiếm:', error);
+      console.error('Lỗi khi tìm kiếm:', error);
+      setShowDropdown(false);
     } finally {
       setSearchLoading(false);
     }
@@ -60,131 +84,182 @@ const AppLayout = () => {
   const handleChangeSearch = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
-    searchTimeoutRef.current = setTimeout(() => handleFetchSuggestions(value), 400);
+
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    searchTimeoutRef.current = setTimeout(() => {
+      handleFetchSuggestions(value);
+    }, 400);
+  };
+
+  const handleSubmitSearch = (e) => {
+    e.preventDefault();
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+    handleFetchSuggestions(searchTerm);
+  };
+
+  const handleSelectTheme = (theme) => {
+    setShowDropdown(false);
+    setSearchTerm('');
+    navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/${theme.id}`);
+  };
+
+  const handleSelectLesson = (lesson) => {
+    setShowDropdown(false);
+    setSearchTerm('');
+    navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/1/bai-hoc/${lesson.id}`);
+  };
+
+  const handleSelectWord = (word) => {
+    setShowDropdown(false);
+    setSearchTerm(word.word);
+    navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/1/bai-hoc/1/tu-vung/${word.id}`);
   };
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Header className="sticky top-0 z-[1000] flex items-center h-[64px] bg-[#61B543] px-4 md:px-6 w-full border-none shadow-sm">
-        
-        {/* TRẠNG THÁI 1: HEADER BÌNH THƯỜNG */}
-        {!isSearchExpanded ? (
-          <div className="flex items-center justify-between w-full animate-in fade-in duration-300">
-            {/* Nhóm trái: Hamburger + Logo */}
-            <div className="flex items-center gap-3">
-              <button 
-                className="lg:hidden bg-transparent border-none text-white text-xl cursor-pointer flex items-center"
-                onClick={() => setIsMobileMenuOpen(true)}
-              >
-                <MenuOutlined />
-              </button>
-              <Link to="/" className="shrink-0 bg-white p-1 rounded-lg shadow-sm flex items-center">
-                <img src={logoImg} alt="VienKey" className="h-8 md:h-9 w-auto object-contain" />
-              </Link>
-            </div>
+      <Header
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          background: '#61B543',
+          paddingInline: 24,
+          height: '72px'
+        }}
+      >
+        <Link to="/" className="flex items-center mr-6" style={{ minWidth: 80 }}>
+          <div className="bg-white p-1.5 rounded-xl shadow-sm hover:-translate-y-1 transition-transform">
+            <img src={logoImg} alt="VienKey Logo" className="h-10 w-auto object-contain" />
+          </div>
+        </Link>
 
-            {/* Nhóm giữa: Search cho Desktop */}
-            <div className="hidden md:flex flex-1 justify-center max-w-lg mx-8" ref={dropdownRef}>
-              <div className="relative w-full">
-                <div className="flex items-center bg-white rounded-full px-4 py-1.5 shadow-sm border border-transparent focus-within:border-green-200 transition-all">
-                  <SearchOutlined className="text-gray-400 mr-2" />
-                  <input
-                    type="text"
-                    placeholder="Tìm kiếm bài học..."
-                    className="w-full bg-transparent outline-none text-sm text-gray-700"
-                    value={searchTerm}
-                    onChange={handleChangeSearch}
-                    onFocus={() => searchTerm && setShowDropdown(true)}
-                  />
-                  {searchLoading && <Spin size="small" className="ml-2" />}
-                </div>
-                {/* Dropdown Suggestions Desktop */}
-                {showDropdown && (suggestions.themes.length > 0 || suggestions.lessons.length > 0) && (
-                  <div className="absolute top-full mt-2 left-0 w-full bg-white rounded-xl shadow-2xl border border-gray-100 z-[1001] max-h-80 overflow-y-auto p-2">
-                     {/* Render suggestions map ở đây */}
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+          <div className="relative flex items-center w-87.5 md:w-112.5" ref={dropdownRef}>
+            <form
+              onSubmit={handleSubmitSearch}
+              className="flex items-center w-full bg-white rounded-full shadow-sm"
+            >
+              <input
+                type="text"
+                placeholder="Tìm kiếm bài học, chủ đề..."
+                className="flex-1 bg-transparent px-6 py-3 text-base outline-none text-gray-700 font-sans"
+                value={searchTerm}
+                onChange={handleChangeSearch}
+                onFocus={() => {
+                  if ((suggestions.themes?.length || suggestions.lessons?.length || suggestions.words?.length) && searchTerm) {
+                    setShowDropdown(true);
+                  }
+                }}
+              />
+              <div className="h-7 w-px bg-gray-300 mx-2"></div>
+              <button
+                type="submit"
+                className="pr-5 pl-2 py-3 flex items-center justify-center bg-transparent border-none cursor-pointer text-gray-600 hover:text-black transition-colors"
+              >
+                {searchLoading ? <Spin size="small" /> : <SearchOutlined style={{ fontSize: '20px' }} />}
+              </button>
+            </form>
+
+            {showDropdown && (suggestions.themes.length > 0 || suggestions.lessons.length > 0 || suggestions.words.length > 0) && (
+              <div className="absolute top-[115%] left-0 w-full bg-white rounded-2xl shadow-2xl border border-gray-100 z-[999] max-h-96 overflow-y-auto p-2">
+                {suggestions.themes.length > 0 && (
+                  <div className="mb-2">
+                    <div className="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Chủ đề</div>
+                    {suggestions.themes.map((theme) => (
+                      <button
+                        key={theme.id}
+                        className="w-full text-left px-4 py-3 hover:bg-green-50 rounded-xl transition-colors flex items-center gap-3"
+                        onClick={() => handleSelectTheme(theme)}
+                      >
+                        <span className="h-8 w-8 flex items-center justify-center rounded-full bg-green-100 text-green-600 font-bold">T</span>
+                        <span className="text-gray-700 font-medium">{theme.theme_name || theme.title}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {suggestions.lessons.length > 0 && (
+                  <div className="mb-2">
+                    <div className="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Bài học</div>
+                    {suggestions.lessons.map((lesson) => (
+                      <button
+                        key={lesson.id}
+                        className="w-full text-left px-4 py-3 hover:bg-blue-50 rounded-xl transition-colors flex items-center gap-3"
+                        onClick={() => handleSelectLesson(lesson)}
+                      >
+                        <span className="h-8 w-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold">B</span>
+                        <div className="flex flex-col">
+                          <span className="text-gray-700 font-medium">{lesson.title}</span>
+                          {lesson.author && <span className="text-xs text-gray-400">Tác giả: {lesson.author}</span>}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {suggestions.words.length > 0 && (
+                  <div>
+                    <div className="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Từ vựng</div>
+                    <div className="px-3 pb-3 flex flex-wrap gap-2">
+                      {suggestions.words.map((word) => (
+                        <button
+                          key={word.id}
+                          className="px-4 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-full text-sm font-bold border border-orange-100 transition-all"
+                          onClick={() => handleSelectWord(word)}
+                        >
+                          {word.word}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
-            </div>
+            )}
+          </div>
+        </div>
 
-            {/* Nhóm phải: Search Icon (Mobile) + Auth */}
-            <div className="flex items-center gap-3">
-              <button 
-                className="md:hidden bg-transparent border-none text-white text-xl cursor-pointer"
-                onClick={() => setIsSearchExpanded(true)}
+        <div style={{ minWidth: 80 }} className="flex justify-end items-center space-x-4">
+          {isLoggedIn ? (
+            <>
+              <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/ca-nhan')}>
+                <div className="w-10 h-10 rounded-full bg-[#EB7470] flex items-center justify-center text-white font-bold border-2 border-white shadow-sm hover:scale-110 transition-transform">
+                  {user?.fullname ? user.fullname.charAt(0).toUpperCase() : <UserOutlined />}
+                </div>
+                <span className="hidden lg:block font-bold text-white truncate max-w-[100px]">{user?.fullname || 'Học sinh'}</span>
+              </div>
+              <button
+                className="bg-[#FF8E7E] text-white font-black text-sm px-5 py-2.5 rounded-full shadow-[0_4px_0_#e57a6b] hover:shadow-[0_2px_0_#e57a6b] hover:translate-y-0.5 active:translate-y-1 transition-all border-none cursor-pointer"
+                onClick={() => navigate('/danh-sach-lop')}
               >
-                <SearchOutlined />
+                HỌC NGAY! 🚀
               </button>
 
-              {isLoggedIn ? (
-                <div 
-                  className="w-9 h-9 rounded-full bg-[#EB7470] flex items-center justify-center text-white font-bold border-2 border-white shadow-sm cursor-pointer hover:scale-105 transition-transform"
-                  onClick={() => navigate('/ca-nhan')}
-                >
-                  {user?.fullname?.charAt(0).toUpperCase() || <UserOutlined />}
-                </div>
-              ) : (
-                <button 
-                  className="bg-white text-[#61B543] font-bold px-4 py-1.5 rounded-full border-none text-sm cursor-pointer hover:bg-gray-50"
-                  onClick={() => navigate('/login')}
-                >
-                  Đăng nhập
-                </button>
-              )}
-            </div>
-          </div>
-        ) : (
-          /* TRẠNG THÁI 2: SEARCH FULL-SCREEN TRÊN MOBILE */
-          <div className="flex items-center w-full gap-3 animate-in slide-in-from-top-2 duration-300">
-            <button 
-              className="bg-transparent border-none text-white text-xl"
-              onClick={() => {
-                setIsSearchExpanded(false);
-                setShowDropdown(false);
-              }}
-            >
-              <ArrowLeftOutlined />
-            </button>
-            <div className="flex-1 flex items-center bg-white rounded-full px-4 py-2 shadow-inner" ref={dropdownRef}>
-              <input
-                autoFocus
-                type="text"
-                placeholder="Tìm bài học, chủ đề..."
-                className="w-full bg-transparent outline-none text-base text-gray-700"
-                value={searchTerm}
-                onChange={handleChangeSearch}
-              />
-              {searchTerm && <CloseOutlined className="text-gray-400 ml-2" onClick={() => setSearchTerm('')} />}
-            </div>
-          </div>
-        )}
+              {/* Nút Thoát - Màu đỏ nhạt pastel, viền mảnh */}
+              <button
+                className="bg-[#FFF1F0] text-[#FF7875] font-bold text-sm px-4 py-2.5 rounded-full border border-[#FFA39E] hover:bg-[#FF7875] hover:text-white transition-all cursor-pointer"
+                onClick={handleLogout}
+              >
+                Thoát
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="bg-white text-[#61B543] font-bold px-6 py-2 rounded-full hover:scale-105 transition-all border-none cursor-pointer" onClick={() => navigate('/login')}>Đăng nhập</button>
+              <button className="bg-[#EB7470] text-white font-bold px-6 py-2 rounded-full hover:scale-105 transition-all border-none cursor-pointer shadow-lg" onClick={() => navigate('/register')}>Đăng ký</button>
+            </>
+          )}
+        </div>
       </Header>
 
-      <Layout hasSider>
-        <Sider
-          width={250}
-          theme="light"
-          className="hidden lg:block border-r border-gray-100 sticky top-[64px] h-[calc(100vh-64px)] overflow-y-auto"
-        >
-          <AppSiderMenu />
-        </Sider>
-
-        <Drawer
-          placement="left"
-          onClose={() => setIsMobileMenuOpen(false)}
-          open={isMobileMenuOpen}
-          width={280}
-          bodyStyle={{ padding: 0 }}
-        >
-          <AppSiderMenu onSelect={() => setIsMobileMenuOpen(false)} />
-        </Drawer>
-
-        <Layout className="bg-[#FFFDEF]">
-          <Content className="p-4 md:p-6 lg:p-8 min-h-[400px]">
-            <div className="max-w-7xl mx-auto h-full">
-              <Outlet />
-            </div>
+      <Layout>
+        <AppSiderMenu />
+        <Layout>
+          <Content style={{ margin: 0, minHeight: 280, background: '#FFFDEF', borderRadius: borderRadiusLG }}>
+            <Outlet />
           </Content>
           <AppFooter />
         </Layout>
