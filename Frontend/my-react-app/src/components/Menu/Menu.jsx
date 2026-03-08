@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, ConfigProvider, Spin } from 'react-router-dom';
+import { Layout, Menu, ConfigProvider, Spin } from 'antd';
 import { useLocation, Link } from 'react-router-dom';
 import { 
   UserOutlined, 
   ReadOutlined, 
-  BorderOutlined, 
-  FolderOpenOutlined 
+  SmileOutlined 
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -14,20 +13,26 @@ const AppSiderMenu = () => {
   const location = useLocation();
   const [themes, setThemes] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [openKeys, setOpenKeys] = useState(['/danh-sach-lop', '/danh-sach-lop/lop-2']);
+  const [openKeys, setOpenKeys] = useState(['/danh-sach-lop', '/danh-sach-lop/lop-2', '/danh-sach-lop/lop-2/ky/2']);
 
-  // 1. Chỉ gọi API lấy dữ liệu cho Lớp 2 - Kỳ 2
+  // 1. Lấy dữ liệu thực tế cho Lớp 2 - Kỳ 2
   useEffect(() => {
     const fetchRealData = async () => {
       try {
         setLoading(true);
-        const res = await fetch('/api/lessons'); // API lấy danh sách bài học/chủ đề hiện có
-        const result = await res.json();
-        if (result.success) {
-          setThemes(result.data || []);
+        const token = localStorage.getItem('token');
+        const res = await fetch('/api/lessons', {
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+        });
+        const data = await res.json();
+        if (data.success) {
+          setThemes(data.data || []);
         }
       } catch (error) {
-        console.error("Lỗi tải dữ liệu thực tế:", error);
+        console.error('Lỗi tải dữ liệu menu:', error);
       } finally {
         setLoading(false);
       }
@@ -35,60 +40,60 @@ const AppSiderMenu = () => {
     fetchRealData();
   }, []);
 
-  // 2. Hàm tạo label với Style đồng nhất
-  const formatLabel = (text, isMain = false) => (
-    <span className={`font-extrabold text-black ${isMain ? 'text-lg' : 'text-base'}`}>
-      {text}
-    </span>
+  // Helper để định dạng text cho đồng bộ
+  const renderLabel = (text, weight = "font-extrabold") => (
+    <span className={`${weight} text-black text-[16px]`}>{text}</span>
   );
 
-  // 3. Cấu trúc Menu kết hợp Tĩnh & Động
+  // 2. Cấu trúc Menu: Tĩnh các lớp khác, Động cho Lớp 2 Kỳ 2
   const menuItems = [
     {
       key: '/ca-nhan',
       icon: <UserOutlined />,
-      label: <Link to="/ca-nhan">{formatLabel('Trang cá nhân', true)}</Link>,
+      label: <Link to="/ca-nhan">{renderLabel('Trang cá nhân')}</Link>,
     },
     {
       key: '/danh-sach-lop',
       icon: <ReadOutlined />,
-      label: formatLabel('Mục lục', true),
-      className: 'border-b border-white/40',
+      label: renderLabel('Mục lục'),
       children: [
         {
           key: '/danh-sach-lop/lop-2',
-          label: formatLabel('Lớp 2'),
+          label: renderLabel('Lớp 2'),
           children: [
             { 
               key: '/danh-sach-lop/lop-2/ky/1', 
-              label: <span className="font-bold text-gray-400 italic">Học kỳ I (Sắp ra mắt)</span> 
+              label: <span className="text-gray-400 italic font-bold">Học kỳ I</span> 
             },
             {
               key: '/danh-sach-lop/lop-2/ky/2',
-              label: formatLabel('Học kỳ II'),
-              // ĐỔ DATA THẬT VÀO ĐÂY
-              children: loading ? [{ key: 'loading', label: <Spin size="small" /> }] : themes.map(t => ({
-                key: `/danh-sach-lop/lop-2/ky/2/chu-de/${t.id}`,
+              label: renderLabel('Học kỳ II'),
+              // Đổ dữ liệu thật từ API vào đây
+              children: loading ? [
+                { key: 'loading', label: <Spin size="small" className="ml-4" /> }
+              ] : themes.map((theme) => ({
+                key: `/danh-sach-lop/lop-2/ky/2/chu-de/${theme.id}`,
                 label: (
-                  <Link to={`/danh-sach-lop/lop-2/ky/2/chu-de/${t.id}`}>
+                  <Link to={`/danh-sach-lop/lop-2/ky/2/chu-de/${theme.id}`}>
                     <span className="text-sm font-semibold text-gray-600 hover:text-[#61B543]">
-                      {t.title}
+                      {theme.title}
                     </span>
                   </Link>
-                )
-              }))
+                ),
+                icon: <SmileOutlined style={{ fontSize: '12px' }} />
+              })),
             },
-          ]
+          ],
         },
-        { key: '/danh-sach-lop/lop-3', label: formatLabel('Lớp 3') },
-        { key: '/danh-sach-lop/lop-4', label: formatLabel('Lớp 4') },
-        { key: '/danh-sach-lop/lop-5', label: formatLabel('Lớp 5') },
-      ]
-    }
+        { key: '/danh-sach-lop/lop-3', label: renderLabel('Lớp 3') },
+        { key: '/danh-sach-lop/lop-4', label: renderLabel('Lớp 4') },
+        { key: '/danh-sach-lop/lop-5', label: renderLabel('Lớp 5') },
+      ],
+    },
   ];
 
   return (
-    <Sider width={260} style={{ background: '#AEE2A4' }} className="h-screen overflow-y-auto shadow-lg">
+    <Sider width={260} style={{ background: '#AEE2A4' }} className="h-screen overflow-y-auto border-r border-white/20">
       <ConfigProvider
         theme={{
           components: {
@@ -97,6 +102,7 @@ const AppSiderMenu = () => {
               itemSelectedBg: '#FEFBF4',
               itemHoverBg: 'rgba(255,255,255,0.3)',
               itemSelectedColor: '#61B543',
+              itemColor: '#000000',
               itemMarginInline: 12,
               itemBorderRadius: 12,
               subMenuItemBg: 'transparent',
