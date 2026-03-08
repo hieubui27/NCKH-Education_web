@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Spin, message } from 'antd';
-import { ArrowLeftOutlined, SwapOutlined } from '@ant-design/icons';
+import { Spin, message } from 'antd';
+import { ArrowLeftOutlined, SwapOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Mousewheel } from 'swiper/modules';
 
@@ -48,17 +48,18 @@ const WordDetail = () => {
   if (loading) return <div className="h-screen flex justify-center items-center bg-[#FEFBF4]"><Spin size="large" /></div>;
 
   return (
-    <div className="w-full h-screen bg-[#A3D977] p-4 flex flex-col items-center overflow-hidden">
-      <div className="w-full max-w-5xl mb-4 flex justify-start">
+    <div className="w-full h-screen bg-[#A3D977] p-4 flex flex-col items-center overflow-hidden font-sans">
+      <div className="w-full max-w-5xl mb-6 flex justify-start">
         <button 
           onClick={() => navigate(-1)}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-bold py-3 px-6 rounded-full shadow-lg flex items-center gap-2 transition-all active:scale-95"
+          className="group relative flex items-center gap-2 bg-white text-[#6B8E23] font-bold py-3 px-8 rounded-2xl shadow-[0_4px_0_0_#8dbd65] hover:shadow-[0_2px_0_0_#8dbd65] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all duration-150 border-2 border-[#8dbd65]/20 z-50"
         >
-          <ArrowLeftOutlined /> Quay lại
+          <ArrowLeftOutlined className="group-hover:-translate-x-1 transition-transform" />
+          <span>QUAY LẠI</span>
         </button>
       </div>
 
-      <div className="w-full max-w-4xl h-[85vh] bg-[#FEFBF4] rounded-[2.5rem] shadow-2xl overflow-hidden relative">
+      <div className="w-full max-w-4xl h-[82vh] bg-[#FEFBF4] rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden border-b-[12px] border-[#F0E1B2] relative">
         <Swiper
           direction={'vertical'}
           slidesPerView={1}
@@ -68,7 +69,7 @@ const WordDetail = () => {
           modules={[Pagination, Navigation, Mousewheel]}
           className="h-full w-full main-vertical-swiper"
         >
-          <SwiperSlide className="p-8 sm:p-12 flex flex-col h-full">
+          <SwiperSlide className="p-8 sm:p-12 flex flex-col h-full bg-[#FEFBF4]">
             <div className="flex-1 flex flex-col justify-center">
               <h2 className="text-[#6B8E23] font-bold text-xl mb-4">Nghĩa và ví dụ :</h2>
               <div className="mb-4">
@@ -80,17 +81,20 @@ const WordDetail = () => {
                 </p>
               </div>
 
-              <div className="w-full mt-6 relative rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-gray-50">
+              <div className="w-full mt-6 relative rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-black group z-20">
                 <Swiper
                   direction={'horizontal'}
                   slidesPerView={1}
-                  navigation={mediaList.length > 1}
+                  navigation={{
+                    nextEl: '.custom-next',
+                    prevEl: '.custom-prev',
+                  }}
                   pagination={{ clickable: true, dynamicBullets: true }}
                   modules={[Pagination, Navigation]}
                   className="h-[40vh] w-full"
                 >
                   {mediaList.map((media, index) => (
-                    <SwiperSlide key={index} className="flex items-center justify-center bg-black">
+                    <SwiperSlide key={index} className="flex items-center justify-center">
                       {media.type === 'video' ? (
                         <video controls className="w-full h-full object-contain" poster={wordData?.image_url}>
                           <source src={media.url} type="video/mp4" />
@@ -101,24 +105,34 @@ const WordDetail = () => {
                     </SwiperSlide>
                   ))}
                 </Swiper>
+                
                 {mediaList.length > 1 && (
-                  <div className="absolute bottom-2 right-4 z-10 text-white bg-black/30 px-3 py-1 rounded-full text-xs flex items-center gap-1 backdrop-blur-sm">
-                    <SwapOutlined /> Vuốt ngang xem thêm
-                  </div>
+                  <>
+                    <button className="custom-prev absolute left-4 top-1/2 -translate-y-1/2 z-[60] bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-[#DE5E51] transition-all opacity-0 group-hover:opacity-100">
+                      <LeftOutlined style={{ fontSize: '20px' }} />
+                    </button>
+                    <button className="custom-next absolute right-4 top-1/2 -translate-y-1/2 z-[60] bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-[#DE5E51] transition-all opacity-0 group-hover:opacity-100">
+                      <RightOutlined style={{ fontSize: '20px' }} />
+                    </button>
+                    <div className="absolute bottom-4 right-6 z-50 text-white bg-black/40 px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 backdrop-blur-sm pointer-events-none">
+                      <SwapOutlined /> VUỐT NGANG XEM THÊM
+                    </div>
+                  </>
                 )}
               </div>
             </div>
-            <div className="text-center text-gray-400 animate-bounce mt-4 flex flex-col items-center">
-              <p className="text-sm">Vuốt lên xem sơ đồ</p>
-              <span className="text-lg">↓</span>
+            
+            <div className="text-center text-gray-400 animate-bounce mt-6 flex flex-col items-center pointer-events-none">
+              <p className="text-sm font-bold uppercase tracking-wider">Vuốt lên xem sơ đồ</p>
+              <span className="text-xl">↓</span>
             </div>
           </SwiperSlide>
 
-          <SwiperSlide className="p-8 sm:p-12 flex flex-col overflow-y-auto">
+          <SwiperSlide className="p-8 sm:p-12 flex flex-col overflow-y-auto bg-[#FEFBF4]">
             <h2 className="text-[#6B8E23] font-bold text-xl mb-6">Ngữ cảnh sử dụng :</h2>
             
-            <div className="relative w-full h-[400px] flex items-center justify-center mb-6 scale-90 sm:scale-100 overflow-visible">
-              <div className="relative z-30 bg-white border-[3px] border-[#DE5E51] text-[#DE5E51] px-8 py-3 rounded-full font-black text-2xl shadow-md">
+            <div className="relative w-full h-[420px] flex items-center justify-center mb-8 scale-90 sm:scale-100 overflow-visible">
+              <div className="relative z-30 bg-white border-[4px] border-[#DE5E51] text-[#DE5E51] px-10 py-4 rounded-full font-black text-3xl shadow-[0_6px_0_0_#DE5E51]">
                 {wordData?.word}
               </div>
 
@@ -131,18 +145,18 @@ const WordDetail = () => {
                 {collocations.map((_, index) => {
                   const total = collocations.length;
                   const angle = (index * (360 / total) - 90) * (Math.PI / 180);
-                  const radius = 140;
+                  const radius = 150;
                   const centerX = 400; 
-                  const centerY = 200;
+                  const centerY = 210;
                   const endX = centerX + Math.cos(angle) * radius;
                   const endY = centerY + Math.sin(angle) * radius;
-                  const startX = centerX + Math.cos(angle) * 65;
-                  const startY = centerY + Math.sin(angle) * 35;
+                  const startX = centerX + Math.cos(angle) * 75;
+                  const startY = centerY + Math.sin(angle) * 45;
                   const cpX = centerX + Math.cos(angle + 0.2) * (radius * 0.5);
                   const cpY = centerY + Math.sin(angle + 0.2) * (radius * 0.5);
                   return (
                     <path key={index} d={`M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`}
-                      fill="none" stroke="#DE5E51" strokeWidth="2.5" strokeLinecap="round" markerEnd="url(#arrowhead)" />
+                      fill="none" stroke="#DE5E51" strokeWidth="3" strokeLinecap="round" markerEnd="url(#arrowhead)" />
                   );
                 })}
               </svg>
@@ -150,10 +164,10 @@ const WordDetail = () => {
               {collocations.map((text, index) => {
                 const total = collocations.length;
                 const angle = (index * (360 / total) - 90) * (Math.PI / 180);
-                const x = Math.cos(angle) * 180;
-                const y = Math.sin(angle) * 180;
+                const x = Math.cos(angle) * 200;
+                const y = Math.sin(angle) * 200;
                 return (
-                  <div key={index} className="absolute z-20 bg-white px-4 py-2 rounded-xl shadow-sm border border-[#F0E1B2] font-bold text-[#444] whitespace-nowrap"
+                  <div key={index} className="absolute z-20 bg-white px-5 py-2.5 rounded-2xl shadow-md border-2 border-[#F0E1B2] font-black text-[#444] whitespace-nowrap text-lg"
                     style={{ transform: `translate(${x}px, ${y}px)` }}>
                     {text}
                   </div>
@@ -161,9 +175,9 @@ const WordDetail = () => {
               })}
             </div>
 
-            <div className="space-y-3 pb-8">
+            <div className="space-y-4 pb-12">
               {wordData?.example_sentences?.map((item, idx) => (
-                <div key={idx} className="bg-[#FFFDF3] border-l-8 border-[#A3D977] p-4 rounded-r-xl shadow-sm italic font-bold text-lg text-gray-800">
+                <div key={idx} className="bg-[#FFFDF3] border-l-[10px] border-[#A3D977] p-6 rounded-r-2xl shadow-sm italic font-bold text-xl text-gray-800 leading-relaxed">
                   {idx + 1}. "{item.text}"
                 </div>
               ))}
@@ -173,23 +187,21 @@ const WordDetail = () => {
       </div>
 
       <style jsx="true">{`
-        .main-vertical-swiper > .swiper-pagination-vertical .swiper-pagination-bullet-active {
-          background: #DE5E51 !important;
-        }
-        .swiper-button-next:after, .swiper-button-prev:after {
-          font-size: 18px !important;
-          font-weight: bold;
-        }
-        .swiper-button-next, .swiper-button-prev {
-          background: white;
-          width: 35px !important;
-          height: 35px !important;
-          border-radius: 50%;
-          color: #DE5E51 !important;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .swiper-pagination-bullet {
+        .main-vertical-swiper .swiper-pagination-bullet {
+          width: 12px;
+          height: 12px;
           background: #DE5E51;
+          opacity: 0.2;
+          transition: all 0.3s;
+        }
+        .main-vertical-swiper .swiper-pagination-bullet-active {
+          opacity: 1;
+          height: 35px;
+          border-radius: 8px;
+        }
+        .swiper-button-disabled {
+          opacity: 0 !important;
+          pointer-events: none;
         }
       `}</style>
     </div>
