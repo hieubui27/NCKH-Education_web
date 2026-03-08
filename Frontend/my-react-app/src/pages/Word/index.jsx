@@ -42,7 +42,7 @@ const WordDetail = () => {
   const mediaList = [];
   if (wordData?.image_url) mediaList.push({ type: 'image', url: wordData.image_url });
   if (wordData?.video_url) mediaList.push({ type: 'video', url: wordData.video_url });
-  if (mediaList.length === 0) mediaList.push({ type: 'image', url: 'https://picsum.photos/800/500?education' });
+
 
   if (loading) return <div className="h-screen flex justify-center items-center bg-[#FEFBF4]"><Spin size="large" /></div>;
 
