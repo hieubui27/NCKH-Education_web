@@ -172,7 +172,7 @@ const AppLayout = () => {
             </form>
 
             {showDropdown && (suggestions.themes.length > 0 || suggestions.lessons.length > 0 || suggestions.words.length > 0) && (
-              <div className="absolute top-[110%] left-0 w-full bg-white rounded-2xl shadow-lg border border-gray-100 z-50 max-h-96 overflow-y-auto">
+              <div className="absolute top-[110%] left-0 w-full bg-white rounded-2xl shadow-lg border border-gray-100 z-999 max-h-96 overflow-y-auto">
                 {suggestions.themes.length > 0 && (
                   <div className="border-b border-gray-100">
                     <div className="px-4 pt-3 pb-1 text-xs font-semibold text-gray-500 uppercase">
