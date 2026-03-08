@@ -205,21 +205,35 @@ const CurriculumPage = () => {
   // Component render từng lớp
   const renderClassPanels = () => {
     return curriculumData.map(classItem => (
-      <Panel header={<span className="text-2xl font-extrabold text-[#3b662b] font-serif">{classItem.label}</span>} key={classItem.key} className="bg-white rounded-2xl mb-4 border-none shadow-inner">
-        <Collapse accordion>
+      <Panel 
+        header={<span className="text-xl md:text-2xl font-extrabold text-[#3b662b] font-serif">{classItem.label}</span>} 
+        key={classItem.key} 
+        className="bg-white rounded-xl md:rounded-2xl mb-3 md:mb-4 border-none shadow-inner"
+      >
+        <Collapse accordion ghost>
           {classItem.children.map((semesterItem, index) => (
-            <Panel header={<span className="text-xl font-bold text-[#3b662b]">{semesterItem.semester}</span>} key={index}>
+            <Panel 
+              header={<span className="text-lg md:text-xl font-bold text-[#3b662b]">{semesterItem.semester}</span>} 
+              key={index}
+            >
               {semesterItem.themes.map((theme, tIndex) => (
-                <div key={tIndex} className="mb-6">
-                  <Text strong className="text-lg text-[#EB7470] block mb-2">{theme.name}</Text>
-                  <ul className="list-disc pl-6 space-y-1">
+                <div key={tIndex} className="mb-4 md:mb-6">
+                  {/* Theme Name: Tự động xuống dòng tốt trên mobile */}
+                  <Text strong className="text-base md:text-lg text-[#EB7470] block mb-2 leading-snug">
+                    {theme.name}
+                  </Text>
+                  
+                  {/* List Lessons: Giảm padding-left trên mobile để tiết kiệm không gian */}
+                  <ul className="list-disc pl-4 md:pl-6 space-y-1 md:space-y-2">
                     {theme.lessons.map((lesson, lIndex) => (
-                      <li key={lIndex}>
-                        <Text className="text-base text-gray-700 hover:text-[#3b662b] cursor-pointer">{lesson}</Text>
+                      <li key={lIndex} className="ml-1">
+                        <Text className="text-sm md:text-base text-gray-700 hover:text-[#3b662b] cursor-pointer block py-1">
+                          {lesson}
+                        </Text>
                       </li>
                     ))}
                   </ul>
-                  {tIndex < semesterItem.themes.length - 1 && <Divider />}
+                  {tIndex < semesterItem.themes.length - 1 && <Divider className="my-3" />}
                 </div>
               ))}
             </Panel>
@@ -230,15 +244,25 @@ const CurriculumPage = () => {
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] bg-[#FFFDEF] flex flex-col items-center pt-2 pb-20 relative font-sans">
-      <div className="w-full max-w-6xl px-4 sm:px-8 z-10 flex flex-col items-center">
+    // Đồng bộ min-h với MainLayout và Header (giả định header cao ~80px)
+    <div className="w-full min-h-screen bg-[#FFFDEF] flex flex-col items-center pt-2 pb-12 md:pb-20 relative font-sans">
+      <div className="w-full max-w-6xl px-3 sm:px-8 z-10 flex flex-col items-center">
         <Banner />
 
-        {/* --- KHUNG CHỨA NỘI DUNG MÀU XANH --- */}
-        <div className="w-full max-w-5xl bg-[#A7DE93] p-8 md:p-10 rounded-[2rem] shadow-sm mt-4">
-          <Title level={2} className="text-center text-white font-serif mb-8">Chương trình học</Title>
+        {/* Khung màu xanh: Điều chỉnh p-4 cho mobile để tránh lãng phí diện tích */}
+        <div className="w-full max-w-5xl bg-[#A7DE93] p-4 md:p-10 rounded-2xl md:rounded-[2rem] shadow-sm mt-4">
+          <Title 
+            level={2} 
+            className="text-center !text-white font-serif mb-6 md:mb-8 !text-2xl md:!text-4xl"
+          >
+            Chương trình học
+          </Title>
           
-          <Collapse accordion expandIconPosition="right">
+          <Collapse 
+            accordion 
+            expandIconPosition="right"
+            className="custom-curriculum-collapse"
+          >
             {renderClassPanels()}
           </Collapse>
         </div>

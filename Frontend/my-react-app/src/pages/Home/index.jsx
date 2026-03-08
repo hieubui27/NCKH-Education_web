@@ -51,48 +51,49 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FFFDEF] flex flex-col items-center pb-20 font-sans overflow-x-hidden">
-      {/* Poster chính */}
-      <div className="w-full max-w-7xl mt-8 mb-8 px-4 z-10">
-        <div className="relative overflow-hidden rounded-[2rem] shadow-2xl">
+    <div className="min-h-screen bg-[#FFFDEF] flex flex-col items-center pb-12 md:pb-20 font-sans overflow-x-hidden w-full">
+      
+      {/* Poster chính: Tối ưu khoảng cách và bo góc trên mobile */}
+      <div className="w-full max-w-7xl mt-4 md:mt-8 mb-6 md:mb-8 px-4 z-10">
+        <div className="relative overflow-hidden rounded-2xl md:rounded-[2rem] shadow-xl md:shadow-2xl">
           <img src={poster} className="w-full h-auto object-cover" alt="main poster" />
         </div>
       </div>
 
       <Banner />
 
-      {/* Phần Tính năng nổi bật với Carousel (3 ô) */}
-      <div className="w-full max-w-7xl mt-12 px-4 sm:px-6 z-10">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[#EB7470] drop-shadow-sm">
+      {/* Phần Tính năng nổi bật */}
+      <div className="w-full max-w-7xl mt-8 md:mt-12 px-4 sm:px-6 z-10">
+        <div className="text-center mb-6 md:mb-10">
+          <h2 className="text-2xl md:text-5xl font-extrabold text-[#EB7470] drop-shadow-sm px-2">
             Tính năng nổi bật
           </h2>
         </div>
 
-        <div className="w-full py-4">
+        <div className="w-full py-2 md:py-4">
           <Swiper
             modules={[Autoplay, Pagination, Navigation]}
-            spaceBetween={30}
-            slidesPerView={1}
+            spaceBetween={15} // Giảm khoảng cách trên mobile
+            slidesPerView={1.2} // Hiển thị một phần của slide tiếp theo để người dùng biết có thể vuốt
+            centeredSlides={true} // Căn giữa slide trên mobile
             loop={true}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             grabCursor={true}
             breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
+              640: { slidesPerView: 2, centeredSlides: false, spaceBetween: 20 },
+              1024: { slidesPerView: 3, centeredSlides: false, spaceBetween: 30 },
             }}
-            className="pb-12"
+            className="pb-10 md:pb-12"
           >
             {features.map((item) => (
               <SwiperSlide key={item.id}>
                 <div
                   onClick={() => navigate(item.link)}
-                  className="group relative cursor-pointer overflow-hidden rounded-3xl shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl active:scale-95 mx-2"
+                  className="group relative cursor-pointer overflow-hidden rounded-2xl md:rounded-3xl shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl active:scale-95"
                 >
                   <div className="aspect-[3/4] w-full">
-                    <img src={item.image} alt={`Feature ${item.id}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <img src={item.image} alt={`Feature ${item.id}`} className="w-full h-full object-cover" />
                   </div>
-                  <div className="absolute inset-0 bg-black/5 group-hover:bg-black/20 transition-opacity duration-300"></div>
                 </div>
               </SwiperSlide>
             ))}
@@ -100,10 +101,10 @@ const Home = () => {
         </div>
       </div>
 
-      {/* --- PHẦN TIN TỨC MỚI (CAROUSEL) --- */}
-      <div className="w-full max-w-7xl mt-16 px-4 sm:px-6 z-10">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 drop-shadow-sm">
+      {/* --- PHẦN TIN TỨC MỚI --- */}
+      <div className="w-full max-w-7xl mt-10 md:mt-16 px-4 sm:px-6 z-10">
+        <div className="text-center mb-6 md:mb-10">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-gray-800">
             Tin tức & Sự kiện
           </h2>
         </div>
@@ -111,34 +112,28 @@ const Home = () => {
         <div className="w-full">
           <Swiper
             modules={[Autoplay, Pagination]}
-            spaceBetween={20}
-            slidesPerView={1}
+            spaceBetween={15}
+            slidesPerView={1.1} // Vuốt mượt trên mobile
             loop={true}
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
-            grabCursor={true}
             breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 4 }, // Hiển thị 4 tin trên desktop
+              480: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 4 },
             }}
-            className="pb-12"
+            className="pb-10 md:pb-12"
           >
             {newsData.map((news) => (
               <SwiperSlide key={news.id}>
                 <div
-                  className="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
-                  // --- THAY ĐỔI Ở ĐÂY ---
-                  // Chuyển hướng về trang danh sách tin tức chung
+                  className="bg-white rounded-xl md:rounded-2xl shadow-md overflow-hidden h-full flex flex-col"
                   onClick={() => navigate('/tin-tuc')}
                 >
-                  {/* Ảnh tin tức */}
-                  <div className="aspect-[16/10] w-full overflow-hidden">
-                    <img src={news.image} alt={news.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                  <div className="aspect-[16/10] w-full">
+                    <img src={news.image} alt={news.title} className="w-full h-full object-cover" />
                   </div>
-
-                  {/* Tiêu đề tin tức */}
-                  <div className="p-4">
-                    <h3 className="text-sm md:text-base font-bold text-gray-800 line-clamp-2 h-10">
+                  <div className="p-3 md:p-4 flex-grow">
+                    <h3 className="text-xs md:text-base font-bold text-gray-800 line-clamp-2">
                       {news.title}
                     </h3>
                   </div>
@@ -149,11 +144,10 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Nút Call to Action */}
-      <div className="mt-10 text-center z-10">
+      <div className="mt-6 md:mt-10 px-4 w-full flex justify-center z-10">
         <button
           onClick={() => navigate(isLoggedIn ? '/danh-sach-lop' : '/login')}
-          className="bg-[#EB7470] hover:bg-[#d85e5a] text-white text-2xl font-extrabold px-14 py-5 rounded-full shadow-[0_10px_0_#b53b37] active:shadow-none active:translate-y-2 transition-all cursor-pointer border-none"
+          className="w-full max-w-xs md:max-w-none bg-[#EB7470] hover:bg-[#d85e5a] text-lg md:text-2xl font-extrabold px-8 md:px-14 py-4 md:py-5 rounded-full shadow-[0_6px_0_#b53b37] md:shadow-[0_10px_0_#b53b37] active:shadow-none active:translate-y-1 md:active:translate-y-2 transition-all cursor-pointer"
         >
           Bắt đầu học ngay! 🚀
         </button>

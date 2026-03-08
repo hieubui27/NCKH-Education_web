@@ -17,30 +17,44 @@ const NewsPage = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8 font-sans">
-      <div className="max-w-4xl mx-auto bg-white border border-green-200 shadow-sm rounded-sm">
-        <div className="p-8 md:p-12">
-          <section className="mb-12">
-            <h2 className="text-2xl text-blue-400 mb-8 font-light">Tin hướng dẫn</h2>
-            <div className="space-y-0">
+    <div className="min-h-screen p-3 md:p-8 font-sans bg-[#FFFDEF] w-full flex justify-center">
+      <div className="w-full max-w-4xl bg-white border border-green-100 shadow-sm rounded-2xl overflow-hidden">
+        <div className="p-5 md:p-12">
+          
+          {/* Section: Tin hướng dẫn */}
+          <section className="mb-10 md:mb-12">
+            <h2 className="text-xl md:text-2xl text-blue-500 mb-6 md:mb-8 font-semibold border-l-4 border-blue-500 pl-3">
+              Tin hướng dẫn
+            </h2>
+            <div className="divide-y divide-gray-100">
               {newsData.tutorials.map((item, index) => (
-                <div key={index} className="flex py-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors cursor-pointer group">
-                  <span className="w-32 shrink-0 text-gray-300 text-sm">{item.date}</span>
-                  <span className="text-gray-700 group-hover:text-blue-600 transition-colors">{item.title}</span>
+                <div key={index} className="flex flex-col md:flex-row py-4 md:items-center hover:bg-gray-50 transition-colors cursor-pointer group px-2 rounded-lg">
+                  {/* Ngày tháng: Lên trên tiêu đề ở mobile, nằm bên trái ở desktop */}
+                  <span className="text-gray-400 text-xs md:text-sm md:w-32 shrink-0 mb-1 md:mb-0">
+                    {item.date}
+                  </span>
+                  <span className="text-gray-700 group-hover:text-blue-600 transition-colors leading-relaxed font-medium text-sm md:text-base">
+                    {item.title}
+                  </span>
                 </div>
               ))}
             </div>
           </section>
 
+          {/* Section: Tin chuyên môn */}
           <section>
-            <h2 className="text-2xl text-blue-400 mb-8 font-light">
+            <h2 className="text-xl md:text-2xl text-blue-500 mb-6 md:mb-8 font-semibold border-l-4 border-blue-500 pl-3">
               Tin chuyên môn
             </h2>
-            <div className="space-y-0">
+            <div className="divide-y divide-gray-100">
               {newsData.specialized.map((item, index) => (
-                <div key={index} className="flex py-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors cursor-pointer group">
-                  <span className="w-32 shrink-0 text-gray-300 text-sm">{item.date}</span>
-                  <span className="text-gray-700 group-hover:text-blue-600">{item.title}</span>
+                <div key={index} className="flex flex-col md:flex-row py-4 md:items-center hover:bg-gray-50 transition-colors cursor-pointer group px-2 rounded-lg">
+                  <span className="text-gray-400 text-xs md:text-sm md:w-32 shrink-0 mb-1 md:mb-0">
+                    {item.date}
+                  </span>
+                  <span className="text-gray-700 group-hover:text-blue-600 transition-colors leading-relaxed font-medium text-sm md:text-base">
+                    {item.title}
+                  </span>
                 </div>
               ))}
             </div>
