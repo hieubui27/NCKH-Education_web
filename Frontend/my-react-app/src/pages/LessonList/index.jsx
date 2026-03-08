@@ -39,15 +39,19 @@ const LessonList = () => {
         const data = await res.json();
         if (data.success && data.data) {
           let allLessons = [];
+          
+          // Gộp các bài học từ các tuần
           data.data.forEach(week => {
             if (week.lessons && Array.isArray(week.lessons)) {
               allLessons = [...allLessons, ...week.lessons];
             }
           });
 
+          // Cập nhật logic lấy ảnh ở đây
           const lessonsWithImages = allLessons.map((lesson, idx) => ({
             ...lesson,
-            image: imageList[idx % imageList.length],
+            // Ưu tiên lesson.image_url từ database, nếu null/undefined thì dùng ảnh mặc định
+            displayImage: lesson.image_url || DEFAULT_LESSON_IMAGE,
             title: lesson.title || `BÀI ${idx + 1}`
           }));
 
@@ -92,7 +96,6 @@ const LessonList = () => {
         </div>
       ) : (
         <div className="w-full max-w-5xl relative group px-2 sm:px-12">
-          {/* Carousel Khu vực Slider */}
           <Carousel ref={carouselRef} dots={true} effect="scrollx" className="pb-8">
             {chunks.map((chunk, slideIndex) => (
               <div key={slideIndex}>
@@ -109,9 +112,13 @@ const LessonList = () => {
                     >
                       <div className="w-full aspect-[16/9] mb-4 overflow-hidden bg-white hover:shadow-lg transition-shadow rounded-lg">
                         <img
-                          src={lesson.image}
+                          src={lesson.displayImage} // Sử dụng displayImage đã xử lý ở trên
                           alt={lesson.title}
                           className="w-full h-full object-cover"
+                          // Xử lý nếu đường dẫn URL ảnh từ DB bị lỗi (404, etc.)
+                          onError={(e) => {
+                            e.target.src = DEFAULT_LESSON_IMAGE;
+                          }}
                         />
                       </div>
                       <h3 className="text-black font-extrabold text-lg md:text-xl text-center px-4">
@@ -124,7 +131,6 @@ const LessonList = () => {
             ))}
           </Carousel>
 
-          {/* Nút điều hướng Carousel (ẩn mặc định, hiện khi Hover) */}
           <button
             onClick={() => carouselRef.current.prev()}
             className="absolute -left-2 sm:left-0 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-gray-100 text-[#DE5E51] hover:bg-[#DE5E51] hover:text-white transition-all z-10 opacity-0 group-hover:opacity-100 cursor-pointer"

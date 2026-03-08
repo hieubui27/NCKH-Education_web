@@ -8,27 +8,28 @@ export const Themes = {
     },
     getContentByThemeId: async (themeId) => {
         const query = `
-      SELECT 
-        w.id AS week_id,
-        w.week_number,
-        w.title AS week_title,
-        COALESCE(
-          json_agg(
-            json_build_object(
-              'id', l.id, 
-              'title', l.title, 
-              'order_number', l.order_number,
-              'content', l.content
-            ) ORDER BY l.order_number ASC
-          ) FILTER (WHERE l.id IS NOT NULL), 
-          '[]'
-        ) AS lessons
-      FROM weeks w
-      LEFT JOIN lessons l ON w.id = l.week_id
-      WHERE w.theme_id = $1
-      GROUP BY w.id, w.week_number, w.title
-      ORDER BY w.week_number ASC;
-    `;
+          SELECT 
+            w.id AS week_id,
+            w.week_number,
+            w.title AS week_title,
+            COALESCE(
+              json_agg(
+                json_build_object(
+                  'id', l.id, 
+                  'title', l.title, 
+                  'order_number', l.order_number,
+                  'content', l.content,
+                  'image_url', l.image_url -- Thêm dòng này
+                ) ORDER BY l.order_number ASC
+              ) FILTER (WHERE l.id IS NOT NULL), 
+              '[]'
+            ) AS lessons
+          FROM weeks w
+          LEFT JOIN lessons l ON w.id = l.week_id
+          WHERE w.theme_id = $1
+          GROUP BY w.id, w.week_number, w.title
+          ORDER BY w.week_number ASC;
+        `;
         const { rows } = await pool.query(query, [themeId]);
         return rows;
     },
