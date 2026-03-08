@@ -2,7 +2,8 @@ import pool from "../config/db.js";
 
 export const Themes = {
     getAllThemes: async () => {
-        const query = `SELECT * FROM themes`;
+        const query = `SELECT * FROM themes 
+                        ORDER BY id ASC`;
         const { rows } = await pool.query(query);
         return rows;
     },
@@ -20,7 +21,7 @@ export const Themes = {
                   'order_number', l.order_number,
                   'content', l.content,
                   'image_url', l.image_url -- Thêm dòng này
-                ) ORDER BY l.order_number ASC
+                ) ORDER BY l.id ASC
               ) FILTER (WHERE l.id IS NOT NULL), 
               '[]'
             ) AS lessons
