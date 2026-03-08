@@ -93,7 +93,7 @@ const AppSiderMenu = () => {
   ];
 
   return (
-    <Sider width={260} style={{ background: '#AEE2A4' }} className="h-screen overflow-y-auto border-r border-white/20">
+    <Sider width={260} style={{ background: '#AEE2A4',minHeight: '100vh', }} className="h-screen overflow-y-auto border-r border-white/20">
       <ConfigProvider
         theme={{
           components: {
