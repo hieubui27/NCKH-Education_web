@@ -3,10 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Spin, message } from 'antd';
 import { ArrowLeftOutlined, SwapOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, Mousewheel } from 'swiper/modules';
+import { Navigation, Mousewheel } from 'swiper/modules';
 
 import 'swiper/css';
-import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const WordDetail = () => {
@@ -65,8 +64,7 @@ const WordDetail = () => {
           slidesPerView={1}
           spaceBetween={0}
           mousewheel={true}
-          pagination={{ clickable: true }}
-          modules={[Pagination, Navigation, Mousewheel]}
+          modules={[Navigation, Mousewheel]}
           className="h-full w-full main-vertical-swiper"
         >
           <SwiperSlide className="p-8 sm:p-12 flex flex-col h-full bg-[#FEFBF4]">
@@ -89,8 +87,7 @@ const WordDetail = () => {
                     nextEl: '.custom-next',
                     prevEl: '.custom-prev',
                   }}
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  modules={[Pagination, Navigation]}
+                  modules={[Navigation]}
                   className="h-[40vh] w-full"
                 >
                   {mediaList.map((media, index) => (
@@ -187,18 +184,6 @@ const WordDetail = () => {
       </div>
 
       <style jsx="true">{`
-        .main-vertical-swiper .swiper-pagination-bullet {
-          width: 12px;
-          height: 12px;
-          background: #DE5E51;
-          opacity: 0.2;
-          transition: all 0.3s;
-        }
-        .main-vertical-swiper .swiper-pagination-bullet-active {
-          opacity: 1;
-          height: 35px;
-          border-radius: 8px;
-        }
         .swiper-button-disabled {
           opacity: 0 !important;
           pointer-events: none;
