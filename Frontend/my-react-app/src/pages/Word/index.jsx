@@ -67,19 +67,27 @@ const WordDetail = () => {
           modules={[Navigation, Mousewheel]}
           className="h-full w-full main-vertical-swiper"
         >
-          <SwiperSlide className="p-8 sm:p-12 flex flex-col h-full bg-[#FEFBF4]">
+          {/* SLIDE 1: NGHĨA VÀ MEDIA */}
+          {/* ĐIỀU CHỈNH: Giảm padding của slide từ p-8/p-12 xuống p-6/p-10 */}
+          <SwiperSlide className="p-6 sm:p-10 flex flex-col h-full bg-[#FEFBF4]">
             <div className="flex-1 flex flex-col justify-center">
-              <h2 className="text-[#6B8E23] font-bold text-xl mb-4">Nghĩa và ví dụ :</h2>
-              <div className="mb-4">
-                <span className="text-[#DE5E51] font-black text-5xl uppercase block mb-2 leading-tight">
+              {/* ĐIỀU CHỈNH: Giảm cỡ chữ tiêu đề nhỏ text-xl -> text-lg, mb-4 -> mb-2 */}
+              <h2 className="text-[#6B8E23] font-bold text-lg mb-2">Nghĩa và ví dụ :</h2>
+              
+              {/* ĐIỀU CHỈNH: Giảm mb-4 -> mb-2 */}
+              <div className="mb-2">
+                {/* ĐIỀU CHỈNH: Giảm cỡ chữ từ vựng text-5xl -> text-4xl */}
+                <span className="text-[#DE5E51] font-black text-4xl uppercase block mb-1 leading-tight">
                   {wordData?.word}
                 </span>
-                <p className="text-2xl text-gray-700 italic leading-relaxed">
+                {/* ĐIỀU CHỈNH: Giảm cỡ chữ định nghĩa text-2xl -> text-xl */}
+                <p className="text-xl text-gray-700 italic leading-relaxed">
                   {wordData?.simplified_meaning || wordData?.standard_meaning}
                 </p>
               </div>
 
-              <div className="w-full mt-6 relative rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-black group z-20">
+              {/* ĐIỀU CHỈNH: Giảm mt-6 -> mt-3 để nhường chỗ cho media cao hơn */}
+              <div className="w-full mt-3 relative rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-black group z-20">
                 <Swiper
                   direction={'horizontal'}
                   slidesPerView={1}
@@ -88,7 +96,8 @@ const WordDetail = () => {
                     prevEl: '.custom-prev',
                   }}
                   modules={[Navigation]}
-                  className="h-[40vh] w-full"
+                  /* TĂNG CHIỀU CAO: Thay đổi h-[40vh] thành h-[45vh] */
+                  className="h-[45vh] w-full"
                 >
                   {mediaList.map((media, index) => (
                     <SwiperSlide key={index} className="flex items-center justify-center">
@@ -119,12 +128,14 @@ const WordDetail = () => {
               </div>
             </div>
             
-            <div className="text-center text-gray-400 animate-bounce mt-6 flex flex-col items-center pointer-events-none">
+            {/* ĐIỀU CHỈNH: Giảm mt-6 -> mt-2 cho phần gợi ý vuốt */}
+            <div className="text-center text-gray-400 animate-bounce mt-2 flex flex-col items-center pointer-events-none">
               <p className="text-sm font-bold uppercase tracking-wider">Vuốt lên xem sơ đồ</p>
               <span className="text-xl">↓</span>
             </div>
           </SwiperSlide>
 
+          {/* SLIDE 2: SƠ ĐỒ VÀ VÍ DỤ (Giữ nguyên cấu trúc) */}
           <SwiperSlide className="p-8 sm:p-12 flex flex-col overflow-y-auto bg-[#FEFBF4]">
             <h2 className="text-[#6B8E23] font-bold text-xl mb-6">Ngữ cảnh sử dụng :</h2>
             
