@@ -5,7 +5,6 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const LessonDetail = () => {
   const navigate = useNavigate();
-  // Lấy các tham số từ URL để xây dựng cấu trúc điều hướng chính xác
   const { classId, termId, topicId, lessonId } = useParams();
 
   const [loading, setLoading] = useState(true);
