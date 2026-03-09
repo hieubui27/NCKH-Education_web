@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
         const fetchCurrentUser = async () => {
             try {
                 // Gọi API backend (Đổi endpoint '/api/auth/me' đúng với BE của bạn)
-                const response = await fetch('http://localhost:5000/api/auth/me', {
+                const response = await fetch('/api/auth/me', {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include', // Quan trọng: Yêu cầu trình duyệt đính kèm Cookie 🍪
