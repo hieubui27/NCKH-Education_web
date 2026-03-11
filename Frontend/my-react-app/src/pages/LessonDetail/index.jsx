@@ -1,60 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Spin, message } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useLessonDetail } from '../../hooks/useLessonDetail';
 
 const LessonDetail = () => {
   const navigate = useNavigate();
   const { classId, termId, topicId, lessonId } = useParams();
 
-  const [loading, setLoading] = useState(true);
-  const [lesson, setLesson] = useState(null);
-  const [words, setWords] = useState([]);
-
-  useEffect(() => {
-    const fetchLessonDetail = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem('token');
-        
-        // Gọi API lấy chi tiết bài học theo themeId (topicId) và lessonId
-        const res = await fetch(`/api/lessons/${topicId}/${lessonId}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          credentials: 'include',
-        });
-
-        const data = await res.json();
-        if (!res.ok || !data.success) {
-          throw new Error(data.message || 'Không lấy được dữ liệu bài học');
-        }
-
-        // Bóc tách dữ liệu từ cấu trúc backend trả về
-        const lessonDataRaw = data.data?.lessonData;
-        const wordsDataRaw = data.data?.wordsData || [];
-
-        const mainLesson =
-          Array.isArray(lessonDataRaw) && lessonDataRaw.length > 0
-            ? lessonDataRaw[0]
-            : lessonDataRaw || null;
-
-        setLesson(mainLesson);
-        setWords(wordsDataRaw);
-      } catch (error) {
-        console.error('Lỗi tải bài học:', error);
-        message.error(error.message || 'Có lỗi xảy ra khi tải bài học');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (lessonId && topicId) {
-      fetchLessonDetail();
-    }
-  }, [lessonId, topicId]);
+  // Tách biệt hoàn toàn API Layer ra khỏi UI Component
+  const { lesson, words, loading, error } = useLessonDetail(topicId, lessonId);
 
   /**
    * Logic Highlight:
@@ -90,7 +45,7 @@ const LessonDetail = () => {
     const escapedWords = wordList
       .sort((a, b) => b.length - a.length)
       .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-    
+
     // Sử dụng Capture Group để giữ lại từ khóa trong mảng split
     const regex = new RegExp(`(${escapedWords.join('|')})`, 'gi');
     const lines = lesson.content.split('\n');
@@ -136,7 +91,7 @@ const LessonDetail = () => {
   return (
     <div className="w-full min-h-screen flex flex-col items-center bg-[#FEFBF4] rounded-2xl pt-4 pb-12 px-4 overflow-y-auto">
       <div className="w-full max-w-5xl bg-[#FFFDE7] rounded-[2.5rem] shadow-md border border-[#E5D8A9] px-6 sm:px-12 py-8 relative">
-        
+
         {/* Thanh công cụ phía trên */}
         <div className="flex items-center justify-between mb-8">
           <Button
