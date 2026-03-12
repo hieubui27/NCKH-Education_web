@@ -86,7 +86,7 @@ const WordDetail = () => {
                 </p>
               </div>
 
-              <h2 className="text-[#6B8E23] font-bold text-lg mt-2 mb-2">Ví dụ minh hoạ :</h2>
+              <h2 className="text-[#6B8E23] font-bold text-lg mt-1 mb-1">Ví dụ minh hoạ :</h2>
 
               <div className="w-full mt-3 relative rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-black group z-20">
                 <Swiper
@@ -141,7 +141,8 @@ const WordDetail = () => {
           </SwiperSlide>
 
           <SwiperSlide className="p-8 sm:p-12 flex flex-col overflow-y-auto bg-[#FEFBF4]">
-            <h2 className="text-[#6B8E23] font-bold text-xl mb-6">Ngữ cảnh sử dụng :</h2>
+            <h1 className="text-[#6B8E23] font-bold text-2xl mb-6">Ngữ cảnh sử dụng :</h1>
+            <h2 className="text-[#6B8E23] font-bold text-xl mb-6">Sơ đồ :</h2>
             <div className="relative w-full h-[420px] flex items-center justify-center mb-8 scale-90 sm:scale-100 overflow-visible">
               <div className="relative z-30 bg-white border-[4px] border-[#DE5E51] text-[#DE5E51] px-10 py-4 rounded-full font-black text-3xl shadow-[0_6px_0_0_#DE5E51]">
                 {wordData?.word}
@@ -186,6 +187,7 @@ const WordDetail = () => {
               })}
             </div>
 
+            <h2 className="text-[#6B8E23] font-bold text-xl mb-4">Câu minh họa :</h2>
             <div className="space-y-4 pb-12">
               {wordData?.example_sentences?.map((item, idx) => (
                 <div key={idx} className="bg-[#FFFDF3] border-l-[10px] border-[#A3D977] p-6 rounded-r-2xl shadow-sm italic font-bold text-xl text-gray-800 leading-relaxed">
