@@ -56,7 +56,7 @@ const AppFooter = () => {
                 <MapPin size={18} className="shrink-0" />
               </li>
               <li className="flex items-center justify-center md:justify-end gap-3 opacity-90 hover:opacity-100 transition-opacity">
-                <span className="text-sm">contact@vienkey.edu.vn</span>
+                <span className="text-sm">vienkey.edu@gmail.com</span>
                 <Mail size={18} className="shrink-0" />
               </li>
               <li className="flex items-center justify-center md:justify-end gap-3 opacity-90 hover:opacity-100 transition-opacity">

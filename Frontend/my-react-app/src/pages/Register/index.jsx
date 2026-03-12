@@ -107,7 +107,7 @@ const Register = () => {
                             >
                                 <DatePicker
                                     format="DD/MM/YYYY"
-                                    placeholder="Chọn ngày của bé"
+                                    placeholder="Chọn ngày sinh"
                                     className="rounded-2xl h-14 text-lg border-none shadow-inner bg-[#FFFDEF] w-full p-4"
                                 />
                             </Form.Item>
