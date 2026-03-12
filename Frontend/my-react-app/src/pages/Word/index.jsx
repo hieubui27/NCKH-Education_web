@@ -37,7 +37,7 @@ const WordDetail = () => {
     fetchWordDetail();
   }, [themeId, lessonId, wordId]);
 
-  const collocations = wordData?.related_words 
+  const collocations = wordData?.related_words
     ? wordData.related_words.split('\n').filter(item => item.trim() !== "")
     : [];
 
@@ -55,7 +55,7 @@ const WordDetail = () => {
   return (
     <div className="w-full h-screen bg-[#A3D977] p-4 flex flex-col items-center overflow-hidden font-sans">
       <div className="w-full max-w-5xl mb-6 flex justify-start">
-        <button 
+        <button
           onClick={() => navigate(-1)}
           className="group relative flex items-center gap-2 bg-white text-[#6B8E23] font-bold py-3 px-8 rounded-2xl shadow-[0_4px_0_0_#8dbd65] hover:shadow-[0_2px_0_0_#8dbd65] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all duration-150 border-2 border-[#8dbd65]/20 z-50"
         >
@@ -76,7 +76,7 @@ const WordDetail = () => {
           <SwiperSlide className="p-6 sm:p-10 flex flex-col h-full bg-[#FEFBF4]">
             <div className="flex-1 flex flex-col justify-center">
               <h2 className="text-[#6B8E23] font-bold text-lg mb-2">Nghĩa và ví dụ :</h2>
-              
+
               <div className="mb-2">
                 <span className="text-[#DE5E51] font-black text-4xl uppercase block mb-1 leading-tight">
                   {wordData?.word}
@@ -98,23 +98,24 @@ const WordDetail = () => {
                   className="h-[50vh] w-full"
                 >
                   {mediaList.map((media, index) => (
-                    <SwiperSlide key={index} className="flex items-center justify-center">
+                    <SwiperSlide key={index} className="flex items-center justify-center bg-black/5">
                       {media.type === 'video' ? (
                         <video controls className="w-full h-full object-contain" poster={wordData?.image_url}>
                           <source src={media.url} type="video/mp4" />
                         </video>
                       ) : (
-                        <img 
-                          src={media.url} 
-                          className="w-full h-full object-cover cursor-zoom-in transition-transform hover:scale-[1.02]" 
-                          alt="word media" 
+                        <img
+                          src={media.url}
+                          // Sửa object-cover thành object-contain để hiện đầy đủ ảnh
+                          className="w-full h-full object-contain cursor-zoom-in transition-transform duration-300 hover:scale-[1.01]"
+                          alt="word media"
                           onClick={() => handlePreview(media.url)}
                         />
                       )}
                     </SwiperSlide>
                   ))}
                 </Swiper>
-                
+
                 {mediaList.length > 1 && (
                   <>
                     <button className="custom-prev absolute left-4 top-1/2 -translate-y-1/2 z-[60] bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-[#DE5E51] transition-all opacity-0 group-hover:opacity-100">
@@ -130,7 +131,7 @@ const WordDetail = () => {
                 )}
               </div>
             </div>
-            
+
             <div className="text-center text-gray-400 animate-bounce mt-2 flex flex-col items-center pointer-events-none">
               <p className="text-sm font-bold uppercase tracking-wider">Vuốt lên xem sơ đồ</p>
               <span className="text-xl">↓</span>
@@ -154,7 +155,7 @@ const WordDetail = () => {
                   const total = collocations.length;
                   const angle = (index * (360 / total) - 90) * (Math.PI / 180);
                   const radius = 150;
-                  const centerX = 400; 
+                  const centerX = 400;
                   const centerY = 210;
                   const endX = centerX + Math.cos(angle) * radius;
                   const endY = centerY + Math.sin(angle) * radius;
@@ -203,10 +204,10 @@ const WordDetail = () => {
         bodyStyle={{ padding: 0, backgroundColor: 'transparent' }}
         closeIcon={<div className="bg-white rounded-full p-2 shadow-lg"><ArrowLeftOutlined /></div>}
       >
-        <img 
-          src={modalImage} 
-          alt="Preview" 
-          className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" 
+        <img
+          src={modalImage}
+          alt="Preview"
+          className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl"
         />
       </Modal>
 
