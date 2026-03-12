@@ -1,20 +1,25 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import bannerImage from '../../assets/Group 1.png';
+import bookTap1 from '../../assets/tieng_viet_2_tap_1.png';
+import bookTap2 from '../../assets/tieng_viet_2_tap_2.png';
 
-const ClassList = () => {
+const TermList = () => {
   const navigate = useNavigate();
-  const classes = [
-    { id: 1, name: 'Lớp 2', path: '/danh-sach-lop/lop-2' },
-    { id: 2, name: 'Lớp 3', path: '/danh-sach-lop/lop-3' },
-    { id: 3, name: 'Lớp 4', path: '/danh-sach-lop/lop-4' },
-    { id: 4, name: 'Lớp 5', path: '/danh-sach-lop/lop-5' },
+  const { classId } = useParams();
+
+  // Kiểm tra xem có phải lớp 2 hay không
+  const isClass2 = classId === 'lop-2';
+
+  const terms = [
+    { id: '1', name: 'Tập 1', image: bookTap1 },
+    { id: '2', name: 'Tập 2', image: bookTap2 },
   ];
 
   return (
-    <div className="w-full h-full flex flex-col items-center bg-[#FEFBF4] rounded-2xl">
+    <div className="w-full h-full min-h-[60vh] flex flex-col items-center bg-[#FEFBF4] rounded-2xl">
       {/* Banner */}
-      <div className="w-full max-w-5xl mb-10 mt-4">
+      <div className="w-full max-w-5xl mb-12 mt-4 px-4 sm:px-8">
         <img
           src={bannerImage}
           alt="Banner Cùng nhau tập đọc"
@@ -22,22 +27,32 @@ const ClassList = () => {
         />
       </div>
 
-      {/* Grid */}
-      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
-        {classes.map((cls) => (
-          <div
-            key={cls.id}
-            onClick={() => navigate(cls.path)}
-            className="bg-[#AEE2A4] rounded-2xl flex items-center justify-center p-14 cursor-pointer hover:bg-[#9cd392] transition-colors shadow-sm"
-          >
-            <span className="text-5xl font-bold text-black tracking-wide cursor-pointer">
-              {cls.name}
-            </span>
-          </div>
-        ))}
-      </div>
+      {/* Logic hiển thị nội dung */}
+      {isClass2 ? (
+        <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-16 px-6 pb-16 justify-items-center">
+          {terms.map((term) => (
+            <div
+              key={term.id}
+              onClick={() => navigate(`/danh-sach-lop/${classId}/ky/${term.id}`)}
+              className="flex justify-center transition-transform hover:-translate-y-2 cursor-pointer drop-shadow-md hover:drop-shadow-xl"
+            >
+              <img
+                src={term.image}
+                alt={term.name}
+                className="w-full max-w-70 h-auto object-cover rounded shadow-lg"
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center pb-20">
+          <p className="text-2xl font-medium text-gray-500 italic">
+            Sẽ cập nhật trong thời gian tới
+          </p>
+        </div>
+      )}
     </div>
   );
 };
 
-export default ClassList;
+export default TermList;
