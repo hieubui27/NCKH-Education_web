@@ -75,7 +75,7 @@ const WordDetail = () => {
         >
           <SwiperSlide className="p-6 sm:p-10 flex flex-col h-full bg-[#FEFBF4]">
             <div className="flex-1 flex flex-col justify-center">
-              <h2 className="text-[#6B8E23] font-bold text-lg mb-2">Nghĩa và ví dụ :</h2>
+              <h2 className="text-[#6B8E23] font-bold text-lg mb-2">Giải nghĩa từ :</h2>
 
               <div className="mb-2">
                 <span className="text-[#DE5E51] font-black text-4xl uppercase block mb-1 leading-tight">

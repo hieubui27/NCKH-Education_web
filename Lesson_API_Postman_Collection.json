@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "f5e9d9b0-a38f-4d92-b430-e5bf3a1c6a2e",
+		"name": "NCKH Lesson API Collection",
+		"description": "API collection for testing Lesson detail and Lesson list fetching.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Lessons",
+			"item": [
+				{
+					"name": "Get Lesson Detail (With Words)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/lessons/:topicId/:lessonId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"lessons",
+								":topicId",
+								":lessonId"
+							],
+							"variable": [
+								{
+									"key": "topicId",
+									"value": "1",
+									"description": "ID của Chủ đề"
+								},
+								{
+									"key": "lessonId",
+									"value": "1",
+									"description": "ID của Bài học"
+								}
+							]
+						},
+						"description": "Fetch lesson details including its content and the list of vocabulary words for highlighting."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lessons By Topic",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/topics/:topicId/lessons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"topics",
+								":topicId",
+								"lessons"
+							],
+							"variable": [
+								{
+									"key": "topicId",
+									"value": "1",
+									"description": "ID của Chủ đề"
+								}
+							]
+						},
+						"description": "Fetch all lessons grouped under a specific topic."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "YOUR_TOKEN_HERE",
+			"type": "string"
+		}
+	]
+}
