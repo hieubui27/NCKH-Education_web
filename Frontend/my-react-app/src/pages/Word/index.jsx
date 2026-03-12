@@ -86,6 +86,8 @@ const WordDetail = () => {
                 </p>
               </div>
 
+              <h2 className="text-[#6B8E23] font-bold text-lg mt-2 mb-2">Ví dụ minh hoạ :</h2>
+
               <div className="w-full mt-3 relative rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-black group z-20">
                 <Swiper
                   direction={'horizontal'}
