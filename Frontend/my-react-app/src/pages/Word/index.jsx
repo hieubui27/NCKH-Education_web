@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Spin, message } from 'antd';
+import { Spin, message, Modal } from 'antd';
 import { ArrowLeftOutlined, SwapOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Mousewheel } from 'swiper/modules';
@@ -13,6 +13,8 @@ const WordDetail = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [wordData, setWordData] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState('');
 
   useEffect(() => {
     const fetchWordDetail = async () => {
@@ -43,6 +45,10 @@ const WordDetail = () => {
   if (wordData?.image_url) mediaList.push({ type: 'image', url: wordData.image_url });
   if (wordData?.video_url) mediaList.push({ type: 'video', url: wordData.video_url });
 
+  const handlePreview = (url) => {
+    setModalImage(url);
+    setIsModalOpen(true);
+  };
 
   if (loading) return <div className="h-screen flex justify-center items-center bg-[#FEFBF4]"><Spin size="large" /></div>;
 
@@ -67,26 +73,19 @@ const WordDetail = () => {
           modules={[Navigation, Mousewheel]}
           className="h-full w-full main-vertical-swiper"
         >
-          {/* SLIDE 1: NGHĨA VÀ MEDIA */}
-          {/* ĐIỀU CHỈNH: Giảm padding của slide từ p-8/p-12 xuống p-6/p-10 */}
           <SwiperSlide className="p-6 sm:p-10 flex flex-col h-full bg-[#FEFBF4]">
             <div className="flex-1 flex flex-col justify-center">
-              {/* ĐIỀU CHỈNH: Giảm cỡ chữ tiêu đề nhỏ text-xl -> text-lg, mb-4 -> mb-2 */}
               <h2 className="text-[#6B8E23] font-bold text-lg mb-2">Nghĩa và ví dụ :</h2>
               
-              {/* ĐIỀU CHỈNH: Giảm mb-4 -> mb-2 */}
               <div className="mb-2">
-                {/* ĐIỀU CHỈNH: Giảm cỡ chữ từ vựng text-5xl -> text-4xl */}
                 <span className="text-[#DE5E51] font-black text-4xl uppercase block mb-1 leading-tight">
                   {wordData?.word}
                 </span>
-                {/* ĐIỀU CHỈNH: Giảm cỡ chữ định nghĩa text-2xl -> text-xl */}
                 <p className="text-xl text-gray-700 italic leading-relaxed">
                   {wordData?.simplified_meaning || wordData?.standard_meaning}
                 </p>
               </div>
 
-              {/* ĐIỀU CHỈNH: Giảm mt-6 -> mt-3 để nhường chỗ cho media cao hơn */}
               <div className="w-full mt-3 relative rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-black group z-20">
                 <Swiper
                   direction={'horizontal'}
@@ -96,8 +95,7 @@ const WordDetail = () => {
                     prevEl: '.custom-prev',
                   }}
                   modules={[Navigation]}
-                  /* TĂNG CHIỀU CAO: Thay đổi h-[40vh] thành h-[45vh] */
-                  className="h-[45vh] w-full"
+                  className="h-[50vh] w-full"
                 >
                   {mediaList.map((media, index) => (
                     <SwiperSlide key={index} className="flex items-center justify-center">
@@ -106,7 +104,12 @@ const WordDetail = () => {
                           <source src={media.url} type="video/mp4" />
                         </video>
                       ) : (
-                        <img src={media.url} className="w-full h-full object-cover" alt="media" />
+                        <img 
+                          src={media.url} 
+                          className="w-full h-full object-cover cursor-zoom-in transition-transform hover:scale-[1.02]" 
+                          alt="word media" 
+                          onClick={() => handlePreview(media.url)}
+                        />
                       )}
                     </SwiperSlide>
                   ))}
@@ -128,17 +131,14 @@ const WordDetail = () => {
               </div>
             </div>
             
-            {/* ĐIỀU CHỈNH: Giảm mt-6 -> mt-2 cho phần gợi ý vuốt */}
             <div className="text-center text-gray-400 animate-bounce mt-2 flex flex-col items-center pointer-events-none">
               <p className="text-sm font-bold uppercase tracking-wider">Vuốt lên xem sơ đồ</p>
               <span className="text-xl">↓</span>
             </div>
           </SwiperSlide>
 
-          {/* SLIDE 2: SƠ ĐỒ VÀ VÍ DỤ (Giữ nguyên cấu trúc) */}
           <SwiperSlide className="p-8 sm:p-12 flex flex-col overflow-y-auto bg-[#FEFBF4]">
             <h2 className="text-[#6B8E23] font-bold text-xl mb-6">Ngữ cảnh sử dụng :</h2>
-            
             <div className="relative w-full h-[420px] flex items-center justify-center mb-8 scale-90 sm:scale-100 overflow-visible">
               <div className="relative z-30 bg-white border-[4px] border-[#DE5E51] text-[#DE5E51] px-10 py-4 rounded-full font-black text-3xl shadow-[0_6px_0_0_#DE5E51]">
                 {wordData?.word}
@@ -194,10 +194,30 @@ const WordDetail = () => {
         </Swiper>
       </div>
 
+      <Modal
+        open={isModalOpen}
+        footer={null}
+        onCancel={() => setIsModalOpen(false)}
+        centered
+        width="auto"
+        bodyStyle={{ padding: 0, backgroundColor: 'transparent' }}
+        closeIcon={<div className="bg-white rounded-full p-2 shadow-lg"><ArrowLeftOutlined /></div>}
+      >
+        <img 
+          src={modalImage} 
+          alt="Preview" 
+          className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" 
+        />
+      </Modal>
+
       <style jsx="true">{`
         .swiper-button-disabled {
           opacity: 0 !important;
           pointer-events: none;
+        }
+        .ant-modal-content {
+          background: transparent !important;
+          box-shadow: none !important;
         }
       `}</style>
     </div>
