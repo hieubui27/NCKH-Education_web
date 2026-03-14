@@ -152,7 +152,7 @@ const Register = () => {
                             >
                                 <div className="w-full h-14 bg-[#FFFDEF] px-6 rounded-2xl shadow-inner flex items-center">
                                     <Radio.Group className="flex items-center w-full">
-                                        <Radio value="student" className="text-lg font-bold flex items-center mr-8">Học sinh</Radio>
+                                        <Radio value="student" className="text-lg font-bold flex items-center mr-8">Phụ huynh</Radio>
                                         <Radio value="teacher" className="text-lg font-bold flex items-center">Giáo viên</Radio>
                                     </Radio.Group>
                                 </div>
