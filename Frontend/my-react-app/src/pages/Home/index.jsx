@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import Banner from "../../components/Banner/Banner";
-import poster from "../../assets/Picture1.png";
+import poster from "../../assets/New Banner.png";
 import function1 from "../../assets/Picture3.png";
 import function2 from "../../assets/Picture4.png";
 import function3 from "../../assets/Picture5.png";
