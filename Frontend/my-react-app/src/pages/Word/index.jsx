@@ -143,12 +143,12 @@ const WordDetail = () => {
           <SwiperSlide className="p-8 sm:p-12 flex flex-col overflow-y-auto bg-[#FEFBF4]">
             <h1 className="text-[#6B8E23] font-bold text-2xl mb-6">Ngữ cảnh sử dụng :</h1>
             <h2 className="text-[#6B8E23] font-bold text-xl mb-6">Sơ đồ :</h2>
-            <div className="relative w-full h-[420px] flex items-center justify-center mb-8 scale-90 sm:scale-100 overflow-visible">
+            <div className="relative w-full min-h-[650px] mt-4 flex items-center justify-center mb-10 scale-[0.80] sm:scale-100 overflow-visible">
               <div className="relative z-30 bg-white border-[4px] border-[#DE5E51] text-[#DE5E51] px-10 py-4 rounded-full font-black text-3xl shadow-[0_6px_0_0_#DE5E51]">
                 {wordData?.word}
               </div>
 
-              <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible">
+              <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 overflow-visible" width="1000" height="1000" viewBox="-500 -500 1000 1000">
                 <defs>
                   <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
                     <polygon points="0 0, 10 3.5, 0 7" fill="#DE5E51" />
@@ -157,15 +157,28 @@ const WordDetail = () => {
                 {collocations.map((_, index) => {
                   const total = collocations.length;
                   const angle = (index * (360 / total) - 90) * (Math.PI / 180);
-                  const radius = 150;
-                  const centerX = 400;
-                  const centerY = 210;
-                  const endX = centerX + Math.cos(angle) * radius;
-                  const endY = centerY + Math.sin(angle) * radius;
-                  const startX = centerX + Math.cos(angle) * 75;
-                  const startY = centerY + Math.sin(angle) * 45;
-                  const cpX = centerX + Math.cos(angle + 0.2) * (radius * 0.5);
-                  const cpY = centerY + Math.sin(angle + 0.2) * (radius * 0.5);
+
+                  let rx = 320;
+                  let ry = 220;
+                  if (total > 5) {
+                    rx = index % 2 === 0 ? 400 : 270;
+                    ry = index % 2 === 0 ? 300 : 180;
+                  }
+
+                  const x = Math.cos(angle) * rx;
+                  const y = Math.sin(angle) * ry;
+
+                  // Bắt đầu mũi tên ở rìa bong bóng trung tâm
+                  const startX = Math.cos(angle) * 90;
+                  const startY = Math.sin(angle) * 45;
+
+                  // Dừng mũi tên trước text box mục tiêu
+                  const endX = x - Math.cos(angle) * 125;
+                  const endY = y - Math.sin(angle) * 50;
+
+                  const cpX = Math.cos(angle + 0.2) * (rx * 0.4);
+                  const cpY = Math.sin(angle + 0.2) * (ry * 0.4);
+
                   return (
                     <path key={index} d={`M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`}
                       fill="none" stroke="#DE5E51" strokeWidth="3" strokeLinecap="round" markerEnd="url(#arrowhead)" />
@@ -176,11 +189,19 @@ const WordDetail = () => {
               {collocations.map((text, index) => {
                 const total = collocations.length;
                 const angle = (index * (360 / total) - 90) * (Math.PI / 180);
-                const x = Math.cos(angle) * 200;
-                const y = Math.sin(angle) * 200;
+
+                let rx = 320;
+                let ry = 220;
+                if (total > 5) {
+                  rx = index % 2 === 0 ? 400 : 270;
+                  ry = index % 2 === 0 ? 300 : 180;
+                }
+
+                const x = Math.cos(angle) * rx;
+                const y = Math.sin(angle) * ry;
                 return (
-                  <div key={index} className="absolute z-20 bg-white px-5 py-2.5 rounded-2xl shadow-md border-2 border-[#F0E1B2] font-black text-[#444] whitespace-nowrap text-lg"
-                    style={{ transform: `translate(${x}px, ${y}px)` }}>
+                  <div key={index} className="absolute z-20 bg-white px-5 py-2.5 rounded-2xl shadow-md border-2 border-[#F0E1B2] font-black text-[#444] text-center min-w-[120px] max-w-[260px] text-sm sm:text-lg flex items-center justify-center transition-all duration-300"
+                    style={{ left: '50%', top: '50%', transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}>
                     {text}
                   </div>
                 );
