@@ -64,12 +64,12 @@ export const Lessons = {
 
 export const Vocabularies = {
     getVocabulariesByWordId: async (wordId) => {
-        const query = `SELECT * FROM vocabularies WHERE id = $1`;
+        const query = `SELECT * FROM vocabs WHERE id = $1`;
         const { rows } = await pool.query(query, [wordId]);
         return rows;
     },
     getWordsByLessonId: async (lessonId) => {
-        const query = `SELECT id, word FROM vocabularies WHERE lesson_id = $1`;
+        const query = `SELECT id, word FROM vocabs WHERE lesson_id = $1`;
         const { rows } = await pool.query(query, [lessonId]);
         return rows;
     },
@@ -81,7 +81,7 @@ export const SearchModel = {
         const searchParam = `%${keyword}%`;
 
         // 1. DỌN DẸP LẠI: Chỉ lấy id, title, và content (để lọc tác giả)
-        // Bỏ hẳn phần join với bảng vocabularies
+        // Bỏ hẳn phần join với bảng vocabs
         const lessonQuery = `
             SELECT id, title, content
             FROM lessons
@@ -100,7 +100,7 @@ export const SearchModel = {
 
         const wordQuery = `
             SELECT id, word
-            FROM vocabularies
+            FROM vocabs
             WHERE word ILIKE $1
             LIMIT 5;
         `;

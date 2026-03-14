@@ -1,0 +1,47 @@
+create table public.vocabularies (
+  id serial not null,
+  lesson_id integer null,
+  word character varying(100) not null,
+  standard_meaning text null,
+  simplified_meaning text null,
+  image_url text null,
+  audio_url text null,
+  video_url text null,
+  related_words text null,
+  example_sentences jsonb null default '[]'::jsonb,
+  is_required boolean null default false,
+  notes text null,
+  created_at timestamp without time zone null default now(),
+  constraint vocabularies_pkey primary key (id),
+  constraint vocabularies_lesson_id_fkey foreign KEY (lesson_id) references lessons (id) on delete CASCADE
+) TABLESPACE pg_default;
+
+create table public.weeks (
+  id serial not null,
+  theme_id integer null,
+  week_number integer not null,
+  title character varying(255) null,
+  created_at timestamp without time zone null default now(),
+  constraint weeks_pkey primary key (id),
+  constraint weeks_theme_id_fkey foreign KEY (theme_id) references themes (id) on delete CASCADE
+) TABLESPACE pg_default;
+
+create table public.lessons (
+  id serial not null,
+  week_id integer null,
+  title character varying(255) not null,
+  content text null,
+  order_number integer null,
+  created_at timestamp without time zone null default now(),
+  image_url text null,
+  constraint lessons_pkey primary key (id),
+  constraint lessons_week_id_fkey foreign KEY (week_id) references weeks (id) on delete CASCADE
+) TABLESPACE pg_default;
+
+create table public.themes (
+  id serial not null,
+  title character varying(255) not null,
+  created_at timestamp without time zone null default now(),
+  image_url text null,
+  constraint themes_pkey primary key (id)
+) TABLESPACE pg_default;
