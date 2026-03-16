@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Spin, message, Modal } from 'antd';
 import { ArrowLeftOutlined, SwapOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
@@ -15,6 +15,7 @@ const WordDetail = () => {
   const [wordData, setWordData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const fetchWordDetail = async () => {
@@ -49,6 +50,29 @@ const WordDetail = () => {
     setModalImage(url);
     setIsModalOpen(true);
   };
+
+  // Listen to native wheel events on our container
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheel = (e) => {
+      const isAtTop = container.scrollTop <= 0;
+      const isAtBottom = Math.abs(container.scrollHeight - container.clientHeight - container.scrollTop) < 2;
+
+      if (e.deltaY < 0 && isAtTop) {
+        return; // Going up at top, let Swiper handle it
+      }
+      if (e.deltaY > 0 && isAtBottom) {
+        return; // Going down at bottom, let Swiper handle it
+      }
+      
+      e.stopPropagation(); // Stop Swiper from intercepting this scroll
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => container.removeEventListener('wheel', handleWheel);
+  }, [loading]); // re-run effect if loading state changes, so ref is available
 
   if (loading) return <div className="h-screen flex justify-center items-center bg-[#FEFBF4]"><Spin size="large" /></div>;
 
@@ -140,8 +164,12 @@ const WordDetail = () => {
             </div>
           </SwiperSlide>
 
-          <SwiperSlide className="p-8 sm:p-12 flex flex-col overflow-y-auto bg-[#FEFBF4]">
-            <h1 className="text-[#6B8E23] font-bold text-2xl mb-6">Ngữ cảnh sử dụng :</h1>
+          <SwiperSlide className="bg-[#FEFBF4]">
+            <div 
+              ref={containerRef}
+              className="p-8 sm:p-12 flex flex-col overflow-y-auto h-full w-full"
+            >
+            <h1 className="text-[#6B8E23] font-bold text-2xl mb-6">Vận dụng - Thực hành :</h1>
             <h2 className="text-[#6B8E23] font-bold text-xl mb-6">Sơ đồ :</h2>
             <div className="relative w-full min-h-[650px] mt-4 flex items-center justify-center mb-10 scale-[0.80] sm:scale-100 overflow-visible">
               <div className="relative z-30 bg-white border-[4px] border-[#DE5E51] text-[#DE5E51] px-10 py-4 rounded-full font-black text-3xl shadow-[0_6px_0_0_#DE5E51]">
@@ -215,6 +243,7 @@ const WordDetail = () => {
                   {idx + 1}. "{item.text}"
                 </div>
               ))}
+            </div>
             </div>
           </SwiperSlide>
         </Swiper>
