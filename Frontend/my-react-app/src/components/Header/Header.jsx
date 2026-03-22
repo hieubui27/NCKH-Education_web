@@ -21,7 +21,7 @@ const Header = () => {
     { label: 'Giới thiệu', path: '/' },
     { label: 'Chương trình', path: '/chuong-trinh-hoc' },
     { label: 'Tin tức', path: '/tin-tuc' },
-    { label: 'Hướng dẫn', path: '/' },
+    { label: 'Hướng dẫn', path: '/huong-dan' },
   ];
 
   return (

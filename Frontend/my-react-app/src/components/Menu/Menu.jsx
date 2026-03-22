@@ -4,7 +4,8 @@ import { useLocation, Link } from 'react-router-dom';
 import { 
   UserOutlined, 
   ReadOutlined, 
-  SmileOutlined 
+  SmileOutlined,
+  QuestionCircleOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -47,6 +48,11 @@ const AppSiderMenu = () => {
   );
 
   const menuItems = [
+    {
+      key: '/huong-dan',
+      icon: <QuestionCircleOutlined />,
+      label: renderLinkStyle('/huong-dan', 'Hướng dẫn sử dụng'),
+    },
     {
       key: '/ca-nhan',
       icon: <UserOutlined />,

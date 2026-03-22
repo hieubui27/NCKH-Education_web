@@ -16,6 +16,7 @@ import Dictionary from '../pages/Dictionary';
 import News from '../pages/News';
 import CurriculumPage from '../pages/chuong trinh';
 import WordDetail from '../pages/Word';
+import Guide from '../pages/Guide';
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
         <Route path="/tin-tuc" element={<News />} />
         {/* --- CẬP NHẬT: Thêm route cho trang chương trình học --- */}
         <Route path="/chuong-trinh-hoc" element={<CurriculumPage />} />
+        <Route path="/huong-dan" element={<Guide />} />
       </Route>
 
       <Route element={<AppLayout />}>
