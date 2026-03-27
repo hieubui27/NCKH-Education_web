@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Layout, Input, Spin, theme, message } from 'antd';
+import { Layout, Spin, theme, message, Drawer } from 'antd';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import AppSiderMenu from '../components/Menu/Menu';
 import { useAuth } from '../context/AuthContext';
 import logoImg from '../assets/logo_vienkey.png';
 import AppFooter from '../components/Footer/AppFooter';
-import { SearchOutlined, UserOutlined } from '@ant-design/icons';
+import { SearchOutlined, UserOutlined, MenuOutlined } from '@ant-design/icons';
 
 const { Header, Content } = Layout;
 
@@ -15,6 +15,7 @@ const AppLayout = () => {
   const [suggestions, setSuggestions] = useState({ themes: [], lessons: [], words: [] });
   const [searchLoading, setSearchLoading] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const searchTimeoutRef = useRef(null);
   const dropdownRef = useRef(null);
 
@@ -111,13 +112,16 @@ const AppLayout = () => {
   const handleSelectLesson = (lesson) => {
     setShowDropdown(false);
     setSearchTerm('');
-    navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/1/bai-hoc/${lesson.id}`);
+    const themeId = lesson.theme_id || 1;
+    navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/${themeId}/bai-hoc/${lesson.id}`);
   };
 
   const handleSelectWord = (word) => {
     setShowDropdown(false);
     setSearchTerm(word.word);
-    navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/1/bai-hoc/1/tu-vung/${word.id}`);
+    const themeId = word.theme_id || 1;
+    const lessonId = word.lesson_id || 1;
+    navigate(`/danh-sach-lop/lop-2/ky/1/chu-de/${themeId}/bai-hoc/${lessonId}/tu-vung/${word.id}`);
   };
 
   return (
@@ -127,18 +131,25 @@ const AppLayout = () => {
           display: 'flex',
           alignItems: 'center',
           background: '#61B543',
-          paddingInline: 24,
-          height: '72px'
+          paddingInline: 12,
+          height: '64px'
         }}
       >
-        <Link to="/" className="flex items-center mr-6" style={{ minWidth: 80 }}>
+        <button
+          className="lg:hidden flex mr-2 bg-white/20 text-white justify-center items-center border-none rounded-lg w-9 h-9 cursor-pointer"
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <MenuOutlined />
+        </button>
+
+        <Link to="/" className="flex items-center mr-3 md:mr-6" style={{ minWidth: 64 }}>
           <div className="bg-white p-1.5 rounded-xl shadow-sm hover:-translate-y-1 transition-transform">
-            <img src={logoImg} alt="VienKey Logo" className="h-10 w-auto object-contain" />
+            <img src={logoImg} alt="VienKey Logo" className="h-8 md:h-10 w-auto object-contain" />
           </div>
         </Link>
 
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-          <div className="relative flex items-center w-87.5 md:w-112.5" ref={dropdownRef}>
+        <div className="hidden md:flex" style={{ flex: 1, justifyContent: 'center' }}>
+          <div className="relative flex items-center w-[28rem] lg:w-[32rem]" ref={dropdownRef}>
             <form
               onSubmit={handleSubmitSearch}
               className="flex items-center w-full bg-white rounded-full shadow-sm"
@@ -222,17 +233,17 @@ const AppLayout = () => {
           </div>
         </div>
 
-        <div style={{ minWidth: 80 }} className="flex justify-end items-center space-x-4">
+        <div style={{ minWidth: 80 }} className="flex justify-end items-center space-x-2 md:space-x-4">
           {isLoggedIn ? (
             <>
-              <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/ca-nhan')}>
-                <div className="w-10 h-10 rounded-full bg-[#EB7470] flex items-center justify-center text-white font-bold border-2 border-white shadow-sm hover:scale-110 transition-transform">
+              <div className="flex items-center gap-2 md:gap-3 cursor-pointer" onClick={() => navigate('/ca-nhan')}>
+                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#EB7470] flex items-center justify-center text-white font-bold border-2 border-white shadow-sm hover:scale-110 transition-transform">
                   {user?.fullname ? user.fullname.charAt(0).toUpperCase() : <UserOutlined />}
                 </div>
                 <span className="hidden lg:block font-bold text-white truncate max-w-[100px]">{user?.fullname || 'Học sinh'}</span>
               </div>
               <button
-                className="bg-[#FF8E7E] text-white font-black text-sm px-5 py-2.5 rounded-full shadow-[0_4px_0_#e57a6b] hover:shadow-[0_2px_0_#e57a6b] hover:translate-y-0.5 active:translate-y-1 transition-all border-none cursor-pointer"
+                className="hidden sm:inline-block bg-[#FF8E7E] text-white font-black text-sm px-4 md:px-5 py-2 md:py-2.5 rounded-full shadow-[0_4px_0_#e57a6b] hover:shadow-[0_2px_0_#e57a6b] hover:translate-y-0.5 active:translate-y-1 transition-all border-none cursor-pointer"
                 onClick={() => navigate('/danh-sach-lop')}
               >
                 HỌC NGAY! 🚀
@@ -240,7 +251,7 @@ const AppLayout = () => {
 
               {/* Nút Thoát - Màu đỏ nhạt pastel, viền mảnh */}
               <button
-                className="bg-[#FFF1F0] text-[#FF7875] font-bold text-sm px-4 py-2.5 rounded-full border border-[#FFA39E] hover:bg-[#FF7875] hover:text-white transition-all cursor-pointer"
+                className="bg-[#FFF1F0] text-[#FF7875] font-bold text-xs md:text-sm px-3 md:px-4 py-2 md:py-2.5 rounded-full border border-[#FFA39E] hover:bg-[#FF7875] hover:text-white transition-all cursor-pointer"
                 onClick={handleLogout}
               >
                 Thoát
@@ -248,8 +259,8 @@ const AppLayout = () => {
             </>
           ) : (
             <>
-              <button className="bg-white text-[#61B543] font-bold px-6 py-2 rounded-full hover:scale-105 transition-all border-none cursor-pointer" onClick={() => navigate('/login')}>Đăng nhập</button>
-              <button className="bg-[#EB7470] text-white font-bold px-6 py-2 rounded-full hover:scale-105 transition-all border-none cursor-pointer shadow-lg" onClick={() => navigate('/register')}>Đăng ký</button>
+              <button className="bg-white text-[#61B543] font-bold px-3 md:px-6 py-2 rounded-full hover:scale-105 transition-all border-none cursor-pointer text-sm md:text-base" onClick={() => navigate('/login')}>Đăng nhập</button>
+              <button className="bg-[#EB7470] text-white font-bold px-3 md:px-6 py-2 rounded-full hover:scale-105 transition-all border-none cursor-pointer shadow-lg text-sm md:text-base" onClick={() => navigate('/register')}>Đăng ký</button>
             </>
           )}
         </div>
@@ -264,6 +275,17 @@ const AppLayout = () => {
           <AppFooter />
         </Layout>
       </Layout>
+
+      <Drawer
+        title="Menu"
+        placement="left"
+        width={280}
+        onClose={() => setMobileMenuOpen(false)}
+        open={mobileMenuOpen}
+        styles={{ body: { padding: 0, background: '#AEE2A4' } }}
+      >
+        <AppSiderMenu isMobile />
+      </Drawer>
     </Layout>
   );
 };

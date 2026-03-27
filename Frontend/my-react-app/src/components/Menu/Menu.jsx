@@ -10,7 +10,7 @@ import {
 
 const { Sider } = Layout;
 
-const AppSiderMenu = () => {
+const AppSiderMenu = ({ isMobile = false }) => {
   const location = useLocation();
   const [themes, setThemes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -97,8 +97,8 @@ const AppSiderMenu = () => {
     },
   ];
 
-  return (
-    <Sider width={260} style={{ background: '#AEE2A4', minHeight: '100vh' }} className="overflow-y-auto border-r border-white/20">
+  const menuNode = (
+    <div className={`${isMobile ? 'w-full' : ''}`} style={{ background: '#AEE2A4', minHeight: isMobile ? 'auto' : '100vh' }}>
       <ConfigProvider
         theme={{
           components: {
@@ -125,6 +125,16 @@ const AppSiderMenu = () => {
           items={menuItems}
         />
       </ConfigProvider>
+    </div>
+  );
+
+  if (isMobile) {
+    return menuNode;
+  }
+
+  return (
+    <Sider width={260} style={{ background: '#AEE2A4', minHeight: '100vh' }} className="overflow-y-auto border-r border-white/20 hidden lg:block">
+      {menuNode}
     </Sider>
   );
 };

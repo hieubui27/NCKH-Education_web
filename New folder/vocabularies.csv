@@ -1,0 +1,228 @@
+﻿id,word,standard_meaning,simplified_meaning,image_url,audio_url,video_url,synonyms,antonyms,is_required,notes
+1,sung sướng,"trạng thái vui vẻ, thích thú, cảm thấy được thoả mãn về vật chất hoặc tinh thần","rất vui vẻ, hài lòng",sung sướng. ảnh.jpg,,,{},{},False,
+2,đâm chồi nảy lộc,mọc ra những mầm non,"cây mọc ra lá mới, ra hoa",,, TIMELAPSE ĐÂM CHỒI NẢY LỘC.mp4,{},{},True,*
+3,đơm trái,mọc ra trái ngọt,mọc ra trái ngọt,đơm trái.png,,,{},{},True,*
+4,tinh nghịch,"hay đùa nghịch một cách tinh ranh, láu lỉnh","hay đùa nghich, nghịch ngợm",tinh nghịch.png,,,{nghịch ngợm},{},False,
+5,thiếu nhi,"trẻ em thuộc các lứa tuổi thiếu niên, nhi đồng",trẻ em từ 6 - 14 tuổi,thiếu nhi.png,,,{},{},False,
+6,thủ thỉ,"nói nhỏ nhẹ, thong thả, vừa đủ để cho nhau nghe, thường là để thổ lộ tình cảm, tâm tình","nói nhỏ, nói nhẹ nhàng, chỉ để người bên cạnh nghe để thể hiện tình cảm, tâm sự",thủ thỉ.png,,,{nói nhỏ nhẹ},{nói to},False,
+7,bập bùng,"từ gợi tả vật cháy không đều, khi bốc cao, khi hạ thấp một cách nhịp nhàng","gợi tả ánh lửa cháy không đều, khi bốc cao, khi hạ thấp",,,  bập bùng. video.mp4,{},{},False,
+8,ấp ủ,"[1] ôm trong lòng và giữ cho được ấm
+[2] nuôi giữ trong lòng một cách trân trọng","giữ gìn một điều tốt đẹp trong lòng, luôn nghĩ đến và yêu quý nó",,,https://drive.google.com/file/d/1-XDXQI9SZTZCweRLP7nljuOJCnmSzFEB/view?usp=drivesdk,{},{},False,
+9,nước nổi,"cách gọi địa phương chỉ hiện tượng lũ lụt tự nhiên ở Đồng bằng sông Cửu Long Việt Nam, thường bắt đầu từ tháng 7 âm lịch đến tháng 10 âm lịch"," hiện tượng lũ lụt tự nhiên ở Đồng bằng sông Cửu Long Việt Nam, còn gọi là nước lũ",,, nước nổi. video.mp4,{nước lũ},{},False,
+10,hiền hòa,"từ chỉ tính cách nhẹ nhàng, dịu dàng, không nóng nảy, không xung đột, thường được dùng để miêu tả con người có tâm hồn bình yên, biết chia sẻ và tôn trọng người khác.","từ chỉ những người nhẹ nhàng, dịu dàng, biết chia sẻ và nhường nhịn người khác",,, hiền hoà.mp4,{},{},False,
+11,dầm dề,"[1] thấm nước nhiều và ướt khắp cả
+[2] kéo dài liên miên","bị ướt nhiều vì nước;
+xảy ra lâu, mãi không dừng lại",l,, dầm dề. video.mp4,{},{},False,
+12,sướt mướt,"[1] (khóc) nhiều và lâu không dứt, nước mắt đầm đìa, 
+[2] có tác dụng gây tâm trạng buồn bã, yếu đuối và dai dẳng không dứt","từ chỉ trạng thái khóc nhiều, lâu không dứt, gây ra tâm trạng buồn bã kéo dài",,, sướt mướt.mp4,{},{},False,
+13,phù sa,"đất, cát mịn và có nhiều chất màu được cuốn trôi theo dòng nước hoặc lắng đọng lại ở bờ sông, bãi bồi","đất, cát mịn được cuốn theo dòng nước hoặc đọng lại ở bờ sông, bãi bồi",phù sa. ảnh.jpg,,,{},{},True,*
+14,cá ròng ròng,"một loại cá nhỏ đặc trưng, thường được bắt vào mùa mưa, khi nguồn cá tự nhiên trở nên dồi dào. Đặc điểm của cá ròng ròng là thân nhỏ, thịt mềm và vị ngọt tự nhiên","một loài cá thân nhỏ bằng ngón tay út, thường được bắt vào mùa mưa",cá ròng ròng. ảnh.jpg,,,{},{},True,*
+15,ngập,"[1] (chất lỏng) tràn lên và phủ kín hoàn toàn
+[2] ở sâu dưới bề mặt một khối gì đó, bị phủ lấp hết hoặc gần hết
+[3] có nhiều và khắp cả trên một diện tích, đến mức như bao phủ, che lấp tất cả","mang hàm ý che phủ, phủ lấp
+- tràn lên và phủ kín hoàn toàn (mưa ngập đường)
+- chìm sâu dưới một bề mặt (chân ngập dưới bùn)
+- có nhiều trên 1 diện tích đến mức có thể che phủ (đồng cỏ ngập hoa)",ngập. ảnh.jpg,,,{},"{khô ráo,cạn nước}",False,
+16,lắt léo,"quanh co, ngoắt ngoéo","không thẳng, có nhiều lỗi rẽ quanh cô, phức tạp",lắt léo.ảnh.webp,,,{},{},False,
+17,chim họa mi,"Chim họa mi là chim cảnh có khả năng hót hay và đá giỏi, thuộc họ chim sâu.","Chim họa mi là chim cảnh có khả năng hót hay và đá giỏi, thuộc họ chim sâu.",chim họa mi. ảnh.jfif,,,{},{},False,
+18,vang lừng,"vang lên và truyền đi rất xa, như ở đâu cũng nghe thấy",tiếng hay và lan ra rất xa,,, vang lừng.mp4,"{vang xa,vang dội}","{im lặng,không ai biết}",False,
+19,kì diệu,"có cái gì vừa rất lạ lùng như không cắt nghĩa nổi, vừa làm cho người ta phải ca ngợi, phải khâm phục","điều lạ lùng xảy ra làm người khác phải ngạc nhiên, ca ngợi",,,kì diệu,"{thần kì,diệu kì,đặc biệt,tuyệt vời}","{bình thường,tầm thường}",False,
+20,rực rỡ,"có màu sắc tươi sáng đẹp đẽ và nổi bật hẳn lên, làm cho ai cũng phải chú ý","màu sắc tươi sáng, nổi bật, làm người khác phải chú ý",rực rỡ. ảnh.png,,,"{tươi sáng,chói lọi}","{tối tăm,nhạt nhòa}",False,
+21,lấp lánh,"có ánh sáng phản chiếu không liên tục, nhưng đều đặn, vẻ sinh động","sáng nhưng không liên tục, nhấp nháy rất đẹp",lấp lánh. ảnh.jpg,,,"{lung linh,lóng lánh}","{tối mờ,mờ nhạt}",False,
+22,nhẹ nhàng,"có tính chất nhẹ, cảm giác khoan khoái, dễ chịu không gây cảm giác gì nặng nề hoặc khó chịu vì không vướng bận gì","cảm giác nhẹ, dễ chịu, thoải mái, không khó chịu gì",,, nhẹ nhàng.mp4,"{êm ái,dịu dàng,từ tốn,chậm rãi}","{mạnh mẽ,dữ dội}",False,
+23,dìu dặt,lúc nhanh lúc chậm một cách nhịp nhàng và êm nhẹ (thường nói về âm thanh),"âm thanh êm nhẹ, nghe rất nhẹ nhàng",,dìu dặt. sound.mp3,,"{du dương,êm ái}","{ồn ào,chói tai}",True,*
+24,tưng bừng,"cảm giác nhộn nhịp, vui vẻ; có những biểu hiện rõ ràng, mạnh mẽ như bừng lên ","(quang cảnh, không khi) vui vẻ, nhộn nhịp, có nhiều âm thanh và cảnh vật đẹp, rực rỡ",,, tưng bừng.mp4,"{nhộn nhịp,rộn ràng,vui vẻ,náo nhiệt}","{vắng lặng,buồn tẻ}",False,
+25,lộc,"[1] chồi lá non
+[2] của trời hay các đấng thiêng liêng ban cho, theo quan niệm xưa","[1] chồi lá non, mới mọc
+[2] vật/của quý được ban tặng",lộc. ảnh.webp,,,{},"{khô héo,tàn úa}",True,*
+26,mong chờ,"trạng thái trông ngóng, đợi chờ điều gì đó, việc gì đó xảy ra.",chờ đợi với nhiều hy vọng điều gì sẽ diễn ra,,, mong chờ.mp4,"{mong đợi,trông đợi}","{thờ ơ,không quan tâm}",False,
+27,đặc trưng,"nét riêng biệt và tiêu biểu, được xem là dấu hiệu để phân biệt với những sự vật khác","nét tiêu biểu, khác biệt với các sự vật khác",,,https://drive.google.com/file/d/1btNTdSh3NCOK4QUDzuk2-FzaX_oYbvIN/view?usp=drivesdk,"{đặc điểm,nét riêng}","{chung chung,giống nhau}",False,
+28,rực rỡ,"có màu sắc tươi sáng đẹp đẽ và nổi bật hẳn lên, làm cho ai cũng phải chú ý","màu sắc tươi sáng, nổi bật, làm người khác phải chú ý",rực rỡ. ảnh.png,,,"{tươi sáng,chói lọi}","{tối tăm,nhạt nhòa}",False,
+29,chúm chím,"từ gợi tả dáng vẻ hơi mấp máy và chúm lại, không hé mở ra","hơi khép lại, nhỏ xíu, chưa mở ra","chúm chím 2. ảnh.jfif
+chúm chím 3. ảnh.webp
+chúm chím. ảnh.jfif",,,{cười tủm tỉm},{khóc nức nở},False,
+30,xinh xắn,xinh và rất ưa nhìn,đẹp,xinh xăn. ảnh.webp,,,"{dễ thương,xinh đẹp}",{xấu xí},False,
+31,mạnh khỏe,"có sức khoẻ như mong muốn, không bị ốm đau","cơ thể khỏe, không bị ốm",mạnh khỏe 1. ảnh.jpg,,,"{khỏe mạnh,cường tráng}","{ốm yếu,bệnh tật}",False,
+32,giỏi giang,"giỏi, tháo vát (nói khái quát)",làm tốt trong một công việc cụ thể,giỏi giang.png,,,"{tài giỏi,giỏi}",{kém cỏi},False,
+33,quây quần,"tụ tập lại trong một không khí thân mật, đầm ấm","mọi người ở gần nhau, làm việc cùng nhau",quây quần 2. ảnh.webp,,,"{sum họp,tụ họp}","{chia xa,tản mác}",False,
+34,tí ta tí tách,"từ mô phỏng tiếng động nhỏ, gọn, liên tiếp, không đều nhau như tiếng nước rơi xuống từng giọt cách quãng","âm thanh nhỏ, lặp lại từng tiếng",,, tí ta tí tách.mp4,"{lộp bộp,lách tách}",{im lặng},False,
+35,lượn,"[1] di chuyển bằng cách chao nghiêng thân hoặc uốn mình theo đường vòng
+[2] đi qua qua lại lại một nơi nào đó, không dừng lại lúc nào cả
+","[1] di chuyển bằng cách uốn mình, đi theo đường cong, không thẳng 
+[2] đi qua đi lại một nơi liên tục",lượn. ảnh.jpg,,,{chao liệng},"{đứng yên,nằm im}",True,*
+36,chân đồi,một ngọn đồi thấp hoặc sườn dốc gồ ghề ở chân hoặc rìa của dãy núi; là địa hình chuyển tiếp giữa đồng bằng hoặc thung lũng bằng phẳng và các đỉnh núi cao hơn.,"vị trí chân hoặc rìa núi, thường dốc và thấp",chân đồi.png,,,{chân núi},{đỉnh đồi},False,
+37,mênh mông,"hết sức lớn lao, rộng lớn và lan tỏa ra xung quanh đến mức như không có giới hạn",vô cùng rộng lớn như không có điểm kết thúc,mênh mông. ảnh.jpg,,,"{rộng lớn,bát ngát}","{chật hẹp,nhỏ bé}",False,
+38,dìu dịu,"có tính chất gây cảm giác dễ chịu, tác động êm nhẹ đến các giác quan hoặc đến tinh thần","cảm giác nhẹ nhàng, dễ chịu, không mạnh, gay gắt",dìu dịu. ảnh.jpeg,,,"{nhẹ nhàng,êm dịu}","{gay gắt,dữ dội}",False,
+39,dập dờn,"chuyển động lúc lên lúc xuống, lúc ẩn lúc hiện, lúc gần lúc xa nối tiếp nhau liên tiếp và nhịp nhàng","chuyển động lên xuống, từ xa đến gần nối tiếp nhau",,, dập dờn.mp4,"{nhấp nhô,lắc lư}",{đứng yên},True,*
+40,ríu rít,"[1] mô phỏng những tiếng cao, trong và tiếp liền nhau, nghe không rõ từng tiếng
+[2] gợi tả cảnh nhóm người tụ lại với nhau cười nói rộn ràng","nhiều tiếng nói nhỏ, vui và liên tục",,,ríu rít,"{líu lo,rộn ràng}","{im lặng,lặng lẽ}",False,
+41,thu hoạch,"gặt hái, thu về những sản phẩm do kết quả lao động, học tập làm ra",lấy sản phẩm sau khi làm xong,thu hoạch.png,,,"{gặt hái,thu hái}",{gieo trồng},False,
+42,âu yếm,"biểu lộ tình thương yêu, trìu mến bằng dáng điệu, cử chỉ, giọng nói","biệu hiện tình yêu thương một cách nhẹ nhàng, ấm ap qua hành động, lời nói",âu yếm.png,,,"{trìu mến,dịu dàng}","{lạnh nhạt,thờ ơ}",False,
+43,vất vả,ở vào tình trạng phải bỏ ra nhiều sức lực hay tâm trí vào một việc gì trong một thời gian dài,tốn nhiều sức lực hay suy nghĩ cho một công việc trong thời gian dài,vất vả.png,,,"{cực nhọc,gian khổ}","{nhàn nhã,thoải mái}",False,
+44,hạn hán,"hạn, nắng hạn nói chung","tình trạng nắng, khô, thiếu nước kéo dài",hạn hán.png,,,"{khô hạn,nắng hạn}","{mưa nhiều,ngập lụt}",False,
+45,hạt thóc,hạt lúa còn nguyên cả vỏ trấu,"hạt gạo chưa bóc vỏ, màu nâu, không ăn được",https://drive.google.com/file/d/1GodxjdCDTp-wtH0oC0VNEOq5QnazLrAR/view?usp=drivesdk,,,{},{},False,
+46,thiên tai,"những tai họa lớn do các hiện tượng thiên nhiên như bão, lụt, hạn hán, giá rét, động đất,... gây nên, làm ảnh hưởng nặng nề đến đời sống và sản xuất","những tai họa tự nhiên như bão, lụt, hạn hán, động đất,... gây ảnh hưởng nặng nề đến đời sống con người",https://drive.google.com/file/d/13WIUjo5oFmyKHFiHJZbxjzLX7-ety99-/view?usp=drivesdk,,,{},{},True,*
+47,bình dị,"bình thường, giản dị","bình thường, giản dị",1. bình dị. photo.jpg,,,"{Giản dị,mộc mạc,đơn sơ,chân phương,khiêm nhường}","{Xa hoa,lộng lẫy,phô trương,hào nhoáng,cầu kỳ.}",False,
+48,lũy tre,hàng tre trồng rất dày,"nhiều cây tre trồng thành nhiều hàng, rất dày ",lũy tre.webp,,,"{Rặng tre,hàng tre,khóm tre,bụi tre,ngàn tre.}",{},False,
+49,rì rào,"từ mô phỏng những âm thanh nhỏ, êm nhẹ, phát ra đều đều, liên tiếp như tiếng sóng vỗ, tiếng gió thổi","những âm thanh nhỏ, nhẹ phát ra đều đều, liên tiếp ",,Âm thanh thư giãn - Tiếng gió rì rào,,{},{},False,
+50,bần thần,"kém vẻ linh hoạt vì mệt mỏi hoặc vì đang có điều băn khoăn, lo nghĩ",nhìn kém linh hoạt vì mệt mỏi hoặc vì đang có điều cần suy nghĩ,bần thần.png,,,{},{},True,*
+51,nâng,"(1) đưa lên cao
+(2) đỡ ai đó dậy","(1) đưa lên cao
+(2) đỡ ai đó dậy",nâng.webp,,,"{nhấc,đỡ}",{},False,
+52,lon xon,"gợi tả dáng đi, chạy với những bước ngắn, nhanh nhẹn, hồ hởi","tả dáng đi, chạy nhanh, trông rất đáng yêu",,, 2.lon ton. video.mp4,{},{},True,*
+53,sáo,"chim nhỏ, lông đen có điểm trắng ở cánh, thường sống thành đàn
+","loài chim nhỏ, lông đen có vệt trắng ở cánh, sống thành đàn
+",https://drive.google.com/file/d/1-e24dP_4a9iPgUw5iMTo_Oo2mbVrcBuz/view?usp=sharing,,,{},{},False,
+54,con liếu điếu  (có ảnh),"Con Liếu Điếu là một loài chim nhỏ, dài khoảng 12–15 cm, với bộ lông mượt mà, mềm mại, kết hợp ba màu chính: trắng, nâu đỏ và xám. ","loài chim có bộ lông 3 màu: trắng, nâu đỏ và xám",chim liếu điếu.jpg,,,{},{},True,
+55,tếu,"có cử chỉ, lời nói vui nhộn, cố tình gây cười một cách nghịch ngợm, nhiều khi thiếu nghiêm chỉnh","cử chỉ hài hước, vui nhộn",https://drive.google.com/file/d/1ll_6eUhEqFXZCyu4j1Y-rFS7M0RGEyX5/view?usp=sharing,,,"{hài hước,vui tính,hóm hỉnh,nghịch ngợm,tếu táo}","{nghiêm nghị,lầm lì,khó tính,nhạt nhẽo}",False,
+56,con chìa vôi,"loài chim đồng cỡ nhỏ, lông đen, đuôi và cánh có vệt trắng, đuôi luôn cử động, ăn sâu bọ","loài chim nhỏ ăn sâu bọ, có lông đen, đuôi và cánh có vệt trắng",https://drive.google.com/file/d/1Xd_xIQNLw39TFqqRQW2abd6IsNzI2rJz/view?usp=sharing,,,{},{},False,
+57,chim chèo bẻo,"chim lông đen, cánh dài, đuôi dài chẻ thành hai nhánh, hay ăn sâu bọ.","loài chim ăn sâu bọ, lông đen, cánh dài, đuôi dài chẻ thành hai nhánh ",https://drive.google.com/file/d/10L3G_grbESkLYhKlOCXDphzUcmjrpLAF/view?usp=sharing,,,{},{},False,
+58,mách lẻo,"nói cho người này chuyện riêng của người khác một cách không cần thiết, thường với dụng ý không tốt ",nói chuyện của người này cho người khác,https://drive.google.com/file/d/1q1wiuXOERimMlkzpKs6Hi32aofD8FiZR/view?usp=sharing,,,{},{},False,
+59,(nhặt) lân la,"tìm cách tiếp cận dần dần từng bước, tạo ra một mối quan hệ tiếp xúc gần gũi, nhằm thực hiện mục đích nhất định","nhặt xung quanh, không đi xa",,,  3. lân la. video.mp4,{},{},True,*
+60,chim sẻ,"chim nhỏ, lông màu hạt dẻ, có vằn, mỏ hình nón, thường sống thành đàn, ăn các hạt ngũ cốc","loài chim nhỏ lông màu hạt dẻ, sống thành đàn, ăn các loại hạt ngũ cốc",chim sẻ.jpg,,,{},{},False,
+61,chim sâu,"chim nhỏ, lông xanh xám, thường sống ở các bụi cây, ăn sâu nhỏ","loài chim nhỏ lông xanh xám, thường sống ở các bụi cây, ăn sâu nhỏ",chim sâu.png,,,{},{},False,
+62,tu hú,"chim có lông màu đen hoặc đen nht có nhiều chấm trắng, thường đẻ trứng vào tổ sáo sậu hoặc chim ác và kêu vào đầu mùa hè ","loài chim có lông màu đen hoặc đen nhạt có nhiều chấm trắng, thường kêu vào đầu mùa hè ",tu hú chấm trắng.jpg,,,{},{},False,
+63,cú mèo,cú có 2 túm lông trên đầu giống như tai mèo,loài cú có 2 túm lông trên đầu giống như tai mèo,https://drive.google.com/file/d/1FMoVaBhFJN5UyQAd54ajHqUWscoTJSVv/view?usp=sharing,,,{},{},False,
+64,khủng long,loài bò sát lớn cổ xưa nay đã bị tuyệt diệt.,"loài động vật bò sát to lớn, ăn thịt, đã tuyệt chủng",https://drive.google.com/file/d/1IuRrxaz1POiBFYmoSKuu5jn-sU9V3J6s/view?usp=sharing,,,{},{},False,
+65,khổng lồ,"có kích thước, quy mô, khối lượng lớn gấp nhiều lần so với bình thường","có số lượng, quy mô, kích thước vô cùng lớn",https://drive.google.com/file/d/1FhYg2oQR9-M9WcIQ8Y20fQLLWOgFOWXh/view?usp=sharing,,,"{đồ sộ,to lớn}","{tí hon,tí xíu}",False,
+66,tự vệ,sự bảo vệ mình chống lại mọi sự xâm phạm từ bên ngoài,sự tự bảo vệ bản thân,4. tự vệ. photo.webp,,,{},{},True,*
+67,dũng mãnh,dũng cảm và mạnh mẽ một cách phi thường,rất dũng cảm và mạnh mẽ ,dũng mãnh.png,,,"{dũng cảm,mạnh mẽ}","{Yếu đuối,nhát gan}",True,*
+68,tuyệt chủng,bị mất hẳn nòi giống,sự biến mất hoàn toàn của một loài động vật hoặc thực vật,,,tuyệt chủng ,{},{},True,*
+69,mảnh khảnh,"cao, gầy và mảnh, trông yếu","cao, gầy và mảnh, trông yếu",https://drive.google.com/file/d/1kbZbFxKVxHtYCdIrWlmmhh3eR3BVPbtR/view?usp=sharing,,,{},{},True,*
+70,nhỏ xíu,"rất nhỏ, như không còn nhỏ hơn được nữa","rất nhỏ, như không còn nhỏ hơn được nữa",https://drive.google.com/file/d/1VpDRQtI7TdyxyVj1Nfxyi05oOVLWIk7f/view?usp=sharing,,,"{bé tí,tí xíu}","{to tướng,to đùng,khổng lồ}",False,
+71,bồ nông,"chim cỡ lớn, mỏ to và dài, cổ có bìu đựng mồi kiếm được, sống từng đàn ở bờ sông, bờ biển, thường bắt cá ăn.","loài chim cỡ lớn, mỏ to và dài, cổ có bìu đựng mồi kiếm được, sống theo đàn ở bờ sông, bờ biển, thường bắt cá ăn.",https://drive.google.com/file/d/1KK6onSVb21URFDB8uF7AlKZ4kMg38u9t/view?usp=sharing,,,{},{},False,
+72,bói cá,"chim sống ở gần nước, mỏ dài, lông xanh, ngực nâu, hay nhào xuống nước để bắt cá.","loài chim mỏ dài, lông xanh, ngực nâu, hay nhào xuống nước để bắt cá",https://drive.google.com/file/d/1nDAWijpCirt-jpjyQGLasmUcFs8mSOdH/view?usp=sharing,,,{},{},False,
+73,chim cu,"loài chim có vòng lông quanh cổ trông như hạt cườm, thường hay gáy cúc cu cu.","loài chim có vòng lông quanh cổ trông như hạt cườm, thường hay gáy cúc cu cu.",https://drive.google.com/file/d/1A3sHHjggAt83vqWRSkomYVwbL7onZqUH/view?usp=sharing,,,{},{},False,
+74,chổi tre,"Cái chổi làm bằng tre, dùng để quét nhà",Chổi làm bằng tre,Chổi tre.jpg,,,{},{},False,
+75,xao xác,"Tiếng cánh chim vỗ, tiếng gà gáy, v.v. nối tiếp nhau làm xao động cảnh không gian vắng lặng",Âm thanh nối tiếp nhau làm xao động âm thanh vắng lăngj,,, xao xạc.mp4,{},{},True,*
+76,cơn giông,"hiện tượng thời tiết phức hợp, xảy ra do sự đối lưu rất mạnh trong khí quyển, đặc trưng bởi sấm sét, chớp, gió mạnh, mưa rào, và đôi khi có mưa đá hoặc vòi rồng","Cơn mưa lớn, rất nguy hiểm ",Cơn dông.webp,,,{},{},False,
+77,lặng ngắt,"Im lặng hoàn toàn, tuyệt đối","Im lặng, không có âm thanh",,, lặng ngắt.mp4,"{Tĩnh lặng,im thin thít}",{},False,
+78,chị/ cô lao công,"Người làm việc chân tay đơn giản (như quét dọn, làm vệ sinh, v.v.) ở cơ quan, xí nghiệp.","Người quét dọn, làm vệ sinh, v.v.",co-lao-cong-700-1713865316.jpg,,,"{Nhân viên dọn dẹp,nhân viên vệ sinh}",{},True,*
+79,rét,"Nghĩa 1: Chỉ thời tiết có nhiệt độ thấp đến mức cơ thể cảm thấy khó chịu
+Nghĩa 2: Có cảm giác lạnh trong người, thường khiến cho phải run lên",Trái nghĩa với ấm ,Rét.avif,,,"{Lạnh,cóng,buốt}","{Nóng,ấm}",False,
+80,bừng tỉnh,"diễn tả hành động tỉnh giấc, mở mắt thức dậy một cách đột ngột, nhanh chóng và hoàn toàn, thường do tác động mạnh từ bên ngoài (tiếng ồn, ánh sáng) hoặc nội tại (giật mình, nỗi sợ)",Tỉnh giấc một cách nhanh chóng,,, bừng tỉnh.video.mp4,"{Thức tỉnh,tỉnh dậy}",{},True,
+81,ấm áp,Ấm và gây cảm giác dễ chịu,Ấm và gây cảm giác dễ chịu,ấm.jpg,,,{},"{lạnh,rét,cóng,buốt}",False,
+82,chim én,"Tên một loài chim di cư nhỏ, nổi bật với đôi cánh nhọn, đuôi chẻ sâu, bay nhanh và chuyên săn côn trùng trên không","Tên loài chim nhỏ có đôi cánh chẻ nhọn, báo mùa xuân về",Chim én.webp,,,{},{},False,
+83,sửa soạn,Lo liệu và sắp đặt các thứ để làm việc gì đó,"Chuẩn bị, sắp xếp ",,, sửa soạn.mp4,"{Chuẩn bị,sắp xếp}",{},True,
+84,khóc nấc,Tiếng khóc đứt quãng bởi tiếng nấc,Tiếng khóc đứt quãng bởi tiếng nấc,,,,{nức nở},{},True,
+85,thút thít,"Từ gợi tả tiếng khóc nhỏ và ngắt quãng, xen với tiếng xịt mũi",Âm thanh tiếng khóc nhỏ,,, thút thít.mp4,{},{},True,*
+86,yên tâm,"Trạng thái tâm lí yên ổn, không có gì phải băn khoăn, lo lắng","Cảm giác yên ổn, không có gì phải lo lắng",yên tâm.jpg,,,"{Yên lòng,an tâm}","{Lo lắng,lo âu}",True,
+87,nhoẻn miệng,"Miệng nhếch lên, tạo thành nụ cười ","Miệng nhếch lên, tạo thành nụ cười ",Nhoẻn miệng.webp,,,{Nhếch miệng},{},False,
+88,sao biển,"Một loài sinh vật sống dưới biển, có hình ngôi sao",Sinh vật dưới nước có hình ngôi sao,sao biển.webp,,,{},{},False,
+89,thủy triều,"Hiện tượng nước biển dâng lên rút xuống một hai lần trong ngày, chủ yếu do sức hút của Mặt Trăng và Mặt Trời","Hiện tượng nước biển dâng lên rút xuống, bị ảnh hưởng bởi Mặt Trăng và Mặt Trời",,,thủy 5i4u,{},{},True,*
+90,đại dương,"Biển lớn, tiếp giáp với cả một châu hoặc một vùng lớn hơn",Vùng biển lớn,Đại dương.webp,,,{Biển cả},{},False,
+91,trìu mến,Biểu lộ tình yêu thương tha thiết,Cái nhìn yêu thương,trìu mến.jpg,,,"{Dịu dàng,âu yếm,yêu thương}","{căm ghét,ghét bỏ}",True,
+92,cánh cam,"Bọ cánh cứng cùng họ với bọ hung, thân màu xanh biếc.","Bọ cánh cứng, thân màu xanh biếc.",cánh cam.webp,,,{},{},False,
+93,tập tễnh,"Chỉ dáng đi không cân, không đều, bên cao bên thấp, vẻ ngả nghiêng, dễ ngã","Dáng đi bên cao bên thấp, vẻ ngả nghiêng, dễ ngã",,, tập tễnh.mp4,{Khập khiễng},{},True,*
+94,óng ánh,"Phản chiếu ánh sáng lấp lánh, trông đẹp mắt","Ánh sáng lấp lánh, trông đẹp mắt",óng ánh.webp,,,"{Lấp lánh,long lanh,lung linh}",{},True,*
+95,khệ nệ,Dáng đi chậm chạp và nặng nề như đang phải mang vác nặng,Dáng đi chậm chạp và nặng nề như đang phải mang vác nặng,,, khệ nệ - mute (1).mp4,{},{},True,*
+96,tròn lẳn,"Rất tròn, rất dễ lăn ","Rất tròn, rất dễ lăn ",Tròn lẳn.webp,,,"{Tròn xoe,tròn vo}",{},False,
+97,cẩn thận,"Thận trọng trong hành động hoặc lời nói của mình, tránh sơ suất, để khỏi xảy ra điều bất lợi hoặc không hay","chú ý trong hành động hoặc lời nói của mình, tránh xảy ra điều không hay",,,,{},"{ẩu,vội vàng,hấp tấp}",True,
+98,ngơ ngác,Ở trạng thái không định thần được trước cảnh vật quá xa lạ hoặc sự việc diễn biến quá bất ngờ,Cảm thấy khó hiểu trước những sự việc bất ngờ diễn ra,ngơ ngác.jpg,,,{},{},True,
+99,hi vọng,Tin tưởng và mong chờ điều tốt đẹp đến,Tin tưởng và mong chờ điều tốt đẹp đến,https://drive.google.com/file/d/1KbXZ_MRY_yB09kq2ctBQzhjknGO1MUHE/view?usp=drivesdk,,,{},{Tuyệt vọng},True,
+100,phổ biến,"Có tính chất chung, có thể áp dụng cho cả một tập hợp các sự vật, hiện tượng","Có những đặc điểm, chi tiết giống nhau giữa các sự vật, hiện tượng",phổ biến.jpg,,,{Đại trà},"{Độc đáo,mới lạ}",False,
+101,đặc biệt,"Khác hẳn những trường hợp thông thường về tính chất, chức năng hoặc mức độ","Sự khác biệt không phải sự vật, hiện tượng nào cũng có",đặc biệt.jpg,,,{},{Bình thường},False,
+102,nhẹ nhàng,"Có tính chất nhẹ, không gây cảm giác gì nặng nề hoặc khó chịu",Trái ngược với nặng,nhẹ nhàng.jpg,,,"{Dịu dàng,hiền hòa}","{Hung dữ,hùng hổ,dữ tợn,mạnh mẽ}",False,
+103,truyền thống,"Thói quen hình thành đã lâu đời trong lối sống và nếp nghĩ, được truyền lại từ thế hệ này sang thế hệ khác","Những sự vật, sự kiện, hiện tượng được truyền lại từ các đời trước","Truyền thống.jpg
+truyền thống 2.jpg",,,{},{},False,
+104,giao tiếp,"Trao đổi, tiếp xúc với nhau","Trao đổi, tiếp xúc với nhau",giao tiếp.jpg,,,"{Giao lưu,trò chuyện,nói chuyện}",{},False,
+105,thư viện,"Nơi lưu giữ sách báo, tài liệu với số lượng lớn và tổ chức cho bạn đọc sử dụng","Nơi lưu giữ sách báo, tài liệu với số lượng lớn",giao tiếp.jpg,,,{},{},False,
+106,thế giới,"Trái Đất, nơi toàn thể loài người đang sinh sống","Trái Đất, nơi toàn thể loài người đang sinh sống",Thế giới.webp,,,"{Trái đất,quả đất}",{},False,
+107,khổng lồ,"Có kích thước, quy mô, khối lượng lớn gấp nhiều lần so với bình thường",Rất to lớn,khổng lồ.jpg,,,{To lớn},"{Bé nhỏ,tí hon,nhỏ nhắn}",False,
+108,di động,Chuyển động thay đổi vị trí,Chuyển động thay đổi vị trí,,, di động.mp4,"{Di chuyển,chuyển động,cử động}","{Đứng yên,đứng im}",True,*
+109,người thủ thư,Người quản lí sách của thư viện.,Người quản lí sách của thư viện.,Thủ thư.webp,,,{},{},True,*
+110,sa mạc,"Vùng rộng lớn có khí hậu rất khô, không có nước, hầu như không có cây cối và động vật sinh sống, trừ ở một số ốc đảo","Nơi rộng lớn, ít cây xanh, thời tiết rất nóng bức",Sa mạc.webp,,,{},{},True,*
+111,phật ý,không vui vì không được vừa ý,không vui vì không được vừa ý,,,,"{giận lòng,mất lòng}","{hài lòng,vui lòng}",True,*
+112,lịch sự,"có thái độ nhã nhặn, lễ độ trong xã giao, phù hợp với quan niệm và phép tắc chung của xã hội","là cách cư xử nhẹ nhàng, lễ phép với người khác",ảnh - lịch sự.png,,video - lịch sự.mp4,"{lễ phép,nhã nhặn}","{thô lỗ,bất lịch sự}",True,*
+113,xấu hổ,"là cảm giác ngượng ngùng, e thẹn",ngại ,xấu hổ.png                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ,,,"{ngượng ngùng,hổ thẹn}","{tự tin,tự hào}",False,
+114,trực tiếp,"Có quan hệ thẳng với đối tượng tiếp xúc, không qua khâu trung gian","Nhìn tận mắt, làm tận tay mà không thông qua điều gì",trực tiếp.png,,,"{thẳng thắn,trực diện}",{gián tiếp},False,
+115,trao đổi,bàn bạc ý kiến với nhau để đi đến thống nhất,nói chuyện qua lại giữa nhiều người,trao đổi.png,,,"{thảo luận,bàn bạc}","{giữ kín,không nói ra}",False,
+116,huấn luyện,giảng dạy và hướng dẫn luyện tập,"dạy để tốt hơn, giỏi hơn",huấn luyện.png,,,"{đào tạo,rèn luyện}","{bỏ mặc,không dạy}",True,*
+117,thông tin,"là tất cả các sự việc, sự kiện, ý tưởng, phán đoán làm tăng thêm sự hiểu biết của con người.",điều được truyền đi cho người khác biết ,thông tin.png,,,"{tin tức,dữ liệu}",{thiếu thông tin},False,
+118,dễ dàng,"đơn giản,  không đòi hỏi nhiều điều kiện, nhiều công phu",trái nghĩa với khó,,,,"{đơn giản,nhẹ nhàng}","{khó khăn,phức tạp}",False,
+119,in-tơ-nét,"hệ thống gồm các mạng máy tính được nối với nhau trên phạm vi toàn thế giới, tạo điều kiện cho các dịch vụ truyền thông dữ liệu, như tìm đọc thông tin từ xa, truyền các tệp tin, thư tín điện tử và các nhóm thông tin.",là một mạng máy tính lớn để nhiều máy tính trên khắp thế giới được nối với nhau.,internet.png,,,{mạng internet},"{không có mạng,ngoại tuyến}",True,*
+120,Vua Hùng,là cách gọi dành cho các vị vua nước Văn Lang của người Lạc Việt - ,têm những vị vua của nước Văn Lang,vua Hùng.png,,,"{vua thời cổ,vua đầu tiên của nước ta}",{},False,
+121,hiểu lầm,Hiểu không đúng sự thật; có ý kiến sai về hoạt động hoặc ý kiến của người khác.,hiểu sai ý,hiểu lầm.png,,,"{hiểu sai,lầm tưởng}","{hiểu đúng,thông cảm}",False,
+122,đảo hoang,"Hòn đảo không có người ở, ít hoặc không có dấu hiệu sinh sống của con người.",đảo không có người ,đảo hoang.png,,,"{đảo vắng,đảo không người}","{đảo đông người,đảo du lịch}",True,*
+123,nảy mầm,"mầm, chồi bắt đầu nhú ra, mọc ra",mầm cây bắt đầu mọc lên,nảy mầm.png,, nảy mầm.mp4,{mọc mầm},"{héo úa,khô héo}",False,
+124,lan rộng,"chỉ quá trình phát tán, mở rộng không gian, tầm ảnh hưởng hoặc phạm vi của một sự vật, hiện tượng từ một điểm xuất phát ban đầu ra các khu vực xung quanh theo mọi hướng.","là từ chỉ quá trình từ một cái nhỏ trở nên to lớn hơn, rộng hơn",,, lan rộng.mp4,"{lan ra,mở rộng}","{thu hẹp,giảm bớt}",False,
+125,hối hận,"Cảm thấy ân hận, day dứt vì nhận ra lỗi lầm của mình.",buồn vì lỗi sai của mình,hối hận.png,,,"{ân hận,hối tiếc}","{hài lòng,tự mãn}",True,*
+126,xa xôi,"khoảng cách xa và cách trở về không gian, thời gian",rất xa,xa xôi.png,,,{xa xăm},"{gần gũi,gần}",False,
+127,bằng lòng,"Có thái độ đồng ý, chấp nhận điều gì đó.",đồng ý ,bằng lòng.jpg,,,{đồng ý},"{từ chối,phản đối}",False,
+128,đảo,"Đảo là phần đất tự nhiên được bao quanh hoàn toàn bởi nước (biển, đại dương, hồ, sông), nổi trên mặt nước. ",vùng đất ở giữa biển,đảo.png,,,{cù lao},{đất liền},False,
+129,hòm thư,"Dụng cụ hoặc nơi dùng để nhận và chứa thư từ, bưu phẩm.",hộp đựng thư bên trong,hòm thư.png,,,{},{},True,*
+130,giặc Nguyên,"- Giặc: Kẻ tổ chức thành lực lượng vũ trang, chuyên đi cướp phá, làm rối loạn an ninh, gây tai hoạ cho cả một vùng hoặc một nước. 
+- Giặc Nguyên: Quân giặc nước Nguyên (Mông Cổ) nằm ở phía Đông Bắc Châu Á, nằm giữa phía Bắc nước Nga và phía Nam Trung Quốc",nước Nguyên đến cướp phá nước khác ,giặc nguyên.png,,,{quân xâm lược},"{quân ta,quân bảo vệ đất nước}",True,*
+131,sứ thần,Người thay mặt cho vua một nước đi giao thiệp với nước ngoài.,Người thay vua đi gặp nước khác,sứ giả.png,,,{sứ giả},{kẻ xâm lược},False,
+132,giả vờ,Làm ra vẻ như thật để che giấu sự thật hoặc đánh lừa người khác.,làm sai sự thật,,,,"{làm bộ,vờ}","{thật thà,thành thật}",False,
+133,xâm chiếm,"Hành động chiếm đoạt hoặc lấn chiếm lãnh thổ, tài sản hay quyền lợi của người khác một cách không được phép.","Lấn chiếm, chiếm lấy của người khác.
+",xâm chiếm.png,,,{xâm lược},"{bảo vệ,giữ gìn}",False,
+134,ngang ngược,"Có thái độ bướng bỉnh, coi thường lẽ phải, làm theo ý mình bất chấp đúng sai.",Làm theo ý mình không cần biết đúng sai,,,,"{hỗn láo,vô lễ}","{lễ phép,ngoan ngoãn}",False,
+135,Trần Quốc Toản,là một vị anh hùng thiếu niên nổi tiếng thời nhà Trần trong lịch sử Việt Nam,thiếu niên anh hùng thời Trần,Trần Quốc Toản.png,,,{vị anh hùng trẻ tuổi},{},True,*
+136,phép nước,"Những quy định, luật lệ của nhà nước buộc mọi người phải tuân theo.",luật lệ của nhà nước,phép nước.png,,,{pháp luật},"{vô pháp,không có luật lệ}",False,
+137,ấm ức,"Trạng thái bực bội, tức giận nhưng bị dồn nén trong lòng, chưa nói ra.","tức mà không nói ra
+",,,,{uất ức},"{vui vẻ,thoải mái}",False,
+138,thường lệ,Việc vẫn xảy ra hoặc được làm lặp đi lặp lại theo thói quen từ trước.,lặp lại theo thói quen,thường lệ.jpg,,,{như mọi khi},{bất thường},False,
+139,ngoằn ngoèo,từ gợi tả dáng vẻ cong queo uốn lượn theo nhiều hướng khác nhau,đường cong nhiều hướng khác nhau,ngoằn ngoèo.png,, ngoằn ngoèo.mp4,{quanh co},{thẳng tắp},True,*
+140,tần ngần,"Ở trạng thái do dự, chần chừ, chưa quyết định ngay vì còn suy nghĩ hoặc băn khoăn.","do dự, chần chừ",,,,{do dự},{quyết đoán},True,*
+141,chú cần vụ,"Người lính làm nhiệm vụ phục vụ, giúp đỡ sinh hoạt cho cán bộ trong quân đội.",người lính phục vụ sinh hoạt cho cán bộ,chú cần vụ.png,,,{người phục vụ},{người chỉ huy},True,*
+142,ân cần,"Có thái độ quan tâm, chăm sóc, đối xử nhẹ nhàng và chu đáo.",Chăm sóc một cách nhẹ nhàng,,, ân cần.mp4,"{dịu dàng,chu đáo}",{lạnh nhạt},False,
+143,thắc mắc,Có điều chưa hiểu rõ nên muốn được giải thích,có câu hỏi cần được trả lời,thắc mắc.png,,,{băn khoăn},{hiểu rõ},False,
+144,thiếu nhi,Trẻ em ở độ tuổi nhỏ.,trẻ em,thiếu nhi.png,,,{trẻ em},{người lớn},False,
+145,thủ đô,Thủ đô là trung tâm hành chính của một quốc gia,Thủ đô là trung tâm hành chính của một quốc gia,thủ đô.jpg,,,"{Kinh đô,kinh thành}","{làng,xóm,thôn quê}",False,
+146,anh hùng,"- nhân vật thần thoại có sức mạnh và dũng khí phi thường, lập nên những kì tích đặc biệt (thường có trong truyện thần thoại Hi Lạp).
+- người có tài năng và dũng khí hơn hẳn người thường, làm nên những việc được người đời ca tụng
+","Anh hùng là người có sức mạnh, can đảm đối mặt với nguy hiểm",anh hùng.jpg,,,"{hào kiệt,dũng sĩ}",{hèn nhát},False,
+147,rạng danh,"Là làm cho danh tiếng trở nên vẻ vang, được nhiều người biết đến và kính trọng.","Là làm cho danh tiếng trở nên vẻ vang, được nhiều người biết đến và kính trọng.",https://drive.google.com/file/d/18yEJk-yV-snxwLabnLUujz_6CV7e4ba9/view?usp=drivesdk,,,{rạng danh},{bôi nhọ},False,
+148,lịch sử,"Lịch sử là quá trình phát sinh, phát triển đã qua hay cho đến tiêu vong của một hiện tượng, một sự vật nào đó diễn ra theo thứ tự thời gian
+","quá trình hình thành, phát triển và biến đổi của sự vật, hiện tượng theo thời gian",https://drive.google.com/file/d/1wrod2SNQoHSbfqDhh6k96ie-TnwbQD81/view?usp=sharing,,,"{quá khứ,sử sách,sử liệu}","{hiện tại,tương lai}",False,
+149,khí hậu,"tình hình chung về quy luật diễn biến của thời tiết ở một vùng, một miền","diễn biến của thời tiết ở một vùng, một miền",https://drive.google.com/file/d/1rKkWLNH9jYkmE1LGPSN8eeTjRnJlEqF2/view?usp=drivesdk,,,{Thời tiết},{Không},False,
+150,truyền thống,"thói quen hình thành đã lâu đời trong lối sống và nếp nghĩ, được truyền lại từ thế hệ này sang thế hệ khác","thói quen lâu đời trong lối sống và nếp nghĩ, được truyền từ thế hệ này sang thế hệ khác.",https://drive.google.com/file/d/1N8HpW6xS5AJddwjXaBfewg_rMqllehaM/view?usp=drivesdk,,,{phong tục},{Cụm từ thường dùng: Truyền thống dân tộc},False,
+151,tươi đẹp,"Là đẹp đẽ, rạng rỡ, tràn đầy sức sống, tạo cảm giác dễ chịu và vui tươi.","Đẹp đẽ, vui tươi, tạo cảm giác dễ chịu",https://drive.google.com/file/d/1Z0kVDgawX_EjBRhzLZPKOf_sz9EK-h67/view?usp=sharing,,,"{xinh đẹp,rực rỡ,tốt đẹp}","{xấu xí,u ám}",False,
+152,ca dao,"Thơ ca do nhân dân sáng tác, được truyền miệng.","thơ ca dân gian truyền miệng, thường theo thể lục bát, dễ nhớ, dễ thuộc",ca dao.png,, ca dao.mp4,"{lời ca dân gian,thơ ca dân gian}",{(không có từ trái nghĩa trực tiếp)},True,*
+153,Vua Hùng," Vua Hùng là cách gọi dành cho các vị vua nước Văn Lang của người Lạc Việt, tồn tại vào khoảng thế kỷ VII đến thế kỷ II trước Công nguyên (TCN)."," Vua Hùng là cách gọi dành cho các vị vua nước Văn Lang của người Lạc Việt, tồn tại vào khoảng thế kỷ VII đến thế kỷ II trước Công nguyên (TCN).",vua Hùng.png,,,{Hùng Vương                                                                                                                                                                                                                                Từ gần nghĩa: thời đại Hùng Vương},{(không có từ trái nghĩa trực tiếp)},False,
+154,tranh họa đồ,"tranh vẽ cảnh vật, sông núi.","tranh vẽ cảnh vật, sông núi.",https://drive.google.com/file/d/1quf5uufHSOPFbJn5WkeIMOPKUl1BFv-L/view?usp=drive_link,,,"{tranh minh họa,tranh vẽ}",{(không có từ trái nghĩa trực tiếp)},True,*
+155,khám phá,"tìm ra, phát hiện ra cái còn ẩn giấu, cái bí mật.","tìm tòi, phát hiện ra cái mới",https://drive.google.com/file/d/1FBHQZTl_1zvrj88JaCQgbP0eo2nM7cwh/view?usp=drive_link,,,"{phát hiện,tìm ra,phát kiến}","{che giấu,bỏ qua}",False,
+156,mến thương,"có tình cảm yêu thương, gắn bó",có tình cảm yêu thương,https://drive.google.com/file/d/1TwbZ8joPedZREGGe0_mYONwfhrFVqA2y/view?usp=drive_link,,,"{yêu thương,quý mến,thương yêu}","{ghét bỏ,căm ghét}",False,
+157,con dúi,"Loài thú nhỏ, ăn củ và rễ cây, sống trong hang đất","Loài thú nhỏ, ăn củ và rễ cây, sống trong hang đất",https://drive.google.com/file/d/1OxouBsKBuWSOCu4LzQe7YtKO2p4fi7bo/view?usp=drive_link,,,"{dúi,chuột dúi}",{(không có từ trái nghĩa trực tiếp)},True,*
+158,thương tình,chạnh lòng thương cảm một cách sâu sắc trước tình cảnh của người nào đó,thương cảm với hoàn cảnh của người khác,https://drive.google.com/file/d/1TwbZ8joPedZREGGe0_mYONwfhrFVqA2y/view?usp=drive_link,,,"{thương xót,cảm thương,động lòng}","{thờ ơ,lạnh lùng}",False,
+159,nương,"(1) đất trồng trọt trên vùng đồi, núi hoặc bãi ven sông                                                                              
+(2) dựa vào để có được sự che chở, giúp đỡ","(1) đất trồng trọt trên vùng đồi, núi hoặc bãi ven sông                                                                              (2) dựa vào để có được sự che chở, giúp đỡ",https://drive.google.com/file/d/1bqGhoYQ8YogK5LWTTHYf1b4R9oUMwv4Z/view?usp=drive_link,,,"{dựa,nhờ,tựa,nương rẫy}","{chống lại,tự lập}",True,*
+160,lũ lụt,"Lũ lụt là một loại thiên tai xảy ra do hiện tượng nước trong sông, suối, hồ tràn ngập một vùng đất.","hiện tượng nước sông, suối, hồ tràn ngập đất liền.",https://drive.google.com/file/d/1DtYNjzNs89J41RcOlf6CVrcXLNF2GZrN/view?usp=sharing,,,"{ngập lụt,lụt lội}",{hạn hán},False,
+161,mênh mông,Mênh mông là rộng lớn tới mức không có giới hạn,"Rộng lớn, bao la",https://drive.google.com/file/d/19lkErGQaVD1Vx2ZEnebreaCxsOh3zkNU/view?usp=sharing,,,"{bát ngát,bao la,rộng lớn}","{chật hẹp,nhỏ bé}",False,
+162,thoát nạn,Vượt qua khỏi nguy hiểm,vượt khỏi nguy hiểm,https://drive.google.com/file/d/18eLhh9Xa9iGrgVt1xQ4uIfkLDFGCVUPd/view?usp=sharing,,,"{thoát hiểm,tránh nạn,thoát khỏi nguy hiểm}","{gặp nạn,mắc nạn}",False,
+163,lao xao,"có nhiều âm thanh hoặc tiếng động nhỏ rộn lên xen lẫn vào nhau, nghe không rõ, không đều","nhiều âm thanh nhỏ vang lên rộn ràng, xen lẫn nhau, nghe không rõ từng tiếng",,, lao xao.mp4,"{xào xạc,rì rào,xôn xao}","{yên ắng,im lặng}",False,
+164,lần lượt,(làm việc gì) theo thứ tự trước sau cho đến hết,Theo trình tự,https://drive.google.com/file/d/1iJZ6Y9FLivx5-HVWaZA6acYavJR21Rgn/view?usp=drive_link,,,"{kế tiếp,tiếp theo,nối tiếp}","{đồng loạt,cùng lúc}",False,
+165,tổ tiên,Những người đầu tiên sinh ra một dòng họ hoặc một dân tộc,Tổ tiên là những người thuộc các thế hệ trước của một dòng họ hoặc một dân tộc,https://drive.google.com/file/d/16V9XI3TH3DuV0hChZDqjP7_r4Oq4KOAJ/view?usp=drive_link,,,"{ông cha,tiền nhân,cha ông}","{con cháu,hậu duệ}",True,*
+166,dân tộc,"Dân tộc là nhóm xã hội, cộng đồng người có chung bản sắc dân tộc, thường gắn liền với nhà nước, có thể bao hàm nhiều nhóm sắc tộc khác nhau.","Dân tộc là cộng đồng người có chung bản sắc và lịch sử, thường gắn với một quốc gia và có thể gồm nhiều nhóm sắc tộc khác nhau.",https://drive.google.com/file/d/10YwPCVMlz6WlwduTPwvvHFetntQREhwM/view?usp=drive_link,,,"{quốc gia,giống nòi}",{(không có từ trái nghĩa trực tiếp)},False,
+167,Trường Sa,"Trường Sa là một tập hợp các thực thể địa lý được bao quanh bởi những vùng ngư nghiệp trù phú đồng thời sở hữu trữ lượng dầu mỏ, khí đốt lớn thuộc biển Đông. ","Trường Sa là được bao quanh bởi những vùng ngư nghiệp trù phú, sở hữu trữ lượng dầu mỏ, khí đốt lớn thuộc biển Đông. ",https://drive.google.com/file/d/19j7BTU0OQNfJBW7SR2fEpEbRch_HW-uL/view?usp=drive_link,,,{quần đảo Trường Sa},{(không có từ trái nghĩa trực tiếp)},False,
+168,kì thú,"Kì thú là lạ lùng, hấp dẫn, gây thích thú và tò mò cho người xem hoặc người nghe.","lạ  lùng, hấp dẫn, gây thích thú và tò mò cho người xem hoặc người nghe.",https://drive.google.com/file/d/1C5o0o6kF3km32mMHa3mFd8YYG_AmhL58/view?usp=sharing,,,"{kì lạ,thú vị,độc đáo}","{tẻ nhạt,nhàm chán}",False,
+169,thám hiểm,Thám hiểm là đi vào vùng xa lạ hoặc hiểm trở để khám phá những điều mới lạ.,"Thám hiểm là đi đến những nơi xa lạ, hiểm trở để khám phá và tìm hiểu.",https://drive.google.com/file/d/1FBHQZTl_1zvrj88JaCQgbP0eo2nM7cwh/view?usp=drive_link,,,"{khám phá,dò tìm,khảo sát}","{bỏ qua,tránh né}",True,*
+170,thú vị,"Tạo nên sự thích thú vị, vui thích",Là sự thích thú,https://drive.google.com/file/d/1C5o0o6kF3km32mMHa3mFd8YYG_AmhL58/view?usp=sharing,,,"{hấp dẫn,lí thú,kì thú}","{nhàm chán,tẻ nhạt}",False,
+171,rực rỡ,"Có màu sắc tươi sáng đẹp đẽ và nổi bật hẳn lên, làm cho ai cũng phải chú ý","Màu sắc tươi sáng, nổi bật",https://drive.google.com/file/d/1J0YF8tAbyIn8FOj2xV1kZ0cm-id32e4y/view?usp=sharing,,,"{tươi sáng,chói lọi,rạng rỡ}","{u ám,tối tăm}",False,
+172,dày đặc,"Rất dày, rất sít, như không còn kẽ hở","Rất dày, rất sít như không có kẽ hở",https://drive.google.com/file/d/1zVoFifyDDfaEJ0Omu8gxY0Dhx4xVaS07/view?usp=sharing,,,"{dày kín,ken dày,đặc kín}","{thưa thớt,rải rác}",False,
+173,di động,"chuyển động, thay đổi vị trí ","chuyển động, thay đổi vị trí ",https://drive.google.com/file/d/17EFJcTP7-Po3v6vAXmBReW0q-tsmK7s3/view?usp=sharing,,,"{lưu động,chuyển động,di chuyển}","{cố định,bất động}",False,
+174,san hô,"đông vật biển, có bộ xương dạng cánh hoa, nhiều màu sắc","đông vật biển, có bộ xương dạng cánh hoa, nhiều màu sắc",https://drive.google.com/file/d/1Vzc_shbdDcv3f-2qgejj27FauN3--a27/view?usp=drive_link,,,{đá san hô},{(không có từ trái nghĩa trực tiếp)},True,*
+175,khổng lồ,"có kích thước, quy mô, khối lượng lớn gấp nhiều lần so với bình thường","rất to, lớn",https://drive.google.com/file/d/1iR71igM4eOj-zAc5yn94-HsIZJDzTAhv/view?usp=drive_link,,,"{to lớn,đồ sộ,vĩ đại}","{nhỏ bé,tí hon}",False,
+176,thân yêu,yêu quý và thân thiết,yêu quý và thân thiết,https://drive.google.com/file/d/1TwbZ8joPedZREGGe0_mYONwfhrFVqA2y/view?usp=drive_link,,,"{yêu quý,thân thương,trìu mến}","{xa lạ,ghét bỏ}",False,
+177,Hồ Gươm,"là một hồ nước nổi tiếng ở trung tâm Hà Nội, gắn liền với truyền thuyết vua Lê Lợi trả gươm báu cho Rùa Thần, nên còn gọi là Hồ Hoàn Kiếm. Hồ là biểu tượng lịch sử, văn hóa của Thủ đô, nơi có các công trình như Đền Ngọc Sơn, cầu Thê Húc, Tháp Rùa",Hồ Hoàn Kiếm,anh-ho-guom.jpg,,,{Hồ Hoàn Kiếm},{(không có từ trái nghĩa trực tiếp)},True,*
+178,bầu dục,"Chỉ hình dạng giống quả trứng, thuôn dài, tròn ở hai đầu.","Chỉ hình dạng giống quả trứng, thuôn dài, tròn ở hai đầu.",https://drive.google.com/file/d/1JDNlRNoU3q-0vwrzQzxrCzHCB9LMqeqL/view?usp=sharing,,,"{hình ôvan,hình trứng}","{hình tròn,hình vuông}",False,
+179,long lanh,"có ánh sáng phản chiếu trên vật trong suốt, tạo vẻ trong sáng, sinh động","ánh sáng sáng, trong suốt",long lanh.jpg,,,"{lấp lánh,lung linh,óng ánh}","{mờ đục,tối xỉn}",False,
+180,Cầu Thê Húc,"Cầu Thê Húc là cây cầu gỗ sơn màu đỏ, bắc qua hồ Hoàn Kiếm (Hồ Gươm), dùng để nối bờ hồ với đền Ngọc Sơn, nằm ở thành phố Hà Nội.","Cầu Thê Húc là cây cầu gỗ sơn màu đỏ, bắc qua hồ Hoàn Kiếm (Hồ Gươm), dùng để nối bờ hồ với đền Ngọc Sơn, nằm ở thành phố Hà Nội.",cau_the_huc_ha_noi_ho_guom__.jpg,,,{(không có từ đồng nghĩa trực tiếp)},{(không có từ trái nghĩa trực tiếp)},False,
+181,đền Ngọc Sơn,"Đền Ngọc Sơn là một ngôi đền nằm trên đảo Ngọc, giữa hồ Hoàn Kiếm (Hồ Gươm), thuộc thành phố Hà Nội, là di tích lịch sử – văn hóa nổi tiếng, nơi thờ các nhân vật lịch sử và anh hùng dân tộc.","Đền Ngọc Sơn là một ngôi đền nằm trên đảo Ngọc, giữa hồ Hoàn Kiếm (Hồ Gươm), thuộc thành phố Hà Nội, là di tích lịch sử – văn hóa nổi tiếng, nơi thờ các nhân vật lịch sử và anh hùng dân tộc.",den-ngoc-son-1_1676825934.jpg,,,{(không có từ đồng nghĩa trực tiếp)},{(không có từ trái nghĩa trực tiếp)},False,
+182,lấp ló,"ló ra rồi khuất đi, khi ẩn khi hiện liên tiếp",Lúc ẩn lúc hiện,lấp ló.webp,,*,"{thấp thoáng,he hé,ẩn hiện}","{lộ rõ,hiện rõ,phô bày}",False,
+183,xum xuê,"Chỉ trạng thái mọc hoặc có rất nhiều, dày đặc, sum suê, thường dùng để nói về cây cối, cành lá, hoa quả.","Mọc nhiều, dày, che kín (thường nói về cây cối, cành lá).",xum xuê.jpg,,,"{sum suê,um tùm,rậm rạp}","{thưa thớt,trơ trụi}",False,
+184,Tháp Rùa,"Tháp Rùa là một công trình kiến trúc nhỏ nằm trên gò đất giữa hồ Hoàn Kiếm (Hồ Gươm), ở thành phố Hà Nội, được xây dựng vào thế kỉ XIX, là biểu tượng lịch sử – văn hóa của Thủ đô.","Tháp Rùa là một công trình kiến trúc nhỏ nằm trên gò đất giữa hồ Hoàn Kiếm (Hồ Gươm), ở thành phố Hà Nội, là biểu tượng lịch sử – văn hóa của Thủ đô.",https://drive.google.com/file/d/16dR_HE24uY6mHrb30fWxwzZx3lzjy7CL/view?usp=sharing,,,{(không có từ đồng nghĩa trực tiếp)},{(không có từ trái nghĩa trực tiếp)},False,
+185,cổ kính,cổ và có vẻ trang nghiêm,cổ và trang nghiêm,https://drive.google.com/file/d/11QdOaxl5RJvmdmFW67AsrLj1iqswzcdq/view?usp=sharing,,,"{cổ xưa,cổ lão,xưa cũ}","{hiện đại,mới mẻ}",True,*
+186,ngân nga,(âm thanh) ngân như kéo dài mãi,âm thanh kéo dài ,,,https://drive.google.com/file/d/1yYECBpO2cY2zkoi2xwju5Gef74BLP2tQ/view?usp=drivesdk,"{du dương,trầm bổng,vang vọng}","{chói tai,ồn ào}",False,
+187,vầng dương,mặt trời,mặt trời,mặt trời.jpg,,,"{mặt trời,thái dương}","{bóng tối,đêm tối}",False,
+188,kim cương,"carbon ở dạng tinh thể óng ánh, rất cứng, dùng để cắt kính, làm đồ trang sức","carbon ở dạng tinh thể óng ánh, rất cứng, dùng để cắt kính, làm đồ trang sức",diamonds-8532020_1920.jpg,,,{hột xoàn},"{đá thường,đá sỏi}",False,
+189,lấp lánh,"có ánh sáng phản chiếu không liên tục, nhưng đều đặn, vẻ sinh động
+","Có ánh sáng phản chiếu, long lanh, đẹp và hấp dẫn",https://drive.google.com/file/d/1YICN2pp_0soK8h6oYYfOLYKZ38NG5hfz/view?usp=sharing,,,"{lung linh,long lanh,óng ánh}","{đen xì,tối om}",False,
+190,ban mai,"buổi sáng, lúc sáng sớm",Lúc sáng sớm,https://drive.google.com/file/d/1lSED-G4v8FY6cHY5Mpl-pf8E1LsK2XxF/view?usp=drive_link,,,"{bình minh,rạng đông,tảng sáng}","{hoàng hôn,chiều tà}",False,
+191,hiền hòa,hiền lành và ôn hoà ,hiền lành và ôn hoà,,, hiền hoà.mp4,"{hiền lành,dịu dàng,ôn hòa}","{dữ dằn,hung dữ}",False,
+192,dập dờn,"chuyển động lúc lên lúc xuống, lúc ẩn lúc hiện, lúc gần lúc xa nối tiếp nhau liên tiếp và nhịp nhàng",Chuyển động lúc ẩn lúc hiện,,, dập dờn.mp4,"{nhấp nhô,chập chờn,lượn sóng}","{đứng yên,bất động}",False,
+193,chiền chiện,"chim cỡ nhỏ hơn chim sẻ, thường sống ở ruộng, bãi quang đãng, khi hót thường bay bổng lên cao.","loài chim cỡ nhỏ, thường sống ở ruộng, bãi quang đãng",chim chiền chiện,,,"{chim sơn ca,chim hót}",{(không có từ trái nghĩa trực tiếp)},False,
+194,tích ri tích rích,tiếng kêu nhỏ liên tiếp của chim chiền chiện,Tiếng kêu của chim chiền chiện,,, tích ri tích rích.mp4,"{líu lo,ríu rít,lích chích}","{im lặng,yên ắng}",False,
+195,ngân nga,(âm thanh) ngân như kéo dài mãi,âm thanh kéo dài,,*,https://drive.google.com/file/d/1yYECBpO2cY2zkoi2xwju5Gef74BLP2tQ/view?usp=drivesdk,"{du dương,trầm bổng,vang vọng}","{chói tai,ồn ào}",False,
+196,mênh mông,rộng lớn đến mức như không có giới hạn,"Rất rộng lớn, bao la",rita2000-wheat-9666681_1920.jpg,,,"{bát ngát,bao la,rộng lớn}","{chật hẹp,nhỏ bé}",False,

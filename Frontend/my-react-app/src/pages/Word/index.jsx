@@ -1,33 +1,32 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Spin, message, Modal } from 'antd';
-import { ArrowLeftOutlined, SwapOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, RightOutlined, EditOutlined, BulbOutlined } from '@ant-design/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Mousewheel } from 'swiper/modules';
+import { Navigation, Mousewheel, Pagination } from 'swiper/modules';
+import http from '../../utils/http';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const WordDetail = () => {
-  const { themeId, lessonId, wordId } = useParams();
+  const { classId, termId, topicId, lessonId, wordId } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [wordData, setWordData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
-  const containerRef = useRef(null);
 
   useEffect(() => {
     const fetchWordDetail = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem('token');
-        const res = await fetch(`/api/lessons/${themeId}/${lessonId}/${wordId}`, {
-          headers: { Authorization: `Bearer ${token}` }
+        const result = await http(`/api/lessons/${topicId}/${lessonId}/${wordId}`, {
+          method: 'GET',
         });
-        const result = await res.json();
-        if (result.success && result.data?.length > 0) {
-          setWordData(result.data[0]);
+        if (result.success && result.data) {
+          setWordData(result.data);
         }
       } catch (error) {
         message.error("Lỗi tải dữ liệu");
@@ -36,245 +35,197 @@ const WordDetail = () => {
       }
     };
     fetchWordDetail();
-  }, [themeId, lessonId, wordId]);
+  }, [topicId, lessonId, wordId]);
 
-  const collocations = wordData?.related_words
-    ? wordData.related_words.split('\n').filter(item => item.trim() !== "")
-    : [];
-
+  const displaySentences = Array.isArray(wordData?.sentences) ? wordData.sentences : [];
   const mediaList = [];
   if (wordData?.image_url) mediaList.push({ type: 'image', url: wordData.image_url });
   if (wordData?.video_url) mediaList.push({ type: 'video', url: wordData.video_url });
 
-  const handlePreview = (url) => {
-    setModalImage(url);
-    setIsModalOpen(true);
+  const getNuanceColor = (nuance) => {
+    switch (nuance?.toLowerCase()) {
+      case 'positive': case 'tích cực': return '#699B3D';
+      case 'negative': case 'tiêu cực': return '#BE3D2E';
+      case 'neutral': case 'trung tính': return '#FFBF41';
+      default: return '#61B543';
+    }
   };
 
-  // Listen to native wheel events on our container
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  const handleBranchClick = (branchKey) => {
+    navigate(`/danh-sach-lop/${classId}/ky/${termId}/chu-de/${topicId}/bai-hoc/${lessonId}/tu-vung/${wordId}/nhanh/${branchKey}`);
+  };
 
-    const handleWheel = (e) => {
-      const isAtTop = container.scrollTop <= 0;
-      const isAtBottom = Math.abs(container.scrollHeight - container.clientHeight - container.scrollTop) < 2;
-
-      if (e.deltaY < 0 && isAtTop) {
-        return; // Going up at top, let Swiper handle it
-      }
-      if (e.deltaY > 0 && isAtBottom) {
-        return; // Going down at bottom, let Swiper handle it
-      }
-      
-      e.stopPropagation(); // Stop Swiper from intercepting this scroll
-    };
-
-    container.addEventListener('wheel', handleWheel, { passive: false });
-    return () => container.removeEventListener('wheel', handleWheel);
-  }, [loading]); // re-run effect if loading state changes, so ref is available
+  const handleQuizClick = (quizType) => {
+    navigate(`/danh-sach-lop/${classId}/ky/${termId}/chu-de/${topicId}/bai-hoc/${lessonId}/tu-vung/${wordId}/bai-tap/${quizType}`);
+  };
 
   if (loading) return <div className="h-screen flex justify-center items-center bg-[#FEFBF4]"><Spin size="large" /></div>;
 
   return (
-    <div className="w-full h-screen bg-[#A3D977] p-4 flex flex-col items-center overflow-hidden font-sans">
-      <div className="w-full max-w-5xl mb-6 flex justify-start">
+    <div className="w-full h-screen bg-[#A3D977] p-2 sm:p-4 flex flex-col items-center overflow-hidden font-sans text-[#202020]">
+      
+      {/* Nút Quay Lại */}
+      <div className="w-full max-w-5xl mb-3 flex justify-start gap-2">
         <button
           onClick={() => navigate(-1)}
-          className="group relative flex items-center gap-2 bg-white text-[#6B8E23] font-bold py-3 px-8 rounded-2xl shadow-[0_4px_0_0_#8dbd65] hover:shadow-[0_2px_0_0_#8dbd65] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all duration-150 border-2 border-[#8dbd65]/20 z-50"
+          className="group flex items-center gap-2 bg-white text-[#6B8E23] font-bold py-2 px-5 rounded-xl shadow-[0_4px_0_0_#8dbd65] hover:translate-y-[2px] transition-all border-2 border-[#8dbd65]/20 text-xs sm:text-sm"
         >
-          <ArrowLeftOutlined className="group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeftOutlined />
           <span>QUAY LẠI</span>
         </button>
       </div>
 
-      <div className="w-full max-w-4xl h-[82vh] bg-[#FEFBF4] rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden border-b-[12px] border-[#F0E1B2] relative">
+      <div className="w-full max-w-4xl h-[84vh] bg-[#FEFBF4] rounded-[2.5rem] shadow-2xl overflow-hidden border-b-[10px] border-[#F0E1B2] relative">
         <Swiper
           direction={'vertical'}
           slidesPerView={1}
-          spaceBetween={0}
           mousewheel={true}
-          modules={[Navigation, Mousewheel]}
-          className="h-full w-full main-vertical-swiper"
+          pagination={{ clickable: true }}
+          modules={[Navigation, Mousewheel, Pagination]}
+          className="h-full w-full"
         >
-          <SwiperSlide className="p-6 sm:p-10 flex flex-col h-full bg-[#FEFBF4]">
-            <div className="flex-1 flex flex-col justify-center">
-              <h2 className="text-[#6B8E23] font-bold text-lg mb-2">Giải nghĩa từ :</h2>
+          {/* SLIDE 1: GIẢI NGHĨA & MINH HỌA */}
+<SwiperSlide className="p-4 sm:p-8 flex flex-col h-full overflow-y-auto">
+  <div className="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-4 items-start">
+    <div>
+      {/* Tên từ & Sắc thái màu */}
+      <h1 className="font-black text-2xl sm:text-3xl uppercase leading-tight mb-1" style={{ color: getNuanceColor(wordData?.nuance) }}>
+        {wordData?.word}
+        <span className="text-gray-400 text-base italic font-normal normal-case ml-2">
+          ({wordData?.pos || 'tính từ'})
+        </span>
+      </h1>
 
-              <div className="mb-2">
-                <span className="text-[#DE5E51] font-black text-4xl uppercase block mb-1 leading-tight">
+      <div className="mt-2">
+        <h2 className="text-lg font-black mb-1 italic">
+          Giải nghĩa và ví dụ:
+        </h2>
+        <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-3">
+          {wordData?.standard_meaning}
+        </p>
+
+        {/* Phần Ví dụ - Đã thu nhỏ (text-xs/sm và padding nhỏ hơn) */}
+        <div className="space-y-1 bg-white/60 p-3 rounded-2xl border border-dashed border-[#F0E1B2]">
+          <p className="font-bold text-[#6B8E23] text-[10px] uppercase tracking-widest">Ví dụ:</p>
+          {displaySentences.map((s, idx) => (
+            <p key={idx} className="text-xs sm:text-sm text-gray-600 italic leading-tight">
+              ({idx + 1}) {s.sentence}
+            </p>
+          ))}
+          {displaySentences.length === 0 && <p className="text-xs text-gray-400 italic">Chưa có ví dụ.</p>}
+        </div>
+      </div>
+    </div>
+    
+    {/* Bảng mã màu - Thu nhỏ lại để nhường chỗ */}
+    <div className="bg-white border border-[#F0E1B2] rounded-xl p-3 shadow-sm hidden md:block">
+      <p className="font-black text-[9px] mb-2 uppercase text-gray-400 tracking-tighter">Mã màu</p>
+      <div className="space-y-1.5 text-[9px] font-bold text-gray-500">
+        <div className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#C64A3B] rounded-sm" /><span>Từ mang sắc thái nghĩa tiêu cực</span></div>
+        <div className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#F2BC3D] rounded-sm" /><span>Từ mang sắc thái nghĩa trung tính</span></div>
+        <div className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#7EA53A] rounded-sm" /><span>Từ mang sắc thái nghĩa tích cực</span></div>
+      </div>
+    </div>
+  </div>
+
+  {/* Phần Minh họa - TĂNG KÍCH THƯỚC (max-h tăng từ 32vh lên 45vh) */}
+  <div className="mt-4 flex-1 flex flex-col min-h-0">
+    <h2 className="font-black text-lg mb-2">Minh họa:</h2>
+    <div className="w-full flex-1 rounded-[2rem] overflow-hidden border-[4px] border-white shadow-xl bg-black aspect-video max-h-[45vh] mx-auto relative">
+      <Swiper navigation={true} modules={[Navigation]} className="h-full w-full">
+        {mediaList.map((media, index) => (
+          <SwiperSlide key={index} className="flex items-center justify-center bg-black">
+            {media.type === 'video' ? (
+              <video controls className="w-full h-full object-contain">
+                <source src={media.url} type="video/mp4" />
+              </video>
+            ) : (
+              <img 
+                src={media.url} 
+                className="w-full h-full object-contain cursor-zoom-in" 
+                onClick={() => {setModalImage(media.url); setIsModalOpen(true)}} 
+                alt="minh họa" 
+              />
+            )}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  </div>
+
+  <div className="mt-2 text-center text-gray-400 animate-bounce text-[10px] font-bold uppercase tracking-widest">
+    ↓ Vuốt lên xem sơ đồ
+  </div>
+</SwiperSlide>
+
+          {/* SLIDE 2: SƠ ĐỒ TƯ DUY */}
+          <SwiperSlide className="p-6 sm:p-10 flex flex-col justify-center items-center h-full">
+            <div className="w-full text-left mb-6">
+              <h1 className="text-[#6B8E23] font-black text-2xl uppercase tracking-tight flex items-center gap-2">
+                <BulbOutlined /> Mở rộng kiến thức
+              </h1>
+            </div>
+            
+            <div className="border-2 border-[#F0E1B2] bg-white w-full max-w-[750px] aspect-[16/10] rounded-[3rem] p-6 shadow-sm relative flex items-center justify-center">
+              <div className="relative w-full h-full">
+                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <path d="M50 50 L50 30" stroke="#DE5E51" strokeWidth="2" strokeLinecap="round" fill="none" />
+                  <path d="M45 55 L22 80" stroke="#DE5E51" strokeWidth="2" strokeLinecap="round" fill="none" />
+                  <path d="M55 55 L78 80" stroke="#DE5E51" strokeWidth="2" strokeLinecap="round" fill="none" />
+                </svg>
+
+                <button onClick={() => handleBranchClick('tu-nghia')} className="absolute top-[12%] left-1/2 -translate-x-1/2 z-20 bg-[#FFF9E9] border-2 border-[#F0E1B2] text-[#202020] px-6 py-2.5 rounded-2xl font-bold text-sm sm:text-base shadow-sm hover:bg-[#DE5E51] hover:text-white transition-all">từ gần nghĩa / trái nghĩa</button>
+                <button onClick={() => handleBranchClick('ngu-canh')} className="absolute bottom-[8%] left-[0%] z-20 bg-[#FFF9E9] border-2 border-[#F0E1B2] text-[#202020] px-5 py-2.5 rounded-2xl font-bold text-sm sm:text-base shadow-sm hover:bg-[#DE5E51] hover:text-white transition-all">ngữ cảnh sử dụng</button>
+                <button onClick={() => handleBranchClick('dat-cau')} className="absolute bottom-[8%] right-[0%] z-20 bg-[#FFF9E9] border-2 border-[#F0E1B2] text-[#202020] px-5 py-2.5 rounded-2xl font-bold text-sm sm:text-base shadow-sm hover:bg-[#DE5E51] hover:text-white transition-all">sử dụng từ trong câu</button>
+                
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 bg-white border-[4px] border-[#DE5E51] text-[#D92F2F] px-10 py-4 rounded-[1.5rem] font-black text-2xl sm:text-4xl shadow-xl uppercase tracking-tighter ring-8 ring-[#DE5E51]/5">
                   {wordData?.word}
-                </span>
-                <p className="text-xl text-gray-700 italic leading-relaxed">
-                  {wordData?.simplified_meaning || wordData?.standard_meaning}
-                </p>
-              </div>
-
-              <h2 className="text-[#6B8E23] font-bold text-lg mt-1 mb-1">Ví dụ minh hoạ :</h2>
-
-              <div className="w-full mt-3 relative rounded-3xl overflow-hidden border-8 border-white shadow-xl bg-black group z-20">
-                <Swiper
-                  direction={'horizontal'}
-                  slidesPerView={1}
-                  navigation={{
-                    nextEl: '.custom-next',
-                    prevEl: '.custom-prev',
-                  }}
-                  modules={[Navigation]}
-                  className="h-[50vh] w-full"
-                >
-                  {mediaList.map((media, index) => (
-                    <SwiperSlide key={index} className="flex items-center justify-center bg-black/5">
-                      {media.type === 'video' ? (
-                        <video controls className="w-full h-full object-contain" poster={wordData?.image_url}>
-                          <source src={media.url} type="video/mp4" />
-                        </video>
-                      ) : (
-                        <img
-                          src={media.url}
-                          // Sửa object-cover thành object-contain để hiện đầy đủ ảnh
-                          className="w-full h-full object-contain cursor-zoom-in transition-transform duration-300 hover:scale-[1.01]"
-                          alt="word media"
-                          onClick={() => handlePreview(media.url)}
-                        />
-                      )}
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-
-                {mediaList.length > 1 && (
-                  <>
-                    <button className="custom-prev absolute left-4 top-1/2 -translate-y-1/2 z-[60] bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-[#DE5E51] transition-all opacity-0 group-hover:opacity-100">
-                      <LeftOutlined style={{ fontSize: '20px' }} />
-                    </button>
-                    <button className="custom-next absolute right-4 top-1/2 -translate-y-1/2 z-[60] bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-[#DE5E51] transition-all opacity-0 group-hover:opacity-100">
-                      <RightOutlined style={{ fontSize: '20px' }} />
-                    </button>
-                    <div className="absolute bottom-4 right-6 z-50 text-white bg-black/40 px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 backdrop-blur-sm pointer-events-none">
-                      <SwapOutlined /> VUỐT NGANG XEM THÊM
-                    </div>
-                  </>
-                )}
+                </div>
               </div>
             </div>
-
-            <div className="text-center text-gray-400 animate-bounce mt-2 flex flex-col items-center pointer-events-none">
-              <p className="text-sm font-bold uppercase tracking-wider">Vuốt lên xem sơ đồ</p>
-              <span className="text-xl">↓</span>
-            </div>
+            <div className="mt-8 text-center text-gray-400 animate-bounce text-xs font-bold uppercase tracking-widest">↓ Vuốt lên để luyện tập</div>
           </SwiperSlide>
 
-          <SwiperSlide className="bg-[#FEFBF4]">
-            <div 
-              ref={containerRef}
-              className="p-8 sm:p-12 flex flex-col overflow-y-auto h-full w-full"
-            >
-            <h1 className="text-[#6B8E23] font-bold text-2xl mb-6">Vận dụng - Thực hành :</h1>
-            <h2 className="text-[#6B8E23] font-bold text-xl mb-6">Sơ đồ :</h2>
-            <div className="relative w-full min-h-[650px] mt-4 flex items-center justify-center mb-10 scale-[0.80] sm:scale-100 overflow-visible">
-              <div className="relative z-30 bg-white border-[4px] border-[#DE5E51] text-[#DE5E51] px-10 py-4 rounded-full font-black text-3xl shadow-[0_6px_0_0_#DE5E51]">
-                {wordData?.word}
+          {/* SLIDE 3: BÀI TẬP LUYỆN TẬP */}
+          <SwiperSlide className="p-6 sm:p-12 flex flex-col h-full bg-[#FFFDF3] overflow-y-auto">
+            <div className="w-full max-w-2xl mx-auto">
+              <div className="mb-10 text-center">
+                <h2 className="text-3xl font-black text-[#202020] uppercase tracking-tight inline-block relative">
+                  4. Bài tập luyện tập
+                  <div className="h-2 w-full bg-[#A3D977] absolute bottom-1 left-0 -z-10 opacity-60"></div>
+                </h2>
               </div>
-
-              <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 overflow-visible" width="1000" height="1000" viewBox="-500 -500 1000 1000">
-                <defs>
-                  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                    <polygon points="0 0, 10 3.5, 0 7" fill="#DE5E51" />
-                  </marker>
-                </defs>
-                {collocations.map((_, index) => {
-                  const total = collocations.length;
-                  const angle = (index * (360 / total) - 90) * (Math.PI / 180);
-
-                  let rx = 320;
-                  let ry = 220;
-                  if (total > 5) {
-                    rx = index % 2 === 0 ? 400 : 270;
-                    ry = index % 2 === 0 ? 300 : 180;
-                  }
-
-                  const x = Math.cos(angle) * rx;
-                  const y = Math.sin(angle) * ry;
-
-                  // Bắt đầu mũi tên ở rìa bong bóng trung tâm
-                  const startX = Math.cos(angle) * 90;
-                  const startY = Math.sin(angle) * 45;
-
-                  // Dừng mũi tên trước text box mục tiêu
-                  const endX = x - Math.cos(angle) * 125;
-                  const endY = y - Math.sin(angle) * 50;
-
-                  const cpX = Math.cos(angle + 0.2) * (rx * 0.4);
-                  const cpY = Math.sin(angle + 0.2) * (ry * 0.4);
-
-                  return (
-                    <path key={index} d={`M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`}
-                      fill="none" stroke="#DE5E51" strokeWidth="3" strokeLinecap="round" markerEnd="url(#arrowhead)" />
-                  );
-                })}
-              </svg>
-
-              {collocations.map((text, index) => {
-                const total = collocations.length;
-                const angle = (index * (360 / total) - 90) * (Math.PI / 180);
-
-                let rx = 320;
-                let ry = 220;
-                if (total > 5) {
-                  rx = index % 2 === 0 ? 400 : 270;
-                  ry = index % 2 === 0 ? 300 : 180;
-                }
-
-                const x = Math.cos(angle) * rx;
-                const y = Math.sin(angle) * ry;
-                return (
-                  <div key={index} className="absolute z-20 bg-white px-5 py-2.5 rounded-2xl shadow-md border-2 border-[#F0E1B2] font-black text-[#444] text-center min-w-[120px] max-w-[260px] text-sm sm:text-lg flex items-center justify-center transition-all duration-300"
-                    style={{ left: '50%', top: '50%', transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}>
-                    {text}
+              
+              <div className="space-y-4">
+                {[
+                  { id: 'quiz-context', label: '1. Chọn ngữ cảnh/đối tượng phù hợp', sub: '(theo kiểu lựa chọn đúng sai)' },
+                  { id: 'quiz-fill', label: '2. Điền từ thích hợp vào chỗ trống', sub: '(giải nghĩa)' },
+                  { id: 'quiz-sentence', label: '3. Đặt câu có từ “....”', sub: '' },
+                  { id: 'quiz-nuance', label: '4. Chọn hình ảnh diễn tả đúng sắc thái nghĩa từ', sub: '' }
+                ].map((item, index) => (
+                  <div 
+                    key={item.id}
+                    onClick={() => handleQuizClick(item.id)}
+                    className="group bg-white border-2 border-[#F0E1B2] p-5 rounded-[2rem] flex items-center justify-between cursor-pointer hover:border-[#A3D977] hover:shadow-lg transition-all active:scale-95"
+                  >
+                    <div className="flex flex-col gap-1">
+                      <span className="text-lg font-black text-[#444] group-hover:text-[#6B8E23] transition-colors">{item.label}</span>
+                      {item.sub && <span className="text-sm text-gray-400 italic font-medium">{item.sub}</span>}
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-[#F7F9F2] flex items-center justify-center text-[#6B8E23] group-hover:bg-[#A3D977] group-hover:text-white transition-all">
+                      <RightOutlined className="text-xl font-bold" />
+                    </div>
                   </div>
-                );
-              })}
-            </div>
-
-            <h2 className="text-[#6B8E23] font-bold text-xl mb-4">Câu minh họa :</h2>
-            <div className="space-y-4 pb-12">
-              {wordData?.example_sentences?.map((item, idx) => (
-                <div key={idx} className="bg-[#FFFDF3] border-l-[10px] border-[#A3D977] p-6 rounded-r-2xl shadow-sm italic font-bold text-xl text-gray-800 leading-relaxed">
-                  {idx + 1}. "{item.text}"
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
             </div>
           </SwiperSlide>
         </Swiper>
       </div>
 
-      <Modal
-        open={isModalOpen}
-        footer={null}
-        onCancel={() => setIsModalOpen(false)}
-        centered
-        width="auto"
-        bodyStyle={{ padding: 0, backgroundColor: 'transparent' }}
-        closeIcon={<div className="bg-white rounded-full p-2 shadow-lg"><ArrowLeftOutlined /></div>}
-      >
-        <img
-          src={modalImage}
-          alt="Preview"
-          className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl"
-        />
+      <Modal open={isModalOpen} footer={null} onCancel={() => setIsModalOpen(false)} centered width="auto" bodyStyle={{ padding: 0 }}>
+        <img src={modalImage} className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" alt="Preview" />
       </Modal>
-
-      <style jsx="true">{`
-        .swiper-button-disabled {
-          opacity: 0 !important;
-          pointer-events: none;
-        }
-        .ant-modal-content {
-          background: transparent !important;
-          box-shadow: none !important;
-        }
-      `}</style>
     </div>
   );
 };

@@ -168,11 +168,20 @@ def process_data(xlsx_file_path):
     ws = wb.active
     headers = [get_str(cell.value) for cell in ws[2]]
     
+    # 1. Câu lệnh Insert vào bảng vocabularies (trả về ID)
     insert_vocab_query = """
-        INSERT INTO vocabs (
-            lesson_id, word, standard_meaning, simplified_meaning, related_words, 
-            example_sentences, image_url, audio_url, video_url, is_required
-        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO vocabularies (
+            word, standard_meaning, simplified_meaning, 
+            image_url, audio_url, video_url, is_required
+        ) VALUES (%s, %s, %s, %s, %s, %s, %s)
+        RETURNING id
+    """
+    
+    # 2. Câu lệnh Insert vào bảng trung gian lesson_vocabularies
+    insert_relation_query = """
+        INSERT INTO lesson_vocabularies (lesson_id, vocab_id)
+        VALUES (%s, %s)
+        ON CONFLICT DO NOTHING
     """
     
     current_lesson_id = None
@@ -180,6 +189,7 @@ def process_data(xlsx_file_path):
     for index, row in enumerate(ws.iter_rows(min_row=5), start=5):
         if row[0].value and (str(row[0].value).startswith("CHỦ ĐỀ") or str(row[0].value).startswith("TUẦN")):
             continue
+            
         row_data = {}
         for idx, cell in enumerate(row):
             if idx < len(headers) and headers[idx]:
@@ -188,110 +198,59 @@ def process_data(xlsx_file_path):
                 row_data[col_name] = val
         
         word_col_val = get_str(row_data.get('TỪ'))
-        print(f"\n🔍 Đang kiểm tra dòng {index} với từ: '{word_col_val}'")
         if not word_col_val or word_col_val.lower() in ['nan', 'none', '']:
             continue
-            
-        # # # ----------------------------------------------------
-        # # # BỎ QUA CÁC DÒNG CHỦ ĐỀ VÀ TUẦN (Không đụng tới)
-        # # # ----------------------------------------------------
-        # if first_col_val.upper().startswith("CHỦ ĐỀ") or first_col_val.upper().startswith("TUẦN"):
-        #     continue
 
-        # # ----------------------------------------------------
-        # # TÌM LESSON_ID TỪ BẢNG LESSONS
-        # # ----------------------------------------------------
+        # XỬ LÝ LESSON_ID
         first_col_val = get_str(row[0].value)
         if first_col_val.lower().startswith("bài"):
             lesson_title = first_col_val.strip()
-            # print(f"\n📚 Phát hiện Bài học: {lesson_title}")
             try:
                 conn = db_pool.getconn()
                 cursor = conn.cursor()
-                # Chỉ lấy ID ra dùng, KHÔNG insert mới
                 cursor.execute("SELECT id FROM lessons WHERE title = %s", (lesson_title,))
                 res = cursor.fetchone()
-                
-                if res:
-                    current_lesson_id = res[0]
-                    # print(f"   -> Đã tìm thấy ID Bài học: {current_lesson_id}")
-                else:
-                    current_lesson_id = None
-                    # print(f"   ⚠️ CẢNH BÁO: Không tìm thấy bài học '{lesson_title}' trong Database. Các từ vựng của bài này sẽ bị bỏ qua!")
+                current_lesson_id = res[0] if res else None
                 cursor.close()
-            except Exception as e:
-                print(f"❌ Lỗi truy vấn Bài học: {e}")
-                if conn: conn.rollback()
             finally:
                 if conn: db_pool.putconn(conn)
-        # print(f"   -> Sử dụng lesson_id hiện tại: {current_lesson_id} cho từ vựng này.")
 
-
-        # ----------------------------------------------------
-        # NẾU LÀ TỪ VỰNG -> LƯU VÀO BẢNG VOCABULARIES
-        # ----------------------------------------------------
-        raw_word = word_col_val
-        is_required = False
-        
-        note_col = next((col for col in headers if 'GHI CHÚ' in col), None)
-        note_val = get_str(row_data.get(note_col)) if note_col else ""
-        if "*" in raw_word or "*" in note_val:
-            is_required = True
-        else:
-            is_required = False
-            
-        word = raw_word.replace("*", "").strip() 
-        # print(f"\n⏳ Đang xử lý từ vựng: {word}")
-        
         if not current_lesson_id:
-            # print(f"⚠️ Bỏ qua từ '{word}' vì không xác định được bài học (lesson_id)!")
             continue
+
+        # CHUẨN BỊ DỮ LIỆU TỪ VỰNG
+        raw_word = word_col_val
+        is_required = "*" in raw_word or "*" in get_str(row_data.get('GHI CHÚ'))
+        word = raw_word.replace("*", "").strip() 
+        
         standard_meaning = get_str(row_data.get('GIẢI NGHĨA'))
         simplified_meaning = get_str(row_data.get('NGHĨA TINH GỌN'))
-        related_words = get_str(row_data.get('CÁC TỪ LIÊN QUAN'))
-        # print(f"   -> Standard Meaning: {standard_meaning}")
-        # print(f"   -> Simplified Meaning: {simplified_meaning}")
-        # print(f"   -> Related Words: {related_words}")
         
-        # XỬ LÝ ĐẶT CÂU MINH HỌA (JSONB)
-        example_text = get_str(row_data.get('ĐẶT CÂU MINH HỌA'))
-        example_list = []
-        for sentence in example_text.split('\n'):
-            sentence_clean = sentence.strip().lstrip('-+* ')
-            if sentence_clean:
-                example_list.append({
-                    "text": sentence_clean,
-                    "audio_url": None
-                })
-        example_sentences_json = json.dumps(example_list, ensure_ascii=False)
-        # print(f"   -> Example Sentences JSON: {example_sentences_json}")
-
-
         # XỬ LÝ MEDIA
-        media_lines = [line.strip() for line in get_str(row_data.get('HÌNH ẢNH')).split('\n') if line.strip()]
-        img_val = media_lines[0] if media_lines else ""
-        # audio_val = get_str(row_data.get('ÂM THANH')).split('\n')[0]
-        vid_lines = [line.strip() for line in get_str(row_data.get('VIDEO MINH HỌA')).split('\n') if line.strip()]
-        vid_val = vid_lines[0] if vid_lines else ""
+        img_val = get_str(row_data.get('HÌNH ẢNH')).split('\n')[0]
+        vid_val = get_str(row_data.get('VIDEO MINH HỌA')).split('\n')[0]
 
         img_url_db = upload_media_to_supabase(img_val, f"{word}_image", "images")
-        # audio_url_db = upload_media_to_supabase(audio_val, f"{word}_audio", "audios")
         video_url_db = upload_video_to_cloudinary(vid_val)
-        print(f"   -> Image URL trên Supabase: {img_url_db}")
-        print(f"   -> Video URL trên Cloudinary: {video_url_db}")
 
-
-        # 4. LƯU DATABASE
+        # THỰC THI LƯU DATABASE (2 BƯỚC)
         try:
             conn = db_pool.getconn()
             cursor = conn.cursor()
+            
+            # Bước 1: Insert vào vocabularies
             cursor.execute(insert_vocab_query, (
-                current_lesson_id, word, standard_meaning, simplified_meaning, related_words, 
-                example_sentences_json, img_url_db, None, video_url_db, is_required
+                word, standard_meaning, simplified_meaning, 
+                img_url_db, None, video_url_db, is_required
             ))
+            new_vocab_id = cursor.fetchone()[0]
+            
+            # Bước 2: Liên kết với lesson
+            cursor.execute(insert_relation_query, (current_lesson_id, new_vocab_id))
+            
             conn.commit()
             cursor.close()
-            print(f"✅ Đã lưu '{word}' vào CSDL.")
+            print(f"✅ Đã lưu '{word}' (ID: {new_vocab_id}) vào bài học {current_lesson_id}")
         except Exception as e:
             print(f"❌ Lỗi khi chèn DB '{word}': {e}")
             if conn: conn.rollback()

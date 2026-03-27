@@ -56,52 +56,141 @@ export const Lessons = {
         return rows;
     },
     getContentByLessonId: async (lessonId) => {
-        const query = `SELECT content FROM lessons WHERE id = $1`;
+        const query = `
+            SELECT id, week_id, title, content, order_number, image_url, created_at
+            FROM lessons
+            WHERE id = $1
+            LIMIT 1
+        `;
         const { rows } = await pool.query(query, [lessonId]);
-        return rows;
+        return rows[0] || null;
     },
 };
 
 export const Vocabularies = {
     getVocabulariesByWordId: async (wordId) => {
-        const query = `SELECT * FROM vocabs WHERE id = $1`;
+        const query = `
+            SELECT
+                v.id,
+                v.word,
+                v.pos,
+                v.standard_meaning,
+                v.simplified_meaning,
+                v.image_url,
+                v.audio_url,
+                v.video_url,
+                v.nuance,
+                COALESCE(v.synonyms, '{}'::text[]) AS synonyms,
+                COALESCE(v.antonyms, '{}'::text[]) AS antonyms,
+                v.is_required,
+                v.notes,
+                v.created_at,
+                -- Lấy danh sách ngữ cảnh (Bối cảnh phù hợp/không phù hợp)
+                COALESCE(
+                    (SELECT json_agg(json_build_object(
+                        'id', vc.id,
+                        'content', vc.content,
+                        'is_appropriate', vc.is_appropriate,
+                        'explanation', vc.explanation,
+                        'image_url', vc.image_url
+                    )) FROM vocabulary_contexts vc WHERE vc.vocab_id = v.id),
+                    '[]'
+                ) AS contexts,
+                -- Lấy danh sách câu ví dụ (Sử dụng từ trong câu)
+                COALESCE(
+                    (SELECT json_agg(json_build_object(
+                        'id', vs.id,
+                        'sentence', vs.sentence
+                    )) FROM vocabulary_sentences vs WHERE vs.vocab_id = v.id),
+                    '[]'
+                ) AS sentences,
+                -- Lấy danh sách bài tập liên quan
+                COALESCE(
+                    (SELECT json_agg(json_build_object(
+                        'id', ve.id,
+                        'title', ve.title,
+                        'quiz_url', ve.quiz_url
+                    )) FROM vocabulary_exercises ve WHERE ve.vocab_id = v.id),
+                    '[]'
+                ) AS exercises
+            FROM vocabularies v
+            WHERE v.id = $1
+            LIMIT 1
+        `;
         const { rows } = await pool.query(query, [wordId]);
-        return rows;
+        return rows[0] || null;
     },
+
     getWordsByLessonId: async (lessonId) => {
-        const query = `SELECT id, word FROM vocabs WHERE lesson_id = $1`;
+        const query = `
+            SELECT v.id, v.word, v.image_url, v.pos
+            FROM lesson_vocabularies lv
+            JOIN vocabularies v ON v.id = lv.vocab_id
+            WHERE lv.lesson_id = $1
+            ORDER BY v.word ASC
+        `;
         const { rows } = await pool.query(query, [lessonId]);
         return rows;
     },
 };
-
 //xu ly tim kiem bản only search
 export const SearchModel = {
     liveSearchData: async (keyword) => {
         const searchParam = `%${keyword}%`;
 
-        // 1. DỌN DẸP LẠI: Chỉ lấy id, title, và content (để lọc tác giả)
-        // Bỏ hẳn phần join với bảng vocabs
+        // 1. SEARCH LESSON (kèm theme)
         const lessonQuery = `
-            SELECT id, title, content
-            FROM lessons
-            WHERE title ILIKE $1 OR content ILIKE $1
+            SELECT 
+                l.id,
+                l.title,
+                l.content,
+                w.id AS week_id,
+                t.id AS theme_id,
+                t.title AS theme_name
+            FROM lessons l
+            LEFT JOIN weeks w ON w.id = l.week_id
+            LEFT JOIN themes t ON t.id = w.theme_id
+            WHERE l.title ILIKE $1 OR l.content ILIKE $1
+            ORDER BY l.id DESC
             LIMIT 5;
         `;
 
-        // 2. DỌN DẸP LẠI: Chỉ lấy id và tên chủ đề
-        // Bỏ hẳn phần join với bảng weeks và lessons
+        // 2. SEARCH THEME (kèm lesson count)
         const themeQuery = `
-            SELECT id, title as theme_name
-            FROM themes
-            WHERE title ILIKE $1
+            SELECT 
+                t.id,
+                t.title AS theme_name,
+                COUNT(l.id) AS total_lessons
+            FROM themes t
+            LEFT JOIN weeks w ON w.theme_id = t.id
+            LEFT JOIN lessons l ON l.week_id = w.id
+            WHERE t.title ILIKE $1
+            GROUP BY t.id
+            ORDER BY t.id DESC
             LIMIT 5;
         `;
 
+        // 3. SEARCH WORD (kèm lesson + theme liên quan)
         const wordQuery = `
-            SELECT id, word
-            FROM vocabs
-            WHERE word ILIKE $1
+            SELECT 
+                v.id,
+                v.word,
+                json_agg(
+                    DISTINCT jsonb_build_object(
+                        'lesson_id', l.id,
+                        'lesson_title', l.title,
+                        'theme_id', t.id,
+                        'theme_name', t.title
+                    )
+                ) FILTER (WHERE l.id IS NOT NULL) AS relations
+            FROM vocabularies v
+            LEFT JOIN lesson_vocabularies lv ON lv.vocab_id = v.id
+            LEFT JOIN lessons l ON l.id = lv.lesson_id
+            LEFT JOIN weeks w ON w.id = l.week_id
+            LEFT JOIN themes t ON t.id = w.theme_id
+            WHERE v.word ILIKE $1
+            GROUP BY v.id
+            ORDER BY v.word ASC
             LIMIT 5;
         `;
 
@@ -111,21 +200,22 @@ export const SearchModel = {
             pool.query(wordQuery, [searchParam])
         ]);
 
-        // Xử lý tách tên tác giả
+        // 👉 xử lý author từ content
         const processedLessons = lessonResult.rows.map(lesson => {
-            const authorMatch = lesson.content.match(/\(?Theo\s+(.+?)\)?$/i); 
-            
+            const authorMatch = lesson.content?.match(/\(?Theo\s+(.+?)\)?$/i);
+
             return {
                 id: lesson.id,
                 title: lesson.title,
-                author: authorMatch ? authorMatch[1].trim() : "Chưa rõ"
-                // Mình không trả về 'content' nữa cho JSON nhẹ bớt, vì dropdown ko cần in ra bài văn dài
+                author: authorMatch ? authorMatch[1].trim() : "Chưa rõ",
+                theme_id: lesson.theme_id,
+                theme_name: lesson.theme_name
             };
         });
 
         return {
-            themes: themeResult.rows,     // Trả về [{id: 1, theme_name: "..."}]
-            lessons: processedLessons,     // Trả về [{id: 1, title: "...", author: "..."}]
+            themes: themeResult.rows,
+            lessons: processedLessons,
             words: wordResult.rows
         };
     }

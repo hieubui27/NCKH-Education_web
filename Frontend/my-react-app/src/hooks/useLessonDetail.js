@@ -22,12 +22,7 @@ export const useLessonDetail = (topicId, lessonId) => {
                 const lessonDataRaw = data.data?.lessonData;
                 const wordsDataRaw = data.data?.wordsData || [];
 
-                const mainLesson =
-                    Array.isArray(lessonDataRaw) && lessonDataRaw.length > 0
-                        ? lessonDataRaw[0]
-                        : lessonDataRaw || null;
-
-                setLesson(mainLesson);
+                setLesson(lessonDataRaw || null);
                 setWords(wordsDataRaw);
             } catch (err) {
                 console.error('Lỗi tải bài học:', err);

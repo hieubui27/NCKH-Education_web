@@ -16,6 +16,7 @@ import Dictionary from '../pages/Dictionary';
 import News from '../pages/News';
 import CurriculumPage from '../pages/chuong trinh';
 import WordDetail from '../pages/Word';
+import WordBranchDetail from '../pages/WordBranch';
 import Guide from '../pages/Guide';
 
 const AppRoutes = () => {
@@ -49,6 +50,7 @@ const AppRoutes = () => {
                   <Route index element={<LessonDetail />} />
                   {/* Thêm route cho chi tiết từ vựng ở đây */}
                   <Route path="tu-vung/:wordId" element={<WordDetail />} />
+                  <Route path="tu-vung/:wordId/nhanh/:branchKey" element={<WordBranchDetail />} />
                 </Route>
               </Route>
             </Route>

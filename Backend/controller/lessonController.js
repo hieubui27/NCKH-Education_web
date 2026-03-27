@@ -73,7 +73,7 @@ export const VocabulariesController = {
             throw new ErrorResponse('Vui lòng cung cấp id của từ vựng', 400);
         }
         const vocabularies = await Vocabularies.getVocabulariesByWordId(wordId);
-        if(vocabularies.length === 0){
+        if(!vocabularies){
             throw new ErrorResponse('Không tìm thấy từ vựng', 404);
         }
         res.status(200).json({ success: true, data: vocabularies });
