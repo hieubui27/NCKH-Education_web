@@ -53,14 +53,34 @@ const WordBranchDetail = () => {
     // --- Nhánh: Từ gần nghĩa / Trái nghĩa ---
     if (branchKey === 'tu-nghia') {
       return (
-        <div className="space-y-4">
-          <div className="bg-white border border-[#F0E1B2] rounded-2xl p-5 shadow-sm">
-            <p className="font-black text-[#DE5E51] mb-2 uppercase text-sm tracking-wider">Từ gần nghĩa</p>
-            <p className="text-lg text-gray-700 bg-[#C9DAF8] w-fit">{synonyms.length > 0 ? synonyms.join(', ') : 'Chưa có dữ liệu'}</p>
+        <div className="space-y-6">
+          <div className="bg-white border border-[#F0E1B2] rounded-2xl p-6 shadow-sm">
+            <p className="font-black text-[#DE5E51] mb-4 uppercase text-sm tracking-wider">Từ gần nghĩa</p>
+            <div className="flex flex-wrap gap-3">
+              {synonyms.length > 0 ? (
+                synonyms.map((s, i) => (
+                  <div key={i} className="px-5 py-2.5 rounded-2xl bg-[#C9DAF8] text-gray-800 font-bold text-lg shadow-sm border border-blue-100/50">
+                    {s}
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-400 italic">Chưa có dữ liệu</p>
+              )}
+            </div>
           </div>
-          <div className="bg-white border border-[#F0E1B2] rounded-2xl p-5 shadow-sm">
-            <p className="font-black text-[#DE5E51] mb-2 uppercase text-sm tracking-wider">Từ trái nghĩa</p>
-            <p className="text-lg text-gray-700 bg-[#F9CB9C] w-fit">{antonyms.length > 0 ? antonyms.join(', ') : 'Chưa có dữ liệu'}</p>
+          <div className="bg-white border border-[#F0E1B2] rounded-2xl p-6 shadow-sm">
+            <p className="font-black text-[#DE5E51] mb-4 uppercase text-sm tracking-wider">Từ trái nghĩa</p>
+            <div className="flex flex-wrap gap-3">
+              {antonyms.length > 0 ? (
+                antonyms.map((a, i) => (
+                  <div key={i} className="px-5 py-2.5 rounded-2xl bg-[#F9CB9A] text-gray-800 font-bold text-lg shadow-sm border border-orange-100/50">
+                    {a}
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-400 italic">Chưa có dữ liệu</p>
+              )}
+            </div>
           </div>
         </div>
       );

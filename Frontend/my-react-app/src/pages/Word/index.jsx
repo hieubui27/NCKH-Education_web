@@ -108,7 +108,7 @@ const WordDetail = () => {
                   <div className="space-y-2 bg-white/60 p-4 rounded-2xl border border-dashed border-[#F0E1B2]">
                     <p className="font-bold text-[#6B8E23] text-xs uppercase tracking-widest">Ví dụ:</p>
                     {displaySentences.map((s, idx) => (
-                      <p key={idx} className="text-sm sm:text-base text-gray-700 italic leading-relaxed">
+                      <p key={idx} className="text-lg sm:text-xl text-gray-700 italic leading-relaxed">
                         ({idx + 1}) {s.sentence}
                       </p>
                     ))}
@@ -166,7 +166,7 @@ const WordDetail = () => {
               </h1>
             </div>
 
-            <div className="border-2 border-[#F0E1B2] bg-white w-full max-w-[750px] aspect-[16/10] rounded-[3rem] p-6 shadow-sm relative flex items-center justify-center">
+            <div className="border-2 border-[#F0E1B2] bg-white mx-auto max-w-[750px] aspect-[16/10] rounded-[3rem] p-6 shadow-sm relative flex items-center justify-center">
               <div className="relative w-full h-full">
                 {/* SVG overlay: đường thẳng nối word div với các button */}
                 <svg
@@ -174,7 +174,7 @@ const WordDetail = () => {
                   viewBox="0 0 100 100"
                   preserveAspectRatio="none"
                 >
-                  <line x1="50" y1="42" x2="50" y2="22" stroke="#DE5E51" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="50" y1="42" x2="50" y2="22" stroke="#DE5E51" strokeWidth="1.2" strokeLinecap="round" />
                   <line x1="36" y1="56" x2="14" y2="80" stroke="#DE5E51" strokeWidth="1.5" strokeLinecap="round" />
                   <line x1="64" y1="56" x2="86" y2="80" stroke="#DE5E51" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
