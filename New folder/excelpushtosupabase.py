@@ -258,7 +258,7 @@ def process_data(xlsx_file_path):
             if conn: db_pool.putconn(conn)
 
 if __name__ == "__main__":
-    excel_file_path = "TẬP ĐỌC KNTT 2.2.xlsx" 
+    excel_file_path = "TẬP ĐỌC KNTT 2.2.xlsx"
     process_data(excel_file_path)
     if db_pool:
         db_pool.closeall()

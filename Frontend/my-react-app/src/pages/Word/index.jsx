@@ -63,7 +63,7 @@ const WordDetail = () => {
 
   return (
     <div className="w-full h-screen bg-[#A3D977] p-2 sm:p-4 flex flex-col items-center overflow-hidden font-sans text-[#202020]">
-      
+
       {/* Nút Quay Lại */}
       <div className="w-full max-w-5xl mb-3 flex justify-start gap-2">
         <button
@@ -85,78 +85,78 @@ const WordDetail = () => {
           className="h-full w-full"
         >
           {/* SLIDE 1: GIẢI NGHĨA & MINH HỌA */}
-<SwiperSlide className="p-4 sm:p-8 flex flex-col h-full overflow-y-auto">
-  <div className="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-4 items-start">
-    <div>
-      {/* Tên từ & Sắc thái màu */}
-      <h1 className="font-black text-2xl sm:text-3xl uppercase leading-tight mb-1" style={{ color: getNuanceColor(wordData?.nuance) }}>
-        {wordData?.word}
-        <span className="text-gray-400 text-base italic font-normal normal-case ml-2">
-          ({wordData?.pos || 'tính từ'})
-        </span>
-      </h1>
+          <SwiperSlide className="p-4 sm:p-8 flex flex-col h-full overflow-y-auto">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-4 items-start">
+              <div>
+                {/* Tên từ & Sắc thái màu */}
+                <h1 className="font-black text-2xl sm:text-3xl uppercase leading-tight mb-1" style={{ color: getNuanceColor(wordData?.nuance) }}>
+                  {wordData?.word}
+                  <span className="text-gray-400 text-base italic font-normal normal-case ml-2">
+                    {wordData?.pos ? `(${wordData.pos})` : ''}
+                  </span>
+                </h1>
 
-      <div className="mt-2">
-        <h2 className="text-lg font-black mb-1 italic">
-          Giải nghĩa và ví dụ:
-        </h2>
-        <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-3">
-          {wordData?.standard_meaning}
-        </p>
+                <div className="mt-2">
+                  <h2 className="text-lg font-black mb-1 italic">
+                    Giải nghĩa và ví dụ:
+                  </h2>
+                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-3">
+                    {wordData?.standard_meaning}
+                  </p>
 
-        {/* Phần Ví dụ - Đã thu nhỏ (text-xs/sm và padding nhỏ hơn) */}
-        <div className="space-y-1 bg-white/60 p-3 rounded-2xl border border-dashed border-[#F0E1B2]">
-          <p className="font-bold text-[#6B8E23] text-[10px] uppercase tracking-widest">Ví dụ:</p>
-          {displaySentences.map((s, idx) => (
-            <p key={idx} className="text-xs sm:text-sm text-gray-600 italic leading-tight">
-              ({idx + 1}) {s.sentence}
-            </p>
-          ))}
-          {displaySentences.length === 0 && <p className="text-xs text-gray-400 italic">Chưa có ví dụ.</p>}
-        </div>
-      </div>
-    </div>
-    
-    {/* Bảng mã màu - Thu nhỏ lại để nhường chỗ */}
-    <div className="bg-white border border-[#F0E1B2] rounded-xl p-3 shadow-sm hidden md:block">
-      <p className="font-black text-[9px] mb-2 uppercase text-gray-400 tracking-tighter">Mã màu</p>
-      <div className="space-y-1.5 text-[9px] font-bold text-gray-500">
-        <div className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#C64A3B] rounded-sm" /><span>Từ mang sắc thái nghĩa tiêu cực</span></div>
-        <div className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#F2BC3D] rounded-sm" /><span>Từ mang sắc thái nghĩa trung tính</span></div>
-        <div className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#7EA53A] rounded-sm" /><span>Từ mang sắc thái nghĩa tích cực</span></div>
-      </div>
-    </div>
-  </div>
+                  {/* Phần Ví dụ - Đã thu nhỏ (text-xs/sm và padding nhỏ hơn) */}
+                  <div className="space-y-2 bg-white/60 p-4 rounded-2xl border border-dashed border-[#F0E1B2]">
+                    <p className="font-bold text-[#6B8E23] text-xs uppercase tracking-widest">Ví dụ:</p>
+                    {displaySentences.map((s, idx) => (
+                      <p key={idx} className="text-sm sm:text-base text-gray-700 italic leading-relaxed">
+                        ({idx + 1}) {s.sentence}
+                      </p>
+                    ))}
+                    {displaySentences.length === 0 && <p className="text-sm text-gray-400 italic">Chưa có ví dụ.</p>}
+                  </div>
+                </div>
+              </div>
 
-  {/* Phần Minh họa - TĂNG KÍCH THƯỚC (max-h tăng từ 32vh lên 45vh) */}
-  <div className="mt-4 flex-1 flex flex-col min-h-0">
-    <h2 className="font-black text-lg mb-2">Minh họa:</h2>
-    <div className="w-full flex-1 rounded-[2rem] overflow-hidden border-[4px] border-white shadow-xl bg-black aspect-video max-h-[45vh] mx-auto relative">
-      <Swiper navigation={true} modules={[Navigation]} className="h-full w-full">
-        {mediaList.map((media, index) => (
-          <SwiperSlide key={index} className="flex items-center justify-center bg-black">
-            {media.type === 'video' ? (
-              <video controls className="w-full h-full object-contain">
-                <source src={media.url} type="video/mp4" />
-              </video>
-            ) : (
-              <img 
-                src={media.url} 
-                className="w-full h-full object-contain cursor-zoom-in" 
-                onClick={() => {setModalImage(media.url); setIsModalOpen(true)}} 
-                alt="minh họa" 
-              />
-            )}
+              {/* Bảng mã màu - Thu nhỏ lại để nhường chỗ */}
+              <div className="bg-white border border-[#F0E1B2] rounded-xl p-3 shadow-sm hidden md:block">
+                <p className="font-black text-[9px] mb-2 uppercase text-gray-400 tracking-tighter">Mã màu</p>
+                <div className="space-y-1.5 text-[9px] font-bold text-gray-500">
+                  <div className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#C64A3B] rounded-sm" /><span>Từ mang sắc thái nghĩa tiêu cực</span></div>
+                  <div className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#F2BC3D] rounded-sm" /><span>Từ mang sắc thái nghĩa trung tính</span></div>
+                  <div className="flex items-center gap-1.5"><span className="w-3 h-3 bg-[#7EA53A] rounded-sm" /><span>Từ mang sắc thái nghĩa tích cực</span></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Phần Minh họa - TĂNG KÍCH THƯỚC (max-h tăng từ 32vh lên 45vh) */}
+            <div className="mt-4 flex-1 flex flex-col min-h-0">
+              <h2 className="font-black text-lg mb-2">Minh họa:</h2>
+              <div className="w-full flex-1 rounded-[2rem] overflow-hidden border-[4px] border-white shadow-xl bg-black aspect-video max-h-[45vh] mx-auto relative">
+                <Swiper navigation={true} modules={[Navigation]} className="h-full w-full">
+                  {mediaList.map((media, index) => (
+                    <SwiperSlide key={index} className="flex items-center justify-center bg-black">
+                      {media.type === 'video' ? (
+                        <video controls className="w-full h-full object-contain">
+                          <source src={media.url} type="video/mp4" />
+                        </video>
+                      ) : (
+                        <img
+                          src={media.url}
+                          className="w-full h-full object-contain cursor-zoom-in"
+                          onClick={() => { setModalImage(media.url); setIsModalOpen(true) }}
+                          alt="minh họa"
+                        />
+                      )}
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </div>
+
+            <div className="mt-2 text-center text-gray-400 animate-bounce text-[10px] font-bold uppercase tracking-widest">
+              ↓ Vuốt lên xem sơ đồ
+            </div>
           </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
-  </div>
-
-  <div className="mt-2 text-center text-gray-400 animate-bounce text-[10px] font-bold uppercase tracking-widest">
-    ↓ Vuốt lên xem sơ đồ
-  </div>
-</SwiperSlide>
 
           {/* SLIDE 2: SƠ ĐỒ TƯ DUY */}
           <SwiperSlide className="p-6 sm:p-10 flex flex-col justify-center items-center h-full">
@@ -165,19 +165,24 @@ const WordDetail = () => {
                 <BulbOutlined /> Mở rộng kiến thức
               </h1>
             </div>
-            
+
             <div className="border-2 border-[#F0E1B2] bg-white w-full max-w-[750px] aspect-[16/10] rounded-[3rem] p-6 shadow-sm relative flex items-center justify-center">
               <div className="relative w-full h-full">
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <path d="M50 50 L50 30" stroke="#DE5E51" strokeWidth="2" strokeLinecap="round" fill="none" />
-                  <path d="M45 55 L22 80" stroke="#DE5E51" strokeWidth="2" strokeLinecap="round" fill="none" />
-                  <path d="M55 55 L78 80" stroke="#DE5E51" strokeWidth="2" strokeLinecap="round" fill="none" />
+                {/* SVG overlay: đường thẳng nối word div với các button */}
+                <svg
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                >
+                  <line x1="50" y1="42" x2="50" y2="22" stroke="#DE5E51" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="36" y1="56" x2="14" y2="80" stroke="#DE5E51" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="64" y1="56" x2="86" y2="80" stroke="#DE5E51" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
 
-                <button onClick={() => handleBranchClick('tu-nghia')} className="absolute top-[12%] left-1/2 -translate-x-1/2 z-20 bg-[#FFF9E9] border-2 border-[#F0E1B2] text-[#202020] px-6 py-2.5 rounded-2xl font-bold text-sm sm:text-base shadow-sm hover:bg-[#DE5E51] hover:text-white transition-all">từ gần nghĩa / trái nghĩa</button>
+                <button onClick={() => handleBranchClick('tu-nghia')} className="absolute top-[12%] left-1/2 -translate-x-1/2 z-20 bg-[#FFF9E9] border-2 border-[#F0E1B2] text-[#202020] px-6 py-2.5 rounded-2xl font-bold text-sm sm:text-base shadow-sm hover:bg-[#DE5E51] hover:text-white transition-all m-0">từ gần nghĩa / trái nghĩa</button>
                 <button onClick={() => handleBranchClick('ngu-canh')} className="absolute bottom-[8%] left-[0%] z-20 bg-[#FFF9E9] border-2 border-[#F0E1B2] text-[#202020] px-5 py-2.5 rounded-2xl font-bold text-sm sm:text-base shadow-sm hover:bg-[#DE5E51] hover:text-white transition-all">ngữ cảnh sử dụng</button>
                 <button onClick={() => handleBranchClick('dat-cau')} className="absolute bottom-[8%] right-[0%] z-20 bg-[#FFF9E9] border-2 border-[#F0E1B2] text-[#202020] px-5 py-2.5 rounded-2xl font-bold text-sm sm:text-base shadow-sm hover:bg-[#DE5E51] hover:text-white transition-all">sử dụng từ trong câu</button>
-                
+
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 bg-white border-[4px] border-[#DE5E51] text-[#D92F2F] px-10 py-4 rounded-[1.5rem] font-black text-2xl sm:text-4xl shadow-xl uppercase tracking-tighter ring-8 ring-[#DE5E51]/5">
                   {wordData?.word}
                 </div>
@@ -195,7 +200,7 @@ const WordDetail = () => {
                   <div className="h-2 w-full bg-[#A3D977] absolute bottom-1 left-0 -z-10 opacity-60"></div>
                 </h2>
               </div>
-              
+
               <div className="space-y-4">
                 {[
                   { id: 'quiz-context', label: '1. Chọn ngữ cảnh/đối tượng phù hợp', sub: '(theo kiểu lựa chọn đúng sai)' },
@@ -203,7 +208,7 @@ const WordDetail = () => {
                   { id: 'quiz-sentence', label: '3. Đặt câu có từ “....”', sub: '' },
                   { id: 'quiz-nuance', label: '4. Chọn hình ảnh diễn tả đúng sắc thái nghĩa từ', sub: '' }
                 ].map((item, index) => (
-                  <div 
+                  <div
                     key={item.id}
                     onClick={() => handleQuizClick(item.id)}
                     className="group bg-white border-2 border-[#F0E1B2] p-5 rounded-[2rem] flex items-center justify-between cursor-pointer hover:border-[#A3D977] hover:shadow-lg transition-all active:scale-95"

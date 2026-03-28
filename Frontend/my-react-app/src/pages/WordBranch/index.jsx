@@ -39,7 +39,7 @@ const WordBranchDetail = () => {
   const synonyms = Array.isArray(wordData?.synonyms) ? wordData.synonyms.filter(Boolean) : [];
   const antonyms = Array.isArray(wordData?.antonyms) ? wordData.antonyms.filter(Boolean) : [];
   const contexts = Array.isArray(wordData?.contexts) ? wordData.contexts.filter((c) => c?.content) : [];
-  
+
   // ✅ SỬA: Lọc dựa trên trường 'sentence' thay vì 'content'
   const sentences = Array.isArray(wordData?.sentences)
     ? wordData.sentences.filter((s) => s?.sentence)
@@ -56,11 +56,11 @@ const WordBranchDetail = () => {
         <div className="space-y-4">
           <div className="bg-white border border-[#F0E1B2] rounded-2xl p-5 shadow-sm">
             <p className="font-black text-[#DE5E51] mb-2 uppercase text-sm tracking-wider">Từ gần nghĩa</p>
-            <p className="text-lg text-gray-700">{synonyms.length > 0 ? synonyms.join(', ') : 'Chưa có dữ liệu'}</p>
+            <p className="text-lg text-gray-700 bg-[#C9DAF8] w-fit">{synonyms.length > 0 ? synonyms.join(', ') : 'Chưa có dữ liệu'}</p>
           </div>
           <div className="bg-white border border-[#F0E1B2] rounded-2xl p-5 shadow-sm">
             <p className="font-black text-[#DE5E51] mb-2 uppercase text-sm tracking-wider">Từ trái nghĩa</p>
-            <p className="text-lg text-gray-700">{antonyms.length > 0 ? antonyms.join(', ') : 'Chưa có dữ liệu'}</p>
+            <p className="text-lg text-gray-700 bg-[#F9CB9C] w-fit">{antonyms.length > 0 ? antonyms.join(', ') : 'Chưa có dữ liệu'}</p>
           </div>
         </div>
       );
@@ -80,7 +80,7 @@ const WordBranchDetail = () => {
             </div>
             {appropriateContexts.map((item, idx) => (
               <div key={item.id || idx} className="bg-white border-2 border-[#A3D977] rounded-2xl p-4 shadow-sm">
-                <div className="flex gap-4">
+                <div className="flex gap-4 items-center">
                   {item.image_url && <img src={item.image_url} alt="context" className="w-20 h-20 rounded-xl object-cover flex-shrink-0 border border-gray-100" />}
                   <div>
                     <p className="font-bold text-[#333] text-base leading-tight">{item.content}</p>
@@ -98,7 +98,7 @@ const WordBranchDetail = () => {
             </div>
             {inappropriateContexts.map((item, idx) => (
               <div key={item.id || idx} className="bg-white border-2 border-[#FFCDD2] rounded-2xl p-4 shadow-sm opacity-90">
-                <div className="flex gap-4">
+                <div className="flex gap-4 items-center">
                   {item.image_url && <img src={item.image_url} alt="context" className="w-20 h-20 rounded-xl object-cover flex-shrink-0 grayscale-[0.5]" />}
                   <div>
                     <p className="font-bold text-[#333] text-base leading-tight">{item.content}</p>
@@ -157,7 +157,7 @@ const WordBranchDetail = () => {
           </button>
         </div>
         <div className="bg-white px-6 py-2 rounded-2xl border-2 border-[#DE5E51] shadow-sm">
-           <span className="text-[#DE5E51] font-black text-xl uppercase tracking-widest">{wordData?.word}</span>
+          <span className="text-[#DE5E51] font-black text-xl uppercase tracking-widest">{wordData?.word}</span>
         </div>
       </div>
 
