@@ -56,7 +56,12 @@ const WordDetail = () => {
   };
 
   const handleQuizClick = (quizType) => {
-    navigate(`/danh-sach-lop/${classId}/ky/${termId}/chu-de/${topicId}/bai-hoc/${lessonId}/tu-vung/${wordId}/bai-tap/${quizType}`);
+    const exercise = wordData?.exercises?.find(ex => ex.type === quizType);
+    if (exercise?.quiz_url) {
+      window.open(exercise.quiz_url, '_blank', 'noopener,noreferrer');
+    } else {
+      message.info("Bài tập này đang được cập nhật!");
+    }
   };
 
   if (loading) return <div className="h-screen flex justify-center items-center bg-[#FEFBF4]"><Spin size="large" /></div>;
@@ -203,10 +208,10 @@ const WordDetail = () => {
 
               <div className="space-y-4">
                 {[
-                  { id: 'quiz-context', label: '1. Chọn ngữ cảnh/đối tượng phù hợp', sub: '(theo kiểu lựa chọn đúng sai)' },
-                  { id: 'quiz-fill', label: '2. Điền từ thích hợp vào chỗ trống', sub: '(giải nghĩa)' },
-                  { id: 'quiz-sentence', label: '3. Đặt câu có từ “....”', sub: '' },
-                  { id: 'quiz-nuance', label: '4. Chọn hình ảnh diễn tả đúng sắc thái nghĩa từ', sub: '' }
+                  { id: 'fill', label: '1. Luyện tập về từ và nghĩa của từ', sub: '' },
+                  { id: 'context', label: '2. Luyện tập về ngữ cảnh sử dụng từ', sub: '' },
+                  { id: 'synonym', label: '3. Luyện tập từ đồng nghĩa – trái nghĩa', sub: '' },
+                  { id: 'sentence', label: '4. Đặt câu với từ', sub: '' }
                 ].map((item, index) => (
                   <div
                     key={item.id}

@@ -109,7 +109,8 @@ export const Vocabularies = {
                     (SELECT json_agg(json_build_object(
                         'id', ve.id,
                         'title', ve.title,
-                        'quiz_url', ve.quiz_url
+                        'quiz_url', ve.quiz_url,
+                        'type', ve.type
                     )) FROM vocabulary_exercises ve WHERE ve.vocab_id = v.id),
                     '[]'
                 ) AS exercises
