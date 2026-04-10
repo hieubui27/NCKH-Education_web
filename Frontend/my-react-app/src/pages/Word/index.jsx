@@ -37,7 +37,7 @@ const WordDetail = () => {
     fetchWordDetail();
   }, [topicId, lessonId, wordId]);
 
-  const displaySentences = Array.isArray(wordData?.sentences) ? wordData.sentences : [];
+  const displaySentences = Array.isArray(wordData?.sentences) ? wordData.sentences.slice(0, 3) : [];
   const mediaList = [];
   if (wordData?.image_url) mediaList.push({ type: 'image', url: wordData.image_url });
   if (wordData?.video_url) mediaList.push({ type: 'video', url: wordData.video_url });
