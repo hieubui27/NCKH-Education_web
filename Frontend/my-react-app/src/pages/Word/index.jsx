@@ -97,7 +97,7 @@ const WordDetail = () => {
         >
           {/* SLIDE 1: GIẢI NGHĨA */}
           <SwiperSlide className="flex flex-col h-full overflow-hidden relative">
-            <div className="w-full flex-1 overflow-y-auto p-4 sm:p-8 pb-12">
+            <div className="w-full mt-10 flex-1 overflow-y-auto p-4 sm:p-8 pb-12 flex flex-col justify-center gap-y-4">
               <div className="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-4 items-start">
                 <div>
                   {/* Tên từ & Sắc thái màu */}

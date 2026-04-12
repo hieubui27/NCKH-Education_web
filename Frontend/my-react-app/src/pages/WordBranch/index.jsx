@@ -117,12 +117,12 @@ const WordBranchDetail = () => {
             </div>
             {appropriateContexts.map((item, idx) => (
               <div key={item.id || idx} className="bg-white border-2 border-[#A3D977] rounded-2xl p-4 shadow-sm">
-                <div className="flex flex-col gap-3">
-                  <div>
+                <div className="flex flex-row gap-4 items-start">
+                  {renderImages(item.image_url, false)}
+                  <div className="flex-1">
                     <p className="font-bold text-[#333] text-lg leading-tight">{item.content}</p>
                     {item.explanation && <p className="text-base text-gray-700 mt-2 italic leading-relaxed opacity-90">{item.explanation}</p>}
                   </div>
-                  {renderImages(item.image_url, false)}
                 </div>
               </div>
             ))}
@@ -135,12 +135,12 @@ const WordBranchDetail = () => {
             </div>
             {inappropriateContexts.map((item, idx) => (
               <div key={item.id || idx} className="bg-white border-2 border-[#FFCDD2] rounded-2xl p-4 shadow-sm opacity-90">
-                <div className="flex flex-col gap-3">
-                  <div>
+                <div className="flex flex-row gap-4 items-start">
+                  {renderImages(item.image_url, true)}
+                  <div className="flex-1">
                     <p className="font-bold text-[#333] text-lg leading-tight">{item.content}</p>
                     {item.explanation && <p className="text-base text-gray-700 mt-2 italic leading-relaxed">{item.explanation}</p>}
                   </div>
-                  {renderImages(item.image_url, true)}
                 </div>
               </div>
             ))}
