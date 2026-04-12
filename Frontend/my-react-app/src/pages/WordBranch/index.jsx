@@ -10,6 +10,23 @@ const branchMap = {
   'dat-cau': { title: 'Sử dụng từ trong câu' },
 };
 
+const renderImages = (imageUrl, grayscale) => {
+  if (!imageUrl || (Array.isArray(imageUrl) && imageUrl.length === 0)) return null;
+  const urls = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
+  return (
+    <div className="flex gap-2 flex-wrap">
+      {urls.map((url, i) => (
+        <img 
+          key={i} 
+          src={url} 
+          alt="context" 
+          className={`w-20 h-20 rounded-xl object-cover flex-shrink-0 ${grayscale ? 'grayscale-[0.5]' : 'border border-gray-100'}`} 
+        />
+      ))}
+    </div>
+  );
+};
+
 const WordBranchDetail = () => {
   const navigate = useNavigate();
   const { classId, termId, topicId, lessonId, wordId, branchKey } = useParams();
@@ -101,7 +118,7 @@ const WordBranchDetail = () => {
             {appropriateContexts.map((item, idx) => (
               <div key={item.id || idx} className="bg-white border-2 border-[#A3D977] rounded-2xl p-4 shadow-sm">
                 <div className="flex gap-4 items-center">
-                  {item.image_url && <img src={item.image_url} alt="context" className="w-20 h-20 rounded-xl object-cover flex-shrink-0 border border-gray-100" />}
+                  {renderImages(item.image_url, false)}
                   <div>
                     <p className="font-bold text-[#333] text-base leading-tight">{item.content}</p>
                     {item.explanation && <p className="text-xs text-gray-500 mt-2 italic leading-relaxed opacity-80">{item.explanation}</p>}
@@ -119,7 +136,7 @@ const WordBranchDetail = () => {
             {inappropriateContexts.map((item, idx) => (
               <div key={item.id || idx} className="bg-white border-2 border-[#FFCDD2] rounded-2xl p-4 shadow-sm opacity-90">
                 <div className="flex gap-4 items-center">
-                  {item.image_url && <img src={item.image_url} alt="context" className="w-20 h-20 rounded-xl object-cover flex-shrink-0 grayscale-[0.5]" />}
+                  {renderImages(item.image_url, true)}
                   <div>
                     <p className="font-bold text-[#333] text-base leading-tight">{item.content}</p>
                     {item.explanation && <p className="text-xs text-gray-500 mt-2 italic leading-relaxed">{item.explanation}</p>}

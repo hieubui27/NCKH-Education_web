@@ -90,7 +90,7 @@ const LessonList = () => {
                     {/* Khung ảnh bài học: Tỉ lệ 16:9, bo góc mạnh, hiệu ứng hover */}
                     <div className="w-full aspect-[16/9] mb-4 overflow-hidden rounded-2xl shadow-md border-4 border-white group-hover:border-[#FFD2A8] transition-all duration-300 bg-white">
                       <img
-                        src={lesson.image_url || DEFAULT_LESSON_IMAGE}
+                        src={Array.isArray(lesson.image_url) ? lesson.image_url[0] : (lesson.image_url || DEFAULT_LESSON_IMAGE)}
                         alt={lesson.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {

@@ -39,7 +39,13 @@ const WordDetail = () => {
 
   const displaySentences = Array.isArray(wordData?.sentences) ? wordData.sentences.slice(0, 3) : [];
   const mediaList = [];
-  if (wordData?.image_url) mediaList.push({ type: 'image', url: wordData.image_url });
+  if (wordData?.image_url) {
+    if (Array.isArray(wordData.image_url)) {
+      wordData.image_url.forEach(url => mediaList.push({ type: 'image', url }));
+    } else {
+      mediaList.push({ type: 'image', url: wordData.image_url });
+    }
+  }
   if (wordData?.video_url) mediaList.push({ type: 'video', url: wordData.video_url });
 
   const getNuanceColor = (nuance) => {
@@ -137,7 +143,7 @@ const WordDetail = () => {
             <div className="mt-4 flex-1 flex flex-col min-h-0">
               <h2 className="font-black text-lg mb-2">Minh họa:</h2>
               <div className="w-full flex-1 rounded-[2rem] overflow-hidden border-[4px] border-white shadow-xl bg-black aspect-video max-h-[45vh] mx-auto relative">
-                <Swiper navigation={true} modules={[Navigation]} className="h-full w-full">
+                <Swiper nested={true} navigation={false} pagination={{ clickable: true }} modules={[Pagination]} className="h-full w-full">
                   {mediaList.map((media, index) => (
                     <SwiperSlide key={index} className="flex items-center justify-center bg-black">
                       {media.type === 'video' ? (

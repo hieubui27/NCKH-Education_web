@@ -16,7 +16,7 @@ const TopicItem = ({ title, path, imageUrl, marginTop }) => {
           className="w-full h-full rounded-full bg-white overflow-hidden shadow-xl flex items-center justify-center relative z-10"
         >
           <img
-            src={imageUrl || 'https://picsum.photos/400/400?education'}
+            src={Array.isArray(imageUrl) ? imageUrl[0] : (imageUrl || 'https://picsum.photos/400/400?education')}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
           />
