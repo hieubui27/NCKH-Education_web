@@ -112,20 +112,9 @@ const WordDetail = () => {
                     <h2 className="text-xl sm:text-2xl font-black mb-2 italic">
                       Giải nghĩa:
                     </h2>
-                    <p className="text-lg sm:text-xl text-gray-800 leading-relaxed mb-6 font-medium">
-                      {wordData?.standard_meaning}
+                    <p className="text-lg sm:text-xl text-gray-800 leading-relaxed font-medium">
+                      {wordData?.simplified_meaning || wordData?.standard_meaning}
                     </p>
-
-                    {/* Phần Ví dụ */}
-                    <div className="space-y-3 bg-white/60 p-5 rounded-3xl border border-dashed border-[#F0E1B2] shadow-sm">
-                      <p className="font-black text-[#6B8E23] text-sm uppercase tracking-widest">Ví dụ:</p>
-                      {displaySentences.map((s, idx) => (
-                        <p key={idx} className="text-xl sm:text-2xl text-gray-700 italic leading-relaxed font-medium">
-                          ({idx + 1}) {s.sentence}
-                        </p>
-                      ))}
-                      {displaySentences.length === 0 && <p className="text-base text-gray-400 italic">Chưa có ví dụ.</p>}
-                    </div>
                   </div>
                 </div>
 
@@ -138,6 +127,17 @@ const WordDetail = () => {
                     <div className="flex items-center gap-2"><span className="w-4 h-4 bg-[#7EA53A] rounded-sm" /><span>Tích cực</span></div>
                   </div>
                 </div>
+              </div>
+
+              {/* Phần Ví dụ */}
+              <div className="mt-6 space-y-3 bg-white/60 p-5 rounded-3xl border border-dashed border-[#F0E1B2] shadow-sm w-full">
+                <p className="font-black text-[#6B8E23] text-sm uppercase tracking-widest">Ví dụ:</p>
+                {displaySentences.map((s, idx) => (
+                  <p key={idx} className="text-xl sm:text-2xl text-gray-700 italic leading-relaxed font-medium">
+                    ({idx + 1}) {s.sentence}
+                  </p>
+                ))}
+                {displaySentences.length === 0 && <p className="text-base text-gray-400 italic">Chưa có ví dụ.</p>}
               </div>
             </div>
 
